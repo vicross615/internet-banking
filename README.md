@@ -1,5 +1,20 @@
 # GTB-iBank
 
+LIVE PREVIEW  - https://mongomartapp.herokuapp.com/
+
+ 
+----------------------------------------------------------------------------------------------------------------------
+
+Screen Shots
+------------------
+
+
+
+
+![Image](https://github.com/zimejin/Mongo-Mart-MongoDB-Node-Express-Application-/blob/master/screen-shot/sreen%20mart.png?raw=true)
+
+----------------------------------------------------------------------------------------------------------------------
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.1.
 Updated to 6.0.8 on July 24th 2018
 
