@@ -8,10 +8,12 @@ LIVE PREVIEW  - https://mongomartapp.herokuapp.com/
 Screen Shots
 ------------------
 
+![Image](https://github.com/zimejin/Angular-6-Internet-Banking-App/blob/master/Screenshots/airtime%20screen.png?raw=true)
+
+----------------------------------------------------------------------------------------------------------------------
 
 
-
-![Image](https://github.com/zimejin/Mongo-Mart-MongoDB-Node-Express-Application-/blob/master/screen-shot/sreen%20mart.png?raw=true)
+![Image](https://github.com/zimejin/Angular-6-Internet-Banking-App/blob/master/Screenshots/screencapture-localhost-4200-onboarding-logout-2018-09-28-17_17_39.png?raw=true)
 
 ----------------------------------------------------------------------------------------------------------------------
 
