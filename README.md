@@ -12,16 +12,6 @@ Screen Shots
 
 ----------------------------------------------------------------------------------------------------------------------
 
-
-
-
-
-
-
-![Image](https://github.com/zimejin/Angular-6-Internet-Banking-App/blob/master/Screenshots/screencapture-localhost-4200-onboarding-logout-2018-09-28-17_17_39.png?raw=true)
-
-----------------------------------------------------------------------------------------------------------------------
-
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.1.
 Updated to 6.0.8 on July 24th 2018
 
@@ -48,3 +38,7 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+![Image](https://github.com/zimejin/Angular-6-Internet-Banking-App/blob/master/Screenshots/screencapture-localhost-4200-onboarding-logout-2018-09-28-17_17_39.png?raw=true)
+
+----------------------------------------------------------------------------------------------------------------------
