@@ -1,0 +1,89 @@
+<div class="d-flex flex-column bd-highlight justify-content-between">
+  <div class="p-2">
+    <span class="text-white f-12">New to internet banking?</span>
+    <img src="./assets/images/logo-blue.png" class="img-fluid white-text float-right img-60" alt="Responsive image">
+    <button [routerLink]="['/onboarding/login']" type="button" class="btn btn-primary btn-sm btn-round px-3 ml-1 waves-light"
+      mdbRippleRadius>Sign In</button>
+  </div>
+  <div class="align-items-center p-2">
+    <div *ngIf="errorMessage" class="alert alert-warning mb-0 py-1">
+      <button (click)="closeAlert()" type="button" class="close mt-1">
+        <i class="icofont icofont-close-line-circled text-danger"></i>
+      </button>
+      <strong>Warning!</strong> {{errorMessage}}
+    </div>
+    <div *ngIf="successMessage" class="alert alert-warning mb-0 py-1">
+      <button (click)="closeAlert()" type="button" class="close mt-1">
+        <i class="icofont icofont-close-line-circled text-danger"></i>
+      </button>
+      <strong class="text-success">Success!</strong> {{successMessage}}
+    </div>
+  </div>
+  <div class="p-2 mx-auto w-100 text-center">
+    <form class="small-font mx-auto w-75" style="width: 90%">
+      <div class="formTitle mb-4 text-center">
+        <p class="text-custom f-25 f-w-100 mb-0">Indemnity,Terms and Conditions</p>
+        <span class="text-light f-12 mx-2">
+          <perfect-scrollbar [style.max-width]="'auto'" [style.max-height]="'280px'" [config]="">
+            <div class="mx-3">
+              <h6 style="text-align:left">INDEMNITY</h6>
+              <p class="text-justify">
+                IN CONSIDERATION of GUARANTY TRUST BANK PLC (hereinafter called “the Bank”) agreeing to process transactions initiated by
+                me via the Bank’s Internet Banking Platform above the Central Bank of Nigeria’s approved limit of N1,000,000.00
+                (one million Naira only) (hereinafter called “Transactions”), I, hereby fully indemnify the Bank,its Directors,
+                agents, privies, assigns, successors, employees, or any other person whomsoever acting under the Bank’s authority
+                or control against any costs, losses, damages, litigation, action, proceeding, expenses (including Attorney’s
+                fees), judicial awards of any kind, or any payments of whatsoever nature made or any cost however incurred,
+                whether directly or indirectly, remotely or otherwise, resulting from the Bank processing such Transactions.
+                Furthermore, I, hereby irrevocably and unconditionally agree that in addition to any general lien or similar
+                right to which the Bank may be entitled by law, the Bank may at any time and without notice to me combine
+                or consolidate all or any of my other deposits and accounts with and liabilities to the Bank in any currency
+                that may at any time be in possession of the Bank and set off or transfer any sum or sums standing to the
+                credit of any one or more of such accounts or deposits in or towards satisfaction of any claim made against
+                the Bank or loss suffered by the Bank as a result of or pursuant to the Bank processing such Transactions.
+                My obligation herein shall not be reduced by any claim by me against the Bank, its Directors, agents, privies,
+                assigns, successors, employees, or any other person whomsoever acting under the Bank’s authority. This Indemnity
+                shall be a continuing obligation in respect of any and all matters connected to or arising from the Bank
+                processing such Transactions. This Indemnity shall remain valid and in full force from the date of its execution
+                hereof until the Bank issues a letter discharging me from my obligations herein. This Indemnity shall be
+                construed in accordance with the laws of the Federal Republic of Nigeria.
+              </p>
+              <h6 style="text-align:left">TERMS AND CONDITIONS</h6>
+              <p class="text-justify">
+                THIS AGREEMENT "Agreement" is entered into by and between Guaranty Trust Bank plc and any individual, corporation, 
+                association, agency, company, or other entity who accesses or uses the Guaranty Trust Bank plc Website (the "User" or "you").
+                The Guaranty Trust Bank plc Website, which is provided without charge to you, is a World Wide Web site on the Internet that is 
+                designed to allow Guaranty Trust Bank plc to communicate with users and for you to interact with those users. The Guaranty Trust 
+                Bank plc Website is owned and operated by Guaranty Trust Bank plc . The Guaranty Trust Bank plc Website contains or may contain 
+                information, communications, opinions, text, graphics, links, electronic art, animations, audio, video, software, photos, music,
+                sounds and other material and data (collectively, "Content") formatted, organized and collected in a variety of forms that are 
+                generally accessible to Users, including directories and databases, and areas of the Guaranty Trust Bank plc Website that can be
+                modified by Users, such as posting classifieds, uploading multimedia files, registering user profiles, and creating auto-notify,
+                personalized pages, and personalized project areas.
+              </p>
+            </div>
+          </perfect-scrollbar>
+        </span>
+
+      </div>
+      <div class="form-row">
+        <div class="md-form">
+          <button id="customer" type="button" (click)="onSubmit()" class="btn btn-success btn-block btn-sm waves-light mt-2">
+            <span *ngIf="loading === true" class="">
+              <i class="fa fa-spin fa-spinner mr-2"></i>
+              Loading....
+            </span>
+            <span *ngIf="!loading" class="">
+              I Agree
+            </span>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="p-2 text-center w-100 text-white bottom">
+    <p>
+      <a class="f-12 f-w-100">GTBank.com</a>
+    </p>
+  </div>
+</div>

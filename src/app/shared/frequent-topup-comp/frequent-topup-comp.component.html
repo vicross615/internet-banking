@@ -1,0 +1,100 @@
+<div [@fadeInOutTranslate] class="card  mb-2 pb-1" style="height: 650px">
+  <div class="mb-0 p-0 bg-light card-block" style="height: 5px;"></div>
+  <div class="card-header py-2 mb-0 bg-light border-0">
+    <div class="d-flex flex-row justify-content-between">
+      <div class="bd-highlight text-left">
+        <h5 class="text-primary f-w-600">
+          <i class="fas fa-arrow-alt-circle-down text-success"></i>
+          Your Frequent Topup
+        </h5>
+      </div>
+    </div>
+  </div>
+  <div class="card-header p-0 mb-2 bg-white border-0">
+    <div class="btn-group btn-group-sm btn-block btn-group-toggle" ngbRadioGroup name="beneficiaryOption">
+      <label [ngClass]="{'current': requestTypeIs == 0, 'text-dark f-w-400': requestTypeIs == 1}" ngbButtonLabel class="col-6 btn-light rounded-0">
+        <input ngbButton type="radio" value="0" (click)="requestType = 0"> AIrtime Topup
+      </label>
+      <label [ngClass]="{'current': requestTypeIs == 1,  'text-white f-w-400': requestTypeIs == 0}" ngbButtonLabel class="col-6 btn-secondary text-white rounded-0">
+        <input ngbButton type="radio" value="1" (click)="requestType = 1"> Data Topup
+      </label>
+    </div>
+  </div>
+  <perfect-scrollbar [style.max-width]="'auto'" [style.max-height]="'100%'">
+    <ng-template #defaultcontent>
+      <div [@fadeInOutTranslate] class="card-body text-center">
+        <div class="mt-0">
+          <i class="fas fa-info-circle fa-2x"></i>
+          <p class="mt-2 f-w-400 text-muted text-center mx-auto">
+            No transfer record
+          </p>
+          <button (click)="goToTransfers()" type="button" class="btn btn-primary btn-sm btn-round px-3 ml-1 waves-light"
+            mdbRippleRadius>Transfer AirTime now</button>
+        </div>
+      </div>
+    </ng-template>
+    <ng-container *ngIf="!(recentTransfers.length == 0); else defaultcontent">
+      <ng-container *ngIf="requestTypeIs == 0">
+        <div class="d-flex flex-row list" *ngFor="let item of recentTransfers">
+          <div *ngIf="item.type == 'AIRTIME'" class="bd-highlight col-3">
+            <img *ngIf="detectProductType(item.producttype, 'AIRTEL')" class="img-menu-user m-2 img-60 img-fluid d-block mx-auto"
+              src="./assets/images/topup/AIRTEL.png" alt="User-Profile-Image">
+
+            <img *ngIf="detectProductType(item.producttype, 'ETISALAT')" class="img-menu-user m-2 img-60 img-fluid d-block mx-auto"
+              src="./assets/images/topup/9MOBILE.png" alt="User-Profile-Image">
+
+            <img *ngIf="detectProductType(item.producttype, '9Mobile')" class="img-menu-user m-2 img-60 img-fluid d-block mx-auto"
+              src="./assets/images/topup/9MOBILE.png" alt="User-Profile-Image">
+
+            <img *ngIf="detectProductType(item.producttype, '9 Mobile')" class="img-menu-user m-2 img-60 img-fluid d-block mx-auto"
+              src="./assets/images/topup/9MOBILE.png" alt="User-Profile-Image">
+
+            <img *ngIf="detectProductType(item.producttype, 'Glo')" class="img-menu-user m-2 img-60 img-fluid d-block mx-auto"
+              src="./assets/images/topup/GLO.png" alt="User-Profile-Image">
+
+            <img *ngIf="detectProductType(item.producttype, 'MTN')" class="img-menu-user m-2 img-60 img-fluid d-block mx-auto"
+              src="./assets/images/topup/MTN.png" alt="User-Profile-Image">
+          </div>
+          <div *ngIf="item.type == 'AIRTIME'" class="pt-2 pl-1 align-self-center bd-highlight align-self-stretch col-9">
+            <h6 class="mb-1 f-w-500 f-12">{{item.producttype | uppercase}}</h6>
+            <p class="mb-1"><i class="icofont icofont-bank mr-2"></i>{{item.type | titlecase}}</p>
+            <a name="" id="" class="btn btn-outline-secondary btn-round btn-mini float-right" (click)='routeToForm(item)'
+              role="button" mdbRippleRadius>Repeat Topup</a>
+            <span class="float-left m-r-20 f-w-500 f-16">{{ item.amount | currency:'NGN':'symbol' }}</span>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="requestTypeIs == 1">
+        <div class="d-flex flex-row list" *ngFor="let item of recentTransfers">
+          <div *ngIf="item.type == 'DATA'" class="bd-highlight col-3">
+            <img *ngIf="detectProductType(item.producttype, 'AIRTEL')" class="img-menu-user m-2 img-80 d-block mx-auto"
+              src="./assets/images/topup/AIRTEL.png" alt="User-Profile-Image">
+
+            <img *ngIf="detectProductType(item.producttype, 'ETISALAT')" class="img-menu-user m-2 img-80 d-block mx-auto"
+              src="./assets/images/topup/9MOBILE.png" alt="User-Profile-Image">
+
+            <img *ngIf="detectProductType(item.producttype, '9MOBILE')" class="img-menu-user m-2 img-80 d-block mx-auto"
+              src="./assets/images/topup/9MOBILE.png" alt="User-Profile-Image">
+
+            <img *ngIf="detectProductType(item.producttype, '9 Mobile')" class="img-menu-user m-2 img-60 img-fluid d-block mx-auto"
+              src="./assets/images/topup/9MOBILE.png" alt="User-Profile-Image">
+
+            <img *ngIf="detectProductType(item.producttype, 'Glo')" class="img-menu-user m-2 img-80 d-block mx-auto"
+              src="./assets/images/topup/GLO.png" alt="User-Profile-Image">
+
+            <img *ngIf="detectProductType(item.producttype, 'MTN')" class="img-menu-user m-2 img-80 d-block mx-auto"
+              src="./assets/images/topup/MTN.png" alt="User-Profile-Image">
+          </div>
+          <div *ngIf="item.type == 'DATA'" class="pt-2 pl-1 align-self-center bd-highlight align-self-stretch col-9">
+            <h6 class="mb-1 f-w-500 f-12">{{item.producttype | uppercase}}</h6>
+            <p class="mb-1"><i class="icofont icofont-bank mr-2"></i>{{item.type | titlecase}}</p>
+            <a name="" id="" class="btn btn-outline-secondary btn-round btn-mini float-right" (click)='routeToForm(item)'
+              role="button" mdbRippleRadius>Repeat Topup</a>
+            <span class="float-left m-r-20 f-w-500 f-16">{{ item.amount | currency:'NGN':'symbol' }}</span>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+
+  </perfect-scrollbar>
+</div>

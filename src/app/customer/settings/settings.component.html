@@ -1,0 +1,94 @@
+<div class="row submenu text-center mx-1 mt-3">
+  <div class="px-1 col-md-2 col-sm-4 col-6">
+    <div [routerLink]="['/settings/view-profile']" routerLinkActive="active-submenu" class="card mb-2 text-center order-visitor-card z-depth-bottom-1"
+      style="max-height: 115px">
+      <div class="card-block px-2 card-grid text-primary">
+        <img src="assets\icon\smashicons\self-service\profile.svg" class="img-fluid img-50 mb-2" alt="">
+        <p class="m-b-0 f-12 f-w-500">Account Update</p>
+      </div>
+    </div>
+  </div>
+  <div class="px-1 col-md-2 col-sm-4 col-6">
+    <div [routerLink]="['password-reset']" routerLinkActive="active-submenu" class="card mb-2 text-center order-visitor-card z-depth-bottom-1"
+      style="max-height: 115px">
+      <div class="card-block px-2 card-grid text-primary">
+        <img src="assets\icon\smashicons\self-service\password-reset-2.svg" class="img-fluid img-50 mb-2" alt="">
+        <p class="m-b-0 f-12 f-w-500">Password Reset</p>
+      </div>
+    </div>
+  </div>
+  <div class="px-1 col-md-2 col-sm-4 col-6">
+    <div [routerLink]="['gt-target']" routerLinkActive="active-submenu" class="bg-light text-muted card mb-2 text-center z-depth-bottom-1"
+      style="max-height: 115px">
+      <div class="card-block px-2 card-grid">
+        <img src="assets\icon\smashicons\self-service\gt-target.svg" class="img-fluid img-50 mb-2" alt="">
+        <p class="m-b-0 f-12 f-w-500">GT Target</p>
+      </div>
+    </div>
+  </div>
+  <div class="px-1 col-md-2 col-sm-4 col-6">
+    <div [routerLink]="['spend-to-save']" routerLinkActive="active-submenu" class="bg-light text-muted card mb-2 text-center z-depth-bottom-1"
+      style="max-height: 115px">
+      <div class="card-block px-2 card-grid">
+        <img src="assets\icon\smashicons\self-service\spend-to-save-3.svg" class="img-fluid img-50 mb-2" alt="">
+        <p class="m-b-0 f-12 f-w-500">Spend2Save</p>
+      </div>
+    </div>
+  </div>
+  <div class="px-1 col-md-2 col-sm-4 col-6">
+    <div [routerLink]="['we-fund']" routerLinkActive="active-submenu" class="bg-light text-muted card mb-2 text-center z-depth-bottom-1"
+      style="max-height: 115px">
+      <div class="card-block px-2 card-grid">
+        <img src="assets\icon\smashicons\self-service\we-fund-2.svg" class="img-fluid img-50 mb-2" alt="">
+        <p class="m-b-0 f-12 f-w-500">WeFund</p>
+      </div>
+    </div>
+  </div>
+  <div class="px-1 col-md-2 col-sm-4 col-6">
+    <div [routerLink]="['i-require']" routerLinkActive="active-submenu" class="card bg-light text-muted mb-2 text-center z-depth-bottom-1"
+      style="max-height: 115px">
+      <div class="card-block px-2 card-grid">
+        <img src="assets\icon\smashicons\self-service\i-require-2.svg" class="img-fluid img-50 mb-2" alt="">
+        <p class="m-b-0 f-12 f-w-500">I Require</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row submenu-content px-md-4">
+  <div class="col-md-7 px-0">
+    <div [@fadeInOutTranslate] class="card mb-2" style="min-height:calc(100vh + 150px)">
+      <div class="mb-0 p-0 bg-primary card-block" style="height: 5px;"></div>
+      <router-outlet>
+        <app-spinner>
+          <app-title></app-title>
+        </app-spinner>
+      </router-outlet>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div class="card bg-primary mb-1">
+      <!-- <div class="card-block p-0 mt-1">
+        <iframe width="100%" height="280" src="https://www.youtube.com/embed/o8s-Yhx31Ws/?playlist=o8s-Yhx31Ws&amp;loop=1&amp;autoplay=0&amp;controls=0&amp;rel=1&amp;mute=1"
+          frameborder="0" allow="autoplay; loop" allowfullscreen></iframe>
+      </div> -->
+      <div class="card-img-overlay text-primary f-w-600">
+        <div class="col-12">
+          <button class="btn  btn-primary btn-round btn-sm waves-light z-depth-bottom-2 float-right" mdbRippleRadius>
+            Learn More
+          </button>
+        </div>
+        <div class="col mt-auto">
+          <h5 class="card-title f-30">GT<span class="text-white">TARGET</span></h5>
+          <p class="card-text text-white f-12" style=" text-shadow: 2px 2px 8px #222;">Do not leave yourself or your<br>
+            family unprotected against financial<br> storms... Build up savings..</p>
+        </div>
+      </div>
+      <img src="assets/images/ads/people.jpg" alt="adverts image" class="card-img">
+    </div>
+    <div class="card bg-primary my-1">
+      <div class="card-block p-0 mt-1">
+        <img src="assets\images\ads\POS ad 800 X 800.png" class="img-fluid mb-1" alt="">
+      </div>
+    </div>
+  </div>
+</div>

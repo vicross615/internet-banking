@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>032 - Web History </title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="032---Web-History-" transform="translate(1.000000, 1.000000)" stroke="#dd4f05" stroke-width="1">
+            <rect id="Rectangle-path" x="-7e-05" y="0" width="58" height="48" rx="4"></rect>
+            <path d="M-7e-05,10 L46.99993,10" id="Shape"></path>
+            <path d="M52.99993,10 L57.99993,10" id="Shape"></path>
+            <path d="M4.99993,5 L5.99993,5" id="Shape"></path>
+            <path d="M9.99993,5 L10.99993,5" id="Shape"></path>
+            <path d="M29.59,48 C25.0925664,42.9775801 23.7796761,35.8625992 26.1884362,29.5658155 C28.5971963,23.2690317 34.3235055,18.8468133 41.0247153,18.1083018 C47.725925,17.3697904 54.2778191,20.4388808 58,26.06" id="Shape"></path>
+            <polyline id="Shape" points="43 23 43 36 48 41"></polyline>
+        </g>
+    </g>
+</svg>

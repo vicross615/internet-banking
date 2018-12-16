@@ -1,0 +1,73 @@
+.menu-modal .modal-content {
+    min-height: 100%;
+    background-color: transparent;
+    border: none;
+    border-color: transparent;
+}
+
+.menu-modal .card {
+    min-height: 100px;
+}
+
+.menu-modal-header {
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+}
+
+.accounts {
+    ngx-tile  {
+        padding-top: 1px !important;
+    }    
+}
+
+.rating-icon {
+:hover{
+    -webkit-box-shadow: 0 0 25px 7px #ccc, 0 1px 5px 0 rgba(0, 0, 0, 0.1), 0 0 0 0 rgba(0, 0, 0, 0) !important;
+    // box-shadow: 0 5px 15px -5px #444, 0 1px 5px 0 rgba(0, 0, 0, 0.1), 0 0 0 0 transparent !important;
+    box-shadow: 0 0 25px 7px #ccc, 0 1px 5px 0 rgba(0, 0, 0, 0.1), 0 0 0 0 rgba(0, 0, 0, 0) !important;
+    width: 50px;
+}
+}
+
+.rating {
+	font-size: 120px;
+	height: 50px;
+	line-height: 50px;
+}
+
+.rating1:hover:before {
+   position: absolute;
+   width: 30px;
+   left: -10px;
+//     font-size: 100px;
+//   transform: scale(1.1);
+//   -webkit-transform: scale(1.2);
+}
+.rating2:hover:before {
+   position: absolute;
+    font-size: 150px;
+  margin-left: -15px;
+  transform: scale(1.1);
+    -webkit-transform: rotate(15deg);
+}
+.rating3:hover:before {
+   position: absolute;
+   transform: scale(1.1);
+    font-size: 140px;
+  margin-left: -10px;
+}
+.rating4:hover:before {
+   position: absolute;
+  font-size: 150px;
+  margin-left: -15px;
+  transform: scale(1.1);
+    -webkit-transform: rotate(-15deg);
+}
+.rating5:hover:before {
+   position: absolute;
+    font-size: 170px;
+  margin-left: -25px;
+  transform: scale(1.1);
+  -webkit-transform: rotate(-30deg);
+}

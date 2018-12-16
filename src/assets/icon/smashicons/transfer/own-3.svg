@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>037 - Wallet </title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="037---Wallet-" transform="translate(1.000000, 1.000000)" stroke="#dd4f05" stroke-width="1">
+            <path d="M56,43 L56,56 C55.9967707,57.1032291 55.1032291,57.9967707 54,58 L2,58 C0.896770878,57.9967707 0.00322927335,57.1032291 0,56 L0,20 C0.00322927335,18.8967709 0.896770878,18.0032293 2,18 L54,18 C55.1032291,18.0032293 55.9967707,18.8967709 56,20 L56,33" id="Shape"></path>
+            <rect id="Rectangle-path" x="3" y="0" width="28" height="18"></rect>
+            <polyline id="Shape" points="21 4 27 4 27 18 7 18 7 4 13 4"></polyline>
+            <polyline id="Shape" points="32 4 39 4 39 18"></polyline>
+            <polyline id="Shape" points="31 4 31 8 35 8 35 18 39 18"></polyline>
+            <rect id="Rectangle-path" x="41" y="33" width="17" height="10" rx="1"></rect>
+            <circle id="Oval" cx="46" cy="38" r="2"></circle>
+            <path d="M0,54 L3,54" id="Shape"></path>
+            <path d="M7,54 L8,54" id="Shape"></path>
+            <path d="M12,54 L13,54" id="Shape"></path>
+            <path d="M17,54 L18,54" id="Shape"></path>
+            <path d="M22,54 L23,54" id="Shape"></path>
+            <path d="M27,54 L28,54" id="Shape"></path>
+            <path d="M32,54 L33,54" id="Shape"></path>
+            <path d="M37,54 L38,54" id="Shape"></path>
+            <path d="M42,54 L43,54" id="Shape"></path>
+            <path d="M47,54 L48,54" id="Shape"></path>
+            <path d="M52,54 L56,54" id="Shape"></path>
+            <path d="M0,22 L3,22" id="Shape"></path>
+            <path d="M7,22 L8,22" id="Shape"></path>
+            <path d="M12,22 L13,22" id="Shape"></path>
+            <path d="M17,22 L18,22" id="Shape"></path>
+            <path d="M22,22 L23,22" id="Shape"></path>
+            <path d="M27,22 L28,22" id="Shape"></path>
+            <path d="M32,22 L33,22" id="Shape"></path>
+            <path d="M37,22 L38,22" id="Shape"></path>
+            <path d="M42,22 L43,22" id="Shape"></path>
+            <path d="M47,22 L48,22" id="Shape"></path>
+            <path d="M52,22 L56,22" id="Shape"></path>
+            <path d="M13,4 C13,6.209139 14.790861,8 17,8 C19.209139,8 21,6.209139 21,4" id="Shape"></path>
+        </g>
+    </g>
+</svg>

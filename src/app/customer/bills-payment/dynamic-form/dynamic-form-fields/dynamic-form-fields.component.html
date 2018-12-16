@@ -1,0 +1,48 @@
+<div [formGroup]="form">
+  <ng-container *ngIf="((field?.show_online === 1) || (field?.field_visible === 1)) && (field?.dataSource !== 1)">
+      <label [@fadeInOutTranslate] [attr.for]="field?.field_name" *ngIf="form?.controls[field?.field_name]?.value" class="f-12 pl-2">{{field.field_name}}:</label>
+      <div [ngSwitch]="field?.field_type_string">
+        <ng-container *ngSwitchCase="'text'">
+          <input *ngIf="field?.amt_ref === 0"
+          [tabIndex]="field?.field_sequence"
+          [title]="field?.tooltip" 
+          [maxlength]="field?.field_length"
+          [formControlName]="field?.field_name" [id]="field?.field_name" [type]="field?.field_type_string"
+          [placeholder]="field?.field_caption" class="form-control form-control-round pt-2">
+          <input *ngIf="field?.amt_ref === 1"
+          [tabIndex]="field?.field_sequence"
+          [title]="field?.tooltip" 
+          [maxlength]="field?.field_length" (keyup)="util.formatCurrency(form?.controls[field?.field_name])" 
+          [formControlName]="field?.field_name" [id]="field?.field_name" [type]="field?.field_type_string"
+          [placeholder]="field?.field_caption" class="form-control form-control-round form-control-right pt-2">
+        </ng-container>
+        <ng-container *ngSwitchCase="'date'">
+            <input *ngIf="field?.amt_ref === 0"
+            [tabIndex]="field?.field_sequence"
+            [title]="field?.tooltip" 
+            [maxlength]="field?.field_length"
+            [formControlName]="field?.field_name" [id]="field?.field_name" [type]="field?.field_type_string"
+            [placeholder]="field?.field_caption" class="form-control form-control-round pt-2">
+            <input *ngIf="field?.amt_ref === 1"
+            [tabIndex]="field?.field_sequence"
+            [title]="field?.tooltip" 
+            [maxlength]="field?.field_length" (keyup)="util.formatCurrency(form?.controls[field?.field_name])" 
+            [formControlName]="field?.field_name" [id]="field?.field_name" [type]="field?.field_type_string"
+            [placeholder]="field?.field_caption" class="form-control form-control-round form-control-right pt-2">
+          </ng-container>
+          
+    
+        <select *ngSwitchCase="'select'"
+        [tabIndex]="field?.field_sequence"
+        [title]="field?.tooltip"
+        [formControlName]="field?.field_name" [id]="field?.field_name"
+        class="custom-select form-control-round pt-2">
+        <option value="" disabled="true" [selected]="true">Select {{field?.field_name}}</option>
+          <option *ngFor="let opt of field?.dropdown_Details" [value]="opt.dropDownValue">{{opt.dropDownText}}</option>
+        </select>
+    
+      </div> 
+    
+      <div class="text-muted f-10 text-right mr-2" *ngIf="(!isValid && field?.read_only === 0) && field?.dataSource === 0"> <span class="text-danger">*</span> Required</div>
+  </ng-container>
+</div>

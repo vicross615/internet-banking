@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>003 - Mobile Banking</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="003---Mobile-Banking" transform="translate(1.000000, 1.000000)" stroke="#dd4f05" stroke-width="1">
+            <path d="M34,45 L34,54 C34,56.209139 32.209139,58 30,58 L4,58 C1.790861,58 0,56.209139 0,54 L0,4 C0,1.790861 1.790861,4.4408921e-16 4,0 L30,0 C32.209139,2.22044605e-16 34,1.790861 34,4 L34,45 Z" id="Shape"></path>
+            <path d="M0,50 L34,50" id="Shape"></path>
+            <path d="M0,8 L34,8" id="Shape"></path>
+            <circle id="Oval" cx="17" cy="52" r="2"></circle>
+            <path d="M15,4 L19,4" id="Shape"></path>
+            <rect id="Rectangle-path" x="5" y="38" width="24" height="8" rx="2"></rect>
+            <rect id="Rectangle-path" x="5" y="30" width="24" height="4" rx="1"></rect>
+            <rect id="Rectangle-path" x="7" y="18" width="4" height="12"></rect>
+            <rect id="Rectangle-path" x="15" y="18" width="4" height="12"></rect>
+            <rect id="Rectangle-path" x="23" y="18" width="4" height="12"></rect>
+            <polygon id="Shape" points="5 18 29 18 17 12"></polygon>
+        </g>
+    </g>
+</svg>

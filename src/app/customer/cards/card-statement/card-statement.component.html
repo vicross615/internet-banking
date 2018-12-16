@@ -1,0 +1,95 @@
+<div [@fadeInOutTranslate] class="card" style="min-height: calc(100vh - 0.2rem)">
+  <div class="mb-0 p-0 bg-primary card-block" style="height: 5px;"></div>
+  <div class="card-block bg-white p-0">
+    <!-- Nav Filter tab start -->
+    <div class="col-12 px-0 py-1 filter-bar">
+      <nav class="navbar navbar-light bg-faded p-3">
+        <h5 class="text-primary f-w-400">
+          <img src="assets\icon\smashicons\cards\card-statement.svg" class="img-fluid img-40 mb-2" alt="">
+          Card Statement
+        </h5>
+        <div ngbDropdown>
+          <p class="f-w-400 mt-2 mr-2 float-md-left" for="">Select Card:</p>
+          <button class="btn btn-round btn-dark btn-mini py-2" id="acctLinkedDropdown" ngbDropdownToggle>
+            {{selectedCard?.cardtype | uppercase}} {{selectedCard?.pan}}
+          </button>
+          <div ngbDropdownMenu aria-labelledby="acctLinkedDropdown">
+            <span *ngFor="let card of cards; let i=index">
+              <!-- <hr class="my-1"> -->
+              <button (click)="cardsService.updateSelectedCard(card)" class="dropdown-item f-12 text-white bg-dark">
+                <span class="d-block">{{card?.cardtype | uppercase}}</span>
+                <span class="">{{card?.pan}}</span>
+              </button>
+            </span>
+          </div>
+        </div>
+        <!-- <ul class="nav navbar-nav navbar-right">
+          <li class="nav-item active">
+            <a class="nav-link text-primary f-w-500" href="javascript:;">Filter:
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li ngbDropdown="" class="nav-item dropdown">
+            <a ngbDropdownToggle="" class="nav-link dropdown-toggle" mdbRippleRadius href="javascript:;" id="bydate"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="icofont icofont-clock-time text-primary"></i> By Date</a>
+            <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="bydate">
+              <a class="dropdown-item" mdbRippleRadius href="javascript:;">Show all</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" mdbRippleRadius href="javascript:;">Custom date</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" mdbRippleRadius href="javascript:;">Today</a>
+              <a class="dropdown-item" mdbRippleRadius href="javascript:;">Yesterday</a>
+              <a class="dropdown-item" mdbRippleRadius href="javascript:;">This week</a>
+              <a class="dropdown-item" mdbRippleRadius href="javascript:;">This month</a>
+              <a class="dropdown-item" mdbRippleRadius href="javascript:;">This year</a>
+            </div>
+          </li>
+          <li ngbDropdown class="nav-item dropdown">
+            <a class="nav-link" mdbRippleRadius href="javascript:;" id="moreOptions" aria-haspopup="true" aria-expanded="false">
+              <i class="icofont icofont-user text-primary"></i> By Beneficiary</a>
+          </li>
+          <li ngbDropdown class="nav-item dropdown">
+            <a class="nav-link" mdbRippleRadius href="javascript:;" id="moreOptions" aria-haspopup="true" aria-expanded="false">
+              <i class="icofont icofont-money text-primary"></i> By Amount</a>
+          </li>
+        </ul> -->
+      </nav>
+    </div>
+    <!-- Nav Filter tab end -->
+  </div>
+  <div [@slideUpDown] class="mx-auto my-5 text-center" *ngIf="!statements && !errorMessage">
+    <div class="preloader4 mx-auto pb-0 mb-0">
+      <span>
+        <div class="double-bounce1 text-center"></div>
+        <div class="double-bounce2 text-center"></div>
+      </span>
+    </div>
+    <span class="f-10 text-muted mb-4"> Loading card statement ..</span>
+  </div>
+  <div [@slideUpDown] class="mx-auto my-5 text-center f-12" *ngIf="errorMessage">
+    <p class="text-primary mb-0">
+      <i-alert-circle class="d-block mx-auto mb-3"></i-alert-circle>
+      {{errorMessage}}.
+    </p>
+    <p>Select a different card to view statement</p>
+  </div>
+  <ng-template [ngIf]="!errorMessage">
+    <perfect-scrollbar [style.max-width]="'auto'" [style.max-height]="'calc(100% - 2rem)'">
+      <div *ngFor="let s of statements" class="list-group-item list-group-item-action flex-column align-items-start px-3">
+        <div class="d-flex w-100 justify-content-between">
+          <h6 class="f-w-700 text-uppercase m-b-0"> {{s?.transDescription | uppercase}} </h6>
+          <small>{{s?.transDate | date}}</small>
+        </div>
+        <p class="my-2 f-12">
+          Desc: {{s?.transType}} |{{s?.transDescription}} | {{s?.referenceNumber}}.
+        </p>
+        <div class="d-flex w-100 justify-content-between">
+          <span class="f-10 mt-auto">
+            <i class="icofont icofont-ui-press text-success f-10"></i>{{s?.transStatus}}</span>
+          <h6 class="text-right text-success"> {{s?.transAmount | currency:s?.transCurrency}} </h6>
+        </div>
+      </div>
+    </perfect-scrollbar>
+  </ng-template>
+</div>

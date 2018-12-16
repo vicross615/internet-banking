@@ -1,0 +1,303 @@
+<div class="card">
+    <div class="card-header">
+      <h4 class="text-c-brand f-20">Cash in Transit</h4>
+    </div>
+    <div class="card-block">
+      <div class="md-tabs">
+        <ngb-tabset>
+          <ngb-tab>
+            <ng-template ngbTabTitle><i class="feather icon-user-check mr-2"></i><span class="f-12">Own Account</span></ng-template>
+            <ng-template ngbTabContent>
+              <div class="row">
+                <div class="col-md-12">
+                  <div [@fadeInOutTranslate] class="m-t-5">
+                      <p>Maximum daily limit: <strong>N5,000,000.00</strong></p>
+                    <form  class="form-txt-inverse" action="javascript:">
+                      <div class="form-group row">
+                        <div class="col-md-12">
+                          <!-- Select option: Account to debit -->
+                          <span><a class="f-12 f-w-100 text-muted">Select Account to debit</a></span>
+                          
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <div class="col-md-12">
+                          <!-- Select option: Receiving Account -->
+                          <span><a class="f-12 f-w-100 text-muted">Select Account to receive funds</a></span>
+                          
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <div class="col-sm-12">
+                          <!-- Input: Amount to transfer -->
+                          <span><a class="f-12 f-w-100 text-muted">How much do you want to send?</a></span>
+                          <input 
+                            type="number" 
+                            class="form-control form-txt-inverse form-control-lg form-control-right form-txt-default" 
+                            placeholder="N30,000.00"
+                            formControlName="transferAmt">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <div class="col-sm-12">
+                          <!-- Input: Narration -->
+                          <span><a class="f-12 f-w-100 text-muted">Add a message (max. of 50 characters):</a></span>
+                          <input type="text" class="form-control  form-txt-inverse form-control-right form-control-lg  form-txt-default" placeholder="">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <div class="col-md-12">
+                          <div class="md-form">
+                            <button 
+                              id="customer" 
+                              type="button"
+                              class="btn btn-success btn-block waves-light float-right col-6 md-trigger" 
+                              mdbRippleRadius>Continue</button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab>
+            <ng-template ngbTabTitle><i class="feather icon-users mr-2"></i><span class="f-12">Beneficiaries</span></ng-template>
+            <ng-template ngbTabContent>
+              <div class="row">
+                <div class="col-md-12">
+                  <div [@fadeInOutTranslate] class="m-t-5">
+                    <p>Maximum daily limit: <strong>N2,000,000.00</strong></p>
+                    <form class="form-txt-inverse" action="javascript:">
+                      <div class="form-group row">
+                        <div class="col-12">
+                          <div class="btn-group btn-group-toggle" ngbRadioGroup formControlName="transferOption">
+                            <label ngbButtonLabel class="btn-outline-primary btn-sm">
+                              <input ngbButton type="radio" [value]="0">New Beneficiary
+                            </label>
+                            <label ngbButtonLabel class="btn-outline-primary btn-sm">
+                              <input ngbButton type="radio" [value]="1">Saved Beneficiary
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Bank options -->
+                      <div class="form-group row">
+                        <div class="col-md-12">
+                          <span><a class="f-12 f-w-100 text-muted mb-1">Choose Beneficiary's bank</a></span><br>
+                          <div class="btn-group btn-group-toggle" ngbRadioGroup formControlName="type">
+                            <label ngbButtonLabel class="btn-outline-primary btn-sm">
+                              <input ngbButton type="radio" [value]="0">GTB
+                            </label>
+                            <label ngbButtonLabel class="btn-outline-primary btn-sm">
+                              <input ngbButton type="radio" [value]="1">Other Banks
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <div [@fadeInOutTranslate] class="col-md-6 m-t-5">
+                          <span><a class="f-12 f-w-100 text-muted">Select bank</a></span>
+                          
+                        </div>
+                        <div class="col-sm-12 m-t-5">
+                          <span><a class="f-12 f-w-100 text-muted"> <i class="feather icon-user-plus"></i> Enter Beneficiary's Account Number:</a></span>
+                          <input 
+                            id="beneficiaries"
+                            type="text" 
+                            class="form-control form-txt-inverse form-control-lg form-txt-default" 
+                            placeholder="">
+                        </div>
+                      </div>
+  
+                      <div class="form-group row">
+                        <div class="col-md-12">
+                          <span><a class="f-12 f-w-100 text-muted">Select Account to debit</a></span>
+                         
+                        </div>
+                        <div class="col-md-12" >
+                          <span><a class="f-12 f-w-100 text-muted">Select Beneficiary's Account</a></span>
+                          
+                        </div>
+                      </div>
+                      <div class="form-group row" >
+                        <div class="col-sm-12">
+                          <span><a class="f-12 f-w-100 text-muted">How much do you want to send?</a></span>
+                          <input type="text" class="form-control  form-txt-inverse form-control-lg form-control-right form-txt-default" placeholder="N30,000.00">
+                          <span class="float-right f-12 f-w-100 text-muted">Transfer limit: <b>N500,000.00</b></span>
+                        </div>
+                        <div class="col-sm-12">
+                          <span><a class="f-12 f-w-100 text-muted">Add a message (max. of 50 characters): <span class="text-info">Optional*</span></a></span>
+                          <input type="text" class="form-control  form-txt-inverse form-control-right form-control-lg form-txt-default" placeholder="">
+                        </div>
+                        <div class="col-sm-12">
+                          <span><a class="f-12 f-w-100 text-muted"> <i class="feather icon-lock"></i> Answer to secret Question:</a></span>
+                        </div>
+                        <div class="col-sm-12">
+                          <input type="text" class="form-control form-txt-inverse form-control-right form-control-lg  form-txt-default" placeholder="">
+                        </div>
+                      </div>
+                      <div [@fadeInOutTranslate] class="form-group row">
+                        <div class="col-12">
+                          <span><a class="f-12 f-w-100 text-muted mb-1">Choose time to send money</a></span>
+                        </div> 
+                        <div class="col-md-12 mb-2">
+                          <div class="btn-group btn-group-toggle" ngbRadioGroup formControlName="time">
+                            <label ngbButtonLabel class="btn-outline-primary btn-sm">
+                              <input ngbButton type="radio" [value]="0">Instant
+                            </label>
+                            <label ngbButtonLabel class="btn-outline-primary btn-sm">
+                              <input ngbButton type="radio" [value]="1">Next day
+                            </label>
+                          </div>
+                          <!-- <pre>{{transferType.value['type']}}</pre> -->
+                        </div>
+                      </div> 
+                      <div class="form-group row">
+                        <div class="col-sm-12">
+                          <div class="md-form">
+                            <button
+                              id="customer" 
+                              type="submit"
+                              class="btn btn-success btn-block waves-light col-6 float-right md-trigger" 
+                              mdbRippleRadius>Continue</button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <h5 class="m-t-20"></h5>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <!--
+          <ngb-tab>
+            <ng-template ngbTabTitle><i class="feather icon-user-plus mr-2"></i><span class="f-10">New Beneficiary</span></ng-template>
+            <ng-template ngbTabContent>
+              <div class="row">
+                <div class="col-md-6">
+                  <div [@fadeInOutTranslate] class="m-t-5">
+                    <p class="my-3">Maximum daily limit:<strong>N2,000,000.00</strong></p>
+                    <form  [formGroup]="ownTransferForm" class="form-txt-inverse" action="javascript:">
+                      <div class="form-group row">
+                        <div class="col-12">
+                          <span><a class="f-12 f-w-100 text-muted mb-1">Choose Beneficiary's bank</a></span><br>
+                          <div class="btn-group btn-group-toggle" ngbRadioGroup formControlName="type">
+                            <label ngbButtonLabel class="btn-outline-primary btn-sm">
+                              <input ngbButton type="radio" [value]="0">GTB
+                            </label>
+                            <label ngbButtonLabel class="btn-outline-primary btn-sm">
+                              <input ngbButton type="radio" [value]="1">Other Banks
+                            </label>
+                          </div>
+                        </div> 
+                        <div [@fadeInOutTranslate] class="col-md-6 m-t-5" *ngIf="transferType.value['type'] === 1">
+                          <span><a class="f-12 f-w-100 text-muted">Select bank</a></span>
+                          <ng-select [ngClass]="'ng-select float-left'" placeholder="Select Bank.."> </ng-select>
+                        </div>
+                        <div class="col-sm-6 m-t-5">
+                          <span><a class="f-12 f-w-100 text-muted"> <i class="feather icon-user-plus"></i> Enter Beneficiary's Account Number:</a></span>
+                          <input 
+                            id="acctNum"
+                            type="text" 
+                            class="form-control form-txt-inverse form-control-lg form-txt-default" 
+                            placeholder=""
+                            formControlName="acctNum">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <div class="col-md-12  m-t-5">
+                          <span><a class="f-12 f-w-100 text-muted">Select Account to debit</a></span>
+                          <ng-select [ngClass]="'ng-select'" placeholder="Select.."> </ng-select>
+                        </div>
+                      </div>
+                      <div [@fadeInOutTranslate] class="form-group row">
+                        <div class="col-md-12">
+                          <span><a class="f-12 f-w-100 text-muted">How much do you want to send?</a></span>
+                          <input type="text" class="form-control  form-txt-inverse form-control-lg form-control-right form-txt-default" placeholder="N30,000.00">
+                        </div>
+                      </div>
+                      <div [@fadeInOutTranslate] class="form-group row">
+                        <div class="col-md-12">
+                          <span><a class="f-12 f-w-100 text-muted">Add a messaage <span class="text-info">(Optional)</span>(max. of 50 characters):</a></span>
+                          <input type="text" class="form-control  form-txt-inverse form-control-right form-control-lg  form-txt-default" placeholder="">
+                          <p class="f-12 f-w-100 text-muted my-0 text-right">max. of 50 characters</p>
+                        </div>
+                      </div>
+                      <div [@fadeInOutTranslate] class="form-group row">
+                        <div class="col-md-12">
+                          <span><a class="f-12 f-w-100 text-muted"> <i class="feather icon-lock"></i> Answer to secret Question:</a></span>
+                          <input type="text" class="form-control  form-txt-inverse form-control-right form-control-lg  form-txt-default" placeholder="">
+                        </div>
+                      </div>
+                      <div [@fadeInOutTranslate] class="form-group row"  *ngIf="transferType.value['type'] === 1">
+                        <div class="col-12">
+                          <span><a class="f-12 f-w-100 text-muted mb-1">Choose time to send money</a></span>
+                        </div> 
+                        <div class="col-md-12 mb-2">
+                          <div class="btn-group btn-group-toggle" ngbRadioGroup formControlName="time">
+                            <label ngbButtonLabel class="btn-outline-primary btn-sm">
+                              <input ngbButton type="radio" [value]="0">Instant
+                            </label>
+                            <label ngbButtonLabel class="btn-outline-primary btn-sm">
+                              <input ngbButton type="radio" [value]="1">Next day
+                            </label>
+                          </div>
+                          
+                        </div>
+                      </div> 
+                      <div class="form-group row">
+                        <div class="col-md-12">
+                          <div class="md-form">
+                            <button    
+                              id="customer" 
+                              type="button"
+                              class="btn btn-success btn-block waves-light float-right col-6 md-trigger"
+                              (click)="openTokenConfirmation()"
+                              mdbRippleRadius>Continue</button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="col-md-6">
+  
+                </div>
+              </div>
+              
+            </ng-template>
+          </ngb-tab>
+          -->
+        </ngb-tabset>
+      </div>
+    </div>
+  </div>
+              
+  
+  <!-- FUnds Transfer Modal Dialogs start 
+  <app-modal-animation [modalID]="'token-confirmation'" [modalClass]="'md-effect-1'">
+    <div class="text-center m-30">
+      <p class="f-14">Transfering <span class="text-custom f-w-700">N250,000.00</span> to<br> <span class="f-w-600 text-inverse">Afolabi Adesua (0012345678)-GTB</span></p>
+      <p class="f-14">from: <span class="f-w-400">0012345678-CURRENT</span></p>
+      <p class="f-10 small">
+        please enter code from token or dial <span class="text-danger">*737*7#</span> on your phone
+      </p>
+      <div class="form-group row justify-content-center">
+        <div class="col-5">
+          <input type="password" data-ng-maxlength="4" class="form-control form-txt-inverse form-control-center" placeholder="0000">
+        </div>
+      </div>
+      <button (click)="openSuccessSwal('token-confirmation')" class="btn btn-success btn-sm md-close">Confirm Transfer</button>
+      <p class="p-b-30 f-10"><span class="text-danger">*</span> By clicking the "Confirm Transfer" button,<br> you acknowledge that the details above are correct.</p>
+    </div>
+    <button (click)="closeModal($event)" aria-label="Close" class="md-close-btn"><i class="icofont icofont-ui-close"></i></button>
+  </app-modal-animation>
+  -->
+  
+    
+  

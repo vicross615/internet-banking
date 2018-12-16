@@ -1,0 +1,76 @@
+<div class="row dashboard">
+  <!-- Account Summary card start -->
+  <div class="col-md-12 mb-0">
+    <div class="row">
+      <div *ngIf="accounts" class="col-12">
+        <acct-details [itemNo]="itemNo">
+        </acct-details>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row px-md-4">
+  <div class="col-md-6 px-0 px-md-1">
+    <div [@fadeInOutTranslate] class="card mb-2">
+      <!-- <div class="mb-0 p-0 bg-light card-block" style="height: 5px;"></div> -->
+      <div class="col-12 p-0 filter-bar">
+        <nav class="navbar navbar-light bg-light justify-content-between">
+          <div class="bd-highlight text-left">
+            <h5 class="text-dark pt-2 f-w-500 f-12">
+              <i class="fas fa-arrow-alt-circle-down text-success"></i> Frequent Transfers
+            </h5>
+          </div>
+        </nav>
+      </div>
+      <div class="card-block p-0 o-hidden" style="height: 300px;">
+        <frequent-transfers></frequent-transfers>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 px-0 px-md-1">
+    <div [@fadeInOutTranslate] class="card mb-2">
+      <!-- <div class="mb-0 p-0 bg-light card-block" style="height: 5px;"></div> -->
+      <div class="col-12 p-0 filter-bar">
+        <nav class="navbar navbar-light bg-light justify-content-between">
+          <div class="bd-highlight text-left">
+            <h5 class="text-dark pt-2 f-w-500 f-12">
+              <i class="fas fa-arrow-alt-circle-down text-success"></i> Frequent Bills
+            </h5>
+          </div>
+        </nav>
+      </div>
+      <div class="card-block p-0 o-hidden" style="height: 300px;">
+        <gtibank-payment-history-cards></gtibank-payment-history-cards>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row px-md-4 mb-5">
+  <div class="col-md-6 px-0 px-md-1">
+    <div [@fadeInOutTranslate] class="card mb-2">
+      <!-- <div class="mb-0 p-0 bg-light card-block" style="height: 5px;"></div> -->
+      <div class="col-12 p-0 filter-bar">
+        <nav class="navbar navbar-light bg-light justify-content-between">
+          <div class="bd-highlight text-left">
+            <h5 class="text-dark pt-2 f-w-500 f-12">
+              <i class="fas fa-arrow-alt-circle-down text-success"></i> GT TrackIt
+            </h5>
+          </div>
+        </nav>
+      </div>
+      <div class="card-block p-0" style="height: 600px;">
+        <gtibank-gt-trackit></gtibank-gt-trackit>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 px-0 px-md-1">
+    <app-gtibank-frequent-topup-comp>
+    </app-gtibank-frequent-topup-comp>
+    <!-- <div class="card mx-0 mb-2">
+      <div class="card-block p-0 mt-1">
+        <iframe width="100%" height="280" src="https://www.youtube.com/embed/oNx-QisDlx4/?playlist=oNx-QisDlx4&amp;loop=1&amp;autoplay=0&amp;controls=0&amp;rel=1&amp;mute=1"
+          frameborder="0" allow="autoplay; loop" allowfullscreen></iframe>
+      </div>
+    </div> -->
+  </div>
+</div>

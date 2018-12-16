@@ -1,0 +1,37 @@
+<div [@slideUpDown] class="row submenu mx-1">
+  <div class="col-12">
+    <p class="f-w-100 f-20">
+      {{category?.categoryName || catFromURL.categoryName }}
+    </p>
+  </div>
+
+  <p *ngIf="errorMessage" class="f-w-400 text-muted text-center mx-auto">{{errorMessage}}</p>
+  <div class="text-center col mb-3" *ngIf="!billers && !errorMessage">
+    <div class="preloader4 mx-auto pb-0 mb-0">
+      <span>
+        <div class="double-bounce1 text-center"></div>
+        <div class="double-bounce2 text-center"></div>
+      </span>
+    </div>
+    <span class="f-10 text-muted mb-4"> Loading Billers..</span>
+  </div>
+  <ng-template [ngIf]="billers">
+    <div *ngFor="let biller of billers; let i = index" class="px-1 col-md-3 col-sm-4 col-6 mb-1">
+      <div (click)="goToProductList(biller)" [ngClass]="{'active-submenu': selectedBiller?.customerId === biller?.customerId}" class="card mb-2 text-center category-list-card z-depth-bottom-1"
+        style="height: 130px">
+        <div class="card-block px-2 card-grid">
+          <img [src]="biller?.image" class="img-fluid img-50 mb-2 light-shadow" alt="">
+          <p class="m-b-0 f-12 f-w-500">{{biller?.customerShowName || biller?.customerName | uppercase}}</p>
+        </div>
+      </div>
+      <!-- <div  
+        class="card mb-2 text-center order-visitor-card z-depth-bottom-1" placement="top" ngbTooltip="">
+        <div class="card-block card-grid px-2">
+          <img class="img-fluid img-40 border-dark mb-2" src="data:image/png;base64,{{biller?.customerLogo}}" alt="card-img">
+          <p class="m-b-0 f-10 f-w-500">{{biller?.customerShowName || biller?.customerName | uppercase}}</p>
+        </div>
+      </div> -->
+    </div>
+  </ng-template>
+
+</div>

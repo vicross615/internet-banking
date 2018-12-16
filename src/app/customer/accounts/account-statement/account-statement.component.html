@@ -1,0 +1,186 @@
+<div [@fadeInOutTranslate] class="card-block p-0" style="min-height: 100vh">
+  <!-- Nav Filter tab start -->
+  <div class="col-12 px-0 py-1 filter-bar">
+    <nav class="navbar navbar-light bg-faded px-3 pb-0">
+      <div class="col-12 px-0 d-flex justify-content-between">
+        <p class="text-dark f-w-500 f-16">
+          {{selectedAcct?.cusname}}
+        </p>
+        <p class="text-dark f-w-100 f-14">
+          Balance: <span class="text-dark f-w-400 f-20">{{selectedAcct?.avail_bal |
+            currency:selectedAcct?.alt_cur_code}}</span>
+        </p>
+      </div>
+      <div ngbDropdown>
+        <p class="f-w-400 mb-1 ml-3" for="">Select acount:</p>
+        <button class="btn btn-round btn-dark btn-sm py-2 mb-1" id="dropdownBasic1" ngbDropdownToggle>
+          {{selectedAcct?.map_acc_no}} {{selectedAcct?.des_eng}}
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <perfect-scrollbar [style.max-width]="'auto'" [style.min-height]="'300px'" [config]="config">
+            <span *ngFor="let account of accounts; let i=index">
+              <!-- <hr class="my-1"> -->
+              <button (click)="changeStatement(account)" class="dropdown-item f-12 btn-light">
+                <span class="d-block f-w-100">{{account?.cusname}}</span>
+                <span class=" f-w-400">{{account?.map_acc_no}} {{account?.des_eng}}</span>
+              </button>
+            </span>
+          </perfect-scrollbar>
+        </div>
+      </div>
+      <!-- end of by priority dropdown -->
+      <div class="nav-item nav-grid">
+        <div *ngIf="accountStatement" class="col-12 px-0 pt-2">
+          <div class="d-flex flex-row justify-content-end bd-highlight mb-0">
+            <div class="px-1 bd-highlight">
+              <p class="text-dark f-w-500 pt-1">Found {{accountStatement?.length}} record<span *ngIf="accountStatement?.length > 1">s</span></p>
+            </div>
+            <div class="px-1 bd-highlight">
+              <p class="text-dark f-w-400 pt-1">
+                <span *ngIf="loading" class="">
+                  <i class="fa fa-spin fa-spinner"></i> Processing...
+                </span>
+              </p>
+            </div>
+            <div class="px-1 bd-highlight">
+              <button (click)="downloadStatement('pdf')" class="btn btn-mini btn-round btn-light light-shadow" type="button"
+                id="downloadPdf">
+                <span *ngIf="!loading" class="">
+                  Download PDF
+                </span>
+              </button>
+              <a #download [href]='downloadPath' target="_blank"></a>
+            </div>
+            <div class="px-1 bd-highlight">
+              <button (click)="downloadStatement('excel')" class="btn btn-mini btn-round btn-light light-shadow" type="button"
+                id="downloadExcel">
+                Download EXCEL
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="accountStatement" class="nav-item nav-grid mb-0">
+        <ul class="nav navbar-nav align-self-end">
+          <li class="nav-item active">
+            <a class="nav-link text-primary f-w-500" href="javascript:;">Filter:
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li ngbDropdown="" class="nav-item dropdown">
+            <a ngbDropdownToggle="" class="nav-link dropdown-toggle" mdbRippleRadius href="javascript:;" id="bydate"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="icofont icofont-clock-time text-primary"></i> {{startDate}} to {{stopDate}} </a>
+            <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="bydate">
+              <a (click)="showFilterInput('date')" class="dropdown-item" mdbRippleRadius href="javascript:;">Custom
+                date</a>
+              <div class="dropdown-divider"></div>
+              <a (click)="filterStatement('Yesterday')" class="dropdown-item" mdbRippleRadius href="javascript:;">Yesterday</a>
+              <a (click)="filterStatement('This Week')" class="dropdown-item" mdbRippleRadius href="javascript:;">This
+                Week</a>
+              <a (click)="filterStatement('Last Week')" class="dropdown-item" mdbRippleRadius href="javascript:;">Last
+                Week</a>
+              <a (click)="filterStatement('This Month')" class="dropdown-item" mdbRippleRadius href="javascript:;">This
+                Month</a>
+              <a (click)="filterStatement('Last Month')" class="dropdown-item" mdbRippleRadius href="javascript:;">Last
+                Month</a>
+            </div>
+          </li>
+          <!-- end of by date dropdown -->
+          <li ngbDropdown class="nav-item dropdown mr-3">
+            <a (click)="showFilterInput('remark')" class="nav-link" mdbRippleRadius href="javascript:;" id="moreOptions"
+              aria-haspopup="true" aria-expanded="false">
+              <i class="icofont icofont-user text-primary mr-2"></i>{{remark || 'All'}}</a>
+          </li>
+          <li ngbDropdown class="nav-item dropdown mr-3">
+            <a (click)="showFilterInput('amount')" class="nav-link" mdbRippleRadius href="javascript:;" id="moreOptions"
+              aria-haspopup="true" aria-expanded="false">
+              <i class="icofont icofont-money text-primary mr-2"></i> {{(amount |
+              currency:currencySymbol[selectedAcct?.alt_cur_code]) || 'All'}}</a>
+          </li>
+        </ul>
+      </div>
+      <div [@fadeInOutTranslate] *ngIf="filter" class="col-12 px-0 py-1 mb-0 d-flex justify-content-start">
+        <form [formGroup]="filterForm" class="" action="javascript:">
+          <div *ngIf="filterType === 'date'" class="input-group input-group-sm mb-0">
+            <input [@fadeInOutTranslate] (click)="startDate.toggle();" class="form-control" placeholder="Start Date"
+              name="dpStop" ngbDatepicker #startDate="ngbDatepicker" formControlName="startDate">
+            <input [@fadeInOutTranslate] (click)="stopDate.toggle()" class="form-control" placeholder="Stop Date" name="dpStart"
+              ngbDatepicker #stopDate="ngbDatepicker" formControlName="stopDate">
+            <div class="input-group-append">
+              <button (click)="filterStatement('Custom')" class="btn btn-outline-secondary" type="button" id="filterDate">Search</button>
+            </div>
+          </div>
+          <div *ngIf="filterType === 'amount'" class="input-group input-group-sm mb-0">
+            <input [@fadeInOutTranslate] min="-10.50" max="transferLimit" (keyup)="util.formatCurrency(filterForm.controls['amount'])"
+              id="amount" class="form-control" placeholder="Enter Amount to filter" aria-label="Enter Amount to filter"
+              aria-describedby="filterAmount" formControlName="amount">
+            <div class="input-group-append">
+              <button (click)="filterStatement('Amount')" class="btn btn-outline-secondary" type="button" id="filterAmount">Search</button>
+            </div>
+          </div>
+          <div *ngIf="filterType === 'remark'" class="input-group input-group-sm mb-0">
+            <input [@fadeInOutTranslate] type="text" class="form-control" placeholder="Enter Remark to filter"
+              aria-label="Enter Remark to filter" aria-describedby="filterRemark" formControlName="remark">
+            <div class="input-group-append">
+              <button (click)="filterStatement('Remark')" class="btn btn-outline-secondary" type="button" id="filterRemark">Search</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </nav>
+  </div>
+  <!-- Nav Filter tab end -->
+  <div [@slideUpDown] class="mx-auto my-5 text-center" *ngIf="!accountStatement && !errorMessage">
+    <div class="preloader4 mx-auto pb-0 mb-0">
+      <span>
+        <div class="double-bounce1 text-center"></div>
+        <div class="double-bounce2 text-center"></div>
+      </span>
+    </div>
+    <span class="f-10 text-muted mb-4"> Loading account statement ..</span>
+  </div>
+  <div [@slideUpDown] class="mx-auto my-5 text-center f-12" *ngIf="errorMessage">
+    <p class="text-primary mb-0">
+      <i-alert-circle class="d-block mx-auto mb-3"></i-alert-circle>
+      {{errorMessage}}.
+    </p>
+    <p>Select a different account to view statement</p>
+  </div>
+  <div [@slideUpDown] class="mx-auto my-5 text-center f-12" *ngIf="downloadError">
+    <p class="text-primary mb-0">
+      <i-alert-circle class="d-block mx-auto mb-3"></i-alert-circle>
+      {{downloadError}}.
+    </p>
+    <button (click)="downloadWrror = null" class="btn btn-mini btn-round btn-outline-secondary" type="button" id="downloadExcel">
+      Close
+    </button>
+  </div>
+  <ng-template [ngIf]="!errorMessage">
+    <perfect-scrollbar [style.max-width]="'auto'" [style.max-height]="'100vh'">
+      <div *ngFor="let s of accountStatement" class="list-group-item list-group-item-action flex-column align-items-start px-3">
+        <div class="d-flex w-100 justify-content-between">
+          <h6 class="f-w-600 text-muted m-b-0 ">{{s?.channel}}</h6>
+          <a (click)="generateReceipt()" name="printReceipt" title="Generate Receipt" id="printReceipt" class="btn btn-light text-dark btn-round btn-mini f-12" href="javascript:" role="button">
+            <i class="icofont icofont-download-alt f-w-400"></i>Generate Receipt
+          </a>
+        </div>
+        <p class="my-2 col-10 pl-0 f-w-400">
+          {{s?.narration}}</p>
+        <div class="d-flex w-100 justify-content-between">
+          <span class="text-primary f-w-100 f-12">{{s?.transDate | date:'EEEE, MMMM d, y'}}</span>
+          <h5 [ngClass]="{'text-danger':s?.amountDebit}" class="text-right text-success f-w-400">{{s?.amountDebit |
+            currency:currencySymbol[selectedAcct?.alt_cur_code]}}{{s?.amountCredit |
+            currency:currencySymbol[selectedAcct?.alt_cur_code]}}</h5>
+        </div>
+      </div>
+    </perfect-scrollbar>
+
+    <!-- <a *ngIf="!error" href="#" class="list-group-item list-group-item-action flex-column align-items-start px-3">
+            <div class="d-flex w-100 justify-content-end">
+              <span class="text-custom">View All</span>
+            </div>
+          </a> -->
+  </ng-template>
+  <ibank-notifications [notification]="notifications" (vissibilityEvent)="visibilityHandler($event)"></ibank-notifications>
+</div>

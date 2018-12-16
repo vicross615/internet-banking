@@ -1,0 +1,135 @@
+<div class="d-flex flex-column align-items-start h-100">
+  <div class="p-0 mb-auto w-100">
+    <div class="d-flex justify-content-between">
+      <div class="pt-2">
+        <span class="text-white f-12">Already Registered ?</span>
+        <button [routerLink]="['/onboarding/login']" [routerLinkActive]="['active']" type="button" class="btn btn-primary btn-sm btn-round px-3 ml-1 waves-light"
+          mdbRippleRadius>Sign In</button>
+      </div>
+      <div class="pt-2">
+        <img src="./assets/images/logo-blue.png" class="img-fluid white-text float-right img-60" alt="Responsive image">
+      </div>
+    </div>
+  </div>
+  <!-- <div class="p-2 mb-auto w-100 text-center">
+    <img src="/assets/images/auth/mastercard.png" class="img-fluid text-center mb-2 mx-auto" alt="">
+  </div> -->
+  <div class="p-2 mb-auto w-100">
+    <form [formGroup]="registerForm" class="small-font mx-auto onboarding-forms" (ngSubmit)="onSubmitRegister(registerForm.value)">
+      <div class="formTitle mb-4">
+        <p class="text-custom f-30 f-w-100 mb-0">Sign Up</p>
+        <span class="text-light f-12">Enter your details below.</span>
+      </div>
+      <div [@slideUpDown] *ngIf="otpMessage" class="form-row text-center my-3">
+        <div class="col-12 mx-auto alert alert-light">
+          <p class="f-w-100 my-2 text-dark">{{otpMessage | titlecase}}</p>
+          <!-- <div class="md-form">
+            <button id="customer" type="button" class="px-3 btn btn-secondary btn-mini btn-round waves-light"
+              mdbRippleRadius>
+              <span *ngIf="loading === true" class="">
+                <i class="fa fa-sPin fa-sPinner mr-2"></i>
+                Loading....
+              </span>
+              <span *ngIf="!OtpRequest" class="">
+                Request Otp
+              </span>
+            </button>
+          </div> -->
+        </div>
+      </div>
+      <!-- <span class="f-12 text-white f-w-100 mb-2"><span class="text-primary f-w-500">Sign Up:</span> Please fill in your
+        details.</span> -->
+      <div [@fadeInOutTranslate] *ngIf="errorMessage" class="alert alert-warning mb-2 p-3 text-center">
+        {{errorMessage}}
+      </div>
+      <div *ngIf="successMessage" class="alert alert-success mb-2 p-3 text-center">
+        {{successMessage}}
+      </div>
+      <div class="form-row mb-2">
+        <div class="col-12">
+          <span *ngIf="registerForm.controls['AccountNumber'].value" class="f-10">Enter Your 10 Digit Account Number</span>
+          <div class="input-group mb-0">
+            <div class="input-group-append">
+              <button class="btn btn-mini btn-block bg-light border-0" type="button">
+                <i class="fa fa-fw fa-2x fa-user prefix text-secondary"></i>
+                <!-- <img src="img/calendar-icon.svg" /> -->
+              </button>
+            </div>
+            <input (keyup)="onkey(registerForm.controls['AccountNumber'].value)" placeholder="Account Number" type="text" id="AccountNumber" class="form-control mb-0 border-0"
+              mdbActive mdbInputValidate formControlName="AccountNumber">
+            <label for="cardNumber" class="sr-only">Your Account Number:</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-row mb-2">
+        <div class="col-12">
+          <span *ngIf="registerForm.controls['Pin'].value" class="f-10">Enter Card PIN.</span>
+          <div class="input-group mb-0">
+            <div class="input-group-append">
+              <button class="btn btn-mini btn-block bg-light border-0" type="button">
+                <i class="fa fa-fw fa-2x fa-ellipsis-h prefix text-secondary"></i>
+                <!-- <img src="img/calendar-icon.svg" /> -->
+              </button>
+            </div>
+            <!--  -->
+            <input placeholder="Enter Card PIN" type="password" id="card-Pin" class="form-control mb-0 border-0"
+              mdbActive mdbInputValidate formControlName="Pin">
+            <label for="card-Pin" class="sr-only">Enter Card Pin</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-row mb-2">
+        <div class="col-12">
+          <span *ngIf="registerForm.controls['Otp'].value" class="f-10">Enter OTP.</span>
+          <div class="input-group mb-0">
+            <div class="input-group-append">
+              <button class="btn btn-mini bg-light border-0" type="button">
+                <i class="fa fa-fw fa-2x fa-lock prefix text-secondary"></i>
+              </button>
+            </div>
+            <input placeholder="Enter OTP" type="number" id="Otp" class="form-control text-muted border-0" mdbActive
+              mdbInputValidate formControlName="Otp">
+            <label for="Otp" class="sr-only">Enter OTP</label>
+
+          </div>
+          <a name="requestOtp" id="requestOtp" class="btn btn-link float-right pr-0" href="javascript:" role="button">
+            <span (click)="requestOtp()" class="f-12 f-w-500 text-white">Request OTP</span></a>
+        </div>
+      </div>
+
+      <!-- <div class="form-row">
+        <div class="checkbox-color checkbox-primary ml-4 f-12">
+          <input class="form-control" id="checkbox" type="checkbox" class="form-control mb-0" mdbActive
+            mdbInputValidate formControlName="checkbox">
+          <label for="checkbox">
+            I accept Terms and Conditions
+          </label>
+        </div>
+      </div> -->
+      <div class="form-row">
+        <div class="col-12 mx-auto">
+          <div class="md-form">
+            <button [disabled]="!registerForm.valid" id="customer" type="submit" class="btn btn-block btn-primary waves-light"
+              mdbRippleRadius>
+              <span *ngIf="loading === true" class="">
+                <i class="fa fa-spin fa-spinner mr-2"></i>
+                Loading....
+              </span>
+              <span *ngIf="!loading" class="">
+                SIGN UP
+              </span>
+            </button>
+          </div>
+          <div class="form-text">
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="p-2 text-center w-100 text-white bottom">
+    <p>
+      <a class="f-12 f-w-100">GTBank.com</a> |
+      <a class="f-12 f-w-100">Terms and Conditions</a>
+    </p>
+  </div>
+</div>

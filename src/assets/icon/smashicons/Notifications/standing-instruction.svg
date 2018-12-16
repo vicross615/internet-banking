@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="56px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>017 - Repeat Questions</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="017---Repeat-Questions" transform="translate(1.000000, 1.000000)">
+            <path d="M32,3.48 C45.1497209,6.04234686 54.1997012,18.1771158 52.9056023,31.5115143 C51.6115034,44.8459128 40.3970362,55.0140228 27,55.0000289" id="Shape" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M22,54.52 C8.85027915,51.9576531 -0.199701177,39.8228842 1.0943977,26.4884857 C2.38849657,13.1540872 13.6029638,2.98597718 27,2.99997112" id="Shape" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M27,55 L30,52 L27,55 Z" id="Shape" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+            <polyline id="Shape" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" points="27 3 24 0 27 3 27 3"></polyline>
+            <path d="M30,58 L27,55 L30,58 Z" id="Shape" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M24,6 L27,3 L24,6 Z" id="Shape" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M15,38 L15,45 C15.0000863,45.4043959 15.2437275,45.7689341 15.6173454,45.923678 C15.9909634,46.0784219 16.4210057,45.9929079 16.707,45.707 L23,38" id="Shape" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M27,35 C26.7352731,34.9961196 26.481743,34.892565 26.29,34.71 L26.17,34.56 C26.1321227,34.5042729 26.1018554,34.4437381 26.08,34.38 C26.0511123,34.3233376 26.0308873,34.2626625 26.02,34.2 C26.0083911,34.1339204 26.0017061,34.0670699 26,34 C26.00158,33.8693227 26.028759,33.7402223 26.08,33.62 C26.1307291,33.4988607 26.2017473,33.3872607 26.29,33.29 C26.3856071,33.1996032 26.4976187,33.128323 26.62,33.08 C26.8634614,32.979982 27.1365386,32.979982 27.38,33.08 C27.6312303,33.1709238 27.8290762,33.3687697 27.92,33.62 C27.971241,33.7402223 27.99842,33.8693227 28,34 C27.9982939,34.0670699 27.9916089,34.1339204 27.98,34.2 C27.9691127,34.2626625 27.9488877,34.3233376 27.92,34.38 C27.8981446,34.4437381 27.8678773,34.5042729 27.83,34.56 L27.71,34.71 C27.6127393,34.7982527 27.5011393,34.8692709 27.38,34.92 C27.2613445,34.9760524 27.1311833,35.0034547 27,35 Z" id="Shape" fill="#dd4f05" fill-rule="nonzero"></path>
+            <path d="M23,38 L42,38 C43.1032019,37.9967052 43.9967052,37.1032019 44,36 L44,18 C43.9967052,16.8967981 43.1032019,16.0032948 42,16 L12,16 C10.8967981,16.0032948 10.0032948,16.8967981 10,18 L10,36 C10.0032948,37.1032019 10.8967981,37.9967052 12,38 L15,38" id="Shape" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M23,24 C23.0005567,21.8990642 24.6263742,20.1566052 26.7222386,20.0107155 C28.8181031,19.8648259 30.6696509,21.3652313 30.9612772,23.4458288 C31.2529035,25.5264262 29.885209,27.4780557 27.83,27.914 C27.3529676,28.0015921 27.004952,28.4150178 27,28.9 L27,30" id="Shape" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+        </g>
+    </g>
+</svg>

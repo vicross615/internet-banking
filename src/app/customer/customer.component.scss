@@ -1,0 +1,34 @@
+.navbar {
+    overflow: hidden;
+    position: fixed !important;
+    width: 100%;
+}
+
+.header-navbar {
+    top: 0px;
+}
+
+.bottom-navbar {
+    bottom: 0px;
+}
+
+.pcoded-main-container {
+    padding-top: 0px !important;
+    background-color: #dddddd;
+    @media only screen and (max-width: 575px) {
+        padding-top: 0px !important;
+    }
+}
+
+.pcoded-content {
+    padding-top: 20px !important;
+    @media only screen and (max-width: 575px) {
+        padding-top: 1px !important;
+    }
+}
+
+.pcoded .pcoded-navbar[pcoded-navbar-position="fixed"] {
+    position: fixed !important;
+}
+
+

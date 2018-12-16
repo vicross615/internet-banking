@@ -1,0 +1,37 @@
+<div [@fadeInOutTranslate] class="card" style="min-height: 100vh">
+    <div class="mb-0 p-0 bg-primary card-block" style="height: 5px;"></div>
+    <div class="card-header bg-white py-2">
+      <div class="d-flex justify-content-between">
+        <p *ngIf="product" class="text-dark pt-2 f-18 f-w-100">
+         {{ biller?.customerShowName || billerFromURL?.billerName }} / {{product?.formTitle }}
+        </p>
+        <p>
+          <a  [@fadeInOutTranslate] (click)="back()" name="more" id="more" class="btn light-shadow btn-round btn-success btn-mini py-2" role="button">
+            <i class="feather icon-grid"></i>Back to Billers
+        </a>
+        </p>
+      
+      </div>
+    </div>
+    <div class="card-block">
+      <div class="row">
+        <div class="col-md-8 mx-auto">
+          <div [@fadeInOutTranslate] class="m-t-5">
+              <form  class="" action="javascript:">
+                <div class="form-group pl-0">
+                  <div class="form-group">
+                    <label for="products">Products:</label>
+                    <select [@fadeInOutTranslate] #p (change)="changeProduct(p.value)" class="form-control form-control-round bg-dark text-white" name="products" id="products">
+                      <option *ngFor="let p of products" value="{{ p | json }}">{{p?.formTitle || p?.formDescription}}</option>
+                    </select>
+                  </div>
+                </div>
+              </form>
+              <dynamic-form [formDataObject]="formFields"></dynamic-form>
+              <!-- <validation-form></validation-form> -->
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+    

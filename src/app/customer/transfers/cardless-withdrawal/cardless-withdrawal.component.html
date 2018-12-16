@@ -1,0 +1,181 @@
+<div class="card-header py-2 bg-white">
+  <div class="d-flex flex-row justify-content-between">
+    <div class="bd-highlight text-left">
+      <h6 class="text-primary f-w-400">
+        <img src="assets\icon\smashicons\transfer\cardless-withdrawal-2.svg" class="img-fluid img-30 mb-2" alt="">
+        Cardless Withdrawal
+      </h6>
+    </div>
+    <div class="bd-highlight text-right">
+      <!-- <h6 class="f-w-100 f-12 text-right text-dark mb-0">Daily limit:
+        <span class="f-w-500 text-c-brand">{{transferLimit | currency:'₦'}}</span>
+      </h6> -->
+    </div>
+  </div>
+</div>
+<div class="card-block">
+  <div class="row">
+    <div class="col-md-8 pt-3 mx-auto">
+      <div [@fadeInOutTranslate] class="m-t-5">
+        <form [formGroup]="cardlessWithdrawalForm" (ngSubmit)="gtRescue()" class="" action="javascript:">
+                <!-- <pre>Model: {{ cardlessWithdrawalForm.value | json }}</pre> -->
+          <!-- <div class="form-group">
+              <div class="btn-group btn-group-sm btn-block btn-group-toggle mx-auto" ngbRadioGroup name="beneficiaryOption" formControlName="option">
+                <label ngbButtonLabel class="btn-outline-primary">
+                  <input ngbButton type="radio" value="GTRESCUE"> GTRescue
+                </label>
+                <label ngbButtonLabel class="btn-outline-secondary bg-c-blue">
+                  <input ngbButton type="radio" value="PAYCODE"> PayCode
+                </label>
+              </div>
+            </div> -->
+          <div class="material-group material-group-primary">
+            <div (click)="amountSubmitted = false" class="form-group form-primary">
+              <!-- Input: Amount to transfer -->
+              <label [@fadeInOutTranslate] class="f-18 f-w-500 mb-0" for="cashOutAmt">How much do you need?</label><br>
+              <small *ngIf="!amountSubmitted" class="text-dark pb-3">Enter amount or use buttons bellow to add up
+                amount (₦).</small>
+              <input (keyup)="checkLimit(cardlessWithdrawalForm.controls['cashOutAmt'].value)" style="font-size: 28pt; color: #dd4f05"
+                id="cashOutAmt" type="text" class="form-primary form-control form-control-lg form-control-right border-left-0 border-right-0 border-top-0"
+                placeholder="0.00" formControlName="cashOutAmt">
+              <span class="form-bar"></span>
+              <small *ngIf="limitError" class="text-danger f-12 f-w-500">{{limitError}}</small>
+              <!-- <pre>Model: {{ cardlessWithdrawalForm.value.cashOutAmt | json }}</pre> -->
+            </div>
+          </div>
+          <div class="form-row mx-auto" style="width: 100%">
+            <div class="col-8 col-md-7 px-0">
+              <div class="row pl-2">
+                <div (click)="addAmount(i)" *ngFor="let i of keypadNumbers" class="col-4 p-1 m-0 text-dark text-center gt-clickable">
+                  <div class="card m-0 text-center p-0 waves-dark" mdbRippleRadius>
+                    <div class="card-body p-0 overflow-hidden">
+                      <h6 class="card-title p-2 f-w-500">{{i}}</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-4 col-md-5 pl-4 pr-0 mb-1 pt-1 gt-clickable">
+              <div class="row text-center h-100">
+                <div class="col-12 text-center my-auto h-100">
+                  <div class="card h-100 mb-2 text-center bg-success md-trigger">
+                    <button (click)="clearAmount()" id="customer" type="button" class="btn btn-success btn-block waves-light p-1"
+                      style="height: 100%;" mdbRippleRadius>
+                      <span class="">
+                        CLEAR
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row pt-3">
+            <div class="form-group col-12 my-1">
+              <gtibank-accounts-typeahead [label]="'Account to Debit'" (acctToDebitEvent)="acctToDebitEventHander($event)">
+              </gtibank-accounts-typeahead>
+            </div>
+            <!-- <div class="form-group col-12 my-1 d-none">
+              <label [@fadeInOutTranslate] *ngIf="cardlessWithdrawalForm.controls['beneficiaryName'].value" class="f-12 pl-2"
+                for="beneficiaryName">
+                Enter Beneficiary's Name:
+              </label>
+              <input #beneficiaryName id="beneficiaryName" maxlength="25" type="text" class="form-control form-control-round" placeholder="Enter Beneficiary's Name"
+                formControlName="beneficiaryName">
+            </div> -->
+            <div class="form-group col-12 my-1">
+              <!-- Input: Phone Number -->
+              <label [@fadeInOutTranslate] *ngIf="cardlessWithdrawalForm.controls['beneficiaryPhoneNumber'].value"
+                class="f-12 pl-2" for="phoneNumber">
+                Enter Beneficiary's Phone number:
+              </label>
+              <input #beneficiaryPhoneNumber id="beneficiaryPhoneNumber" maxlength="11" type="text" class="form-control form-control-round mt-1"
+                placeholder="Phone number" formControlName="beneficiaryPhoneNumber">
+              <!-- <span class="f-10 text-danger"> *Optional</span> -->
+              <!-- Beneficiary Display Card -->
+
+              <span [@fadeInOutTranslate] class="text-success f-12">{{successMessage}}</span>
+              <span [@fadeInOutTranslate] class="text-danger f-12">{{errorMessage}}</span>
+            </div>
+            <!-- <div class="form-group col-12 my-1" *ngIf="cardlessWithdrawalForm.value.option === 'PAYCODE'">
+              <p class="mb-0">
+                <label [@fadeInOutTranslate] class="f-12 pl-2" for="cashOutTerminal">Cashout Terminal:</label>
+              </p>
+              <div class="btn-group btn-group-toggle" ngbRadioGroup name="cashOutTerminal" formControlName="cashOutTerminal">
+                <label ngbButtonLabel class="btn-outline-secondary btn-mini">
+                  <input ngbButton type="radio" value="ATM"> ATM
+                </label>
+                <label ngbButtonLabel class="btn-outline-secondary btn-mini">
+                  <input ngbButton type="radio" value="POS"> POS
+                </label>
+                <label ngbButtonLabel class="btn-outline-secondary btn-mini">
+                  <input ngbButton type="radio" value="WEB"> WEB
+                </label>
+              </div>
+            </div> -->
+            <!-- <div *ngIf="cardlessWithdrawalForm.value.option === 'PAYCODE'" class="form-group col-12 my-1">
+              <label [@fadeInOutTranslate] *ngIf="cardlessWithdrawalForm.controls['cashOutPIN'].value" class="f-12 pl-2" for="cashOutPIN">cashout
+                PIN:</label>
+              <input id="cashOutPIN" type="text" class="form-control form-control-round" placeholder="Cashout PIN" formControlName="cashOutPIN">
+            </div> -->
+            <!-- Input for Secret Question -->
+            <div class="form-group col-12 my-1">
+              <label [@fadeInOutTranslate] *ngIf="cardlessWithdrawalForm.controls['secretAnsw'].value" class="f-12 pl-2" for="secretAnsw">Answer
+                to secret Question:</label>
+              <input type="password" class="form-control form-control-round" placeholder="Answer to secret Question" formControlName="secretAnsw">
+              <get-secret-question></get-secret-question>
+            </div>
+            <div class="form-group col-12 my-1">
+              <label [@fadeInOutTranslate] *ngIf="cardlessWithdrawalForm.controls['token'].value" class="f-12 pl-2" for="token">Enter
+                Token:</label>
+              <input type="text" class="form-control form-control-round" placeholder="Enter Token" formControlName="token">
+            </div>
+            <span class="f-10 px-2">Use your <span class="text-primary">hardware token</span> or dial <span class="text-primary">*737*7#
+              </span>to generate 6 digit code.</span>
+            <div class="form-group col-12 my-3">
+              <div class="md-form text-right">
+                <button [disabled]='!cardlessWithdrawalForm.valid'
+                  [@fadeInOutTranslate] id="submit" type="submit" class="btn px-4 btn-round light-shadow btn-success waves-light md-trigger btn-sm"
+                  mdbRippleRadius>
+                  <span *ngIf="isLoading === true" class="">
+                    <i class="fa fa-spin fa-spinner"></i>
+                  </span>
+                  <span *ngIf="!isLoading" class="">
+                    Continue
+                  </span>
+                </button>
+              </div>
+              <p class="mt-3 f-12">You will be charged
+                <span class="text-primary">₦50.00</span> for this transaction
+              </p>
+            </div>
+          </div>
+        </form>
+        <!-- <pre>Model: {{ cardlessWithdrawalForm.value | json }}</pre>
+          <pre>BeneficiaryDetail: {{ beneficiaryDetail | json }}</pre> -->
+      </div>
+    </div>
+  </div>
+  <!-- <div class="row mt-5">
+    <div class="col-md-9 mx-auto">
+      <div [@fadeInOutTranslate] *ngIf="transferSuccessMessage" class="alert alert-success text-dark" role="alert">
+        <h6 class="f-18 f-w-500 mb-0">Your Request was Successful</h6>
+        <small class="f-10 text-muted">Use the withdrawal code to get you cash from any GTBank ATM.</small>
+        <ul class="text-dark f-12 mt-4">
+          <li class="f-14 f-w-500"><span class="f-12 pl-2">Withdrawal code: </span>{{transferSuccessMessage?.cashlessCode}}</li>
+          <li><span class="f-w-500">Code expires on: </span>{{transferSuccessMessage?.codeExpiry | date:'medium'}}</li>
+          <li class="">
+            <span class="f-w-500">Charges: </span>{{transferSuccessMessage?.chargeAmount | currency:'₦'}}</li>
+        </ul>
+        <p class="f-18 f-w-500 text-primary text-right">Amount: {{transferSuccessMessage?.amount | currency:'₦'}}</p>
+        <a href="javascript:" class="btn btn-primary btn-round btn-sm float-right">Close</a>
+      </div>
+      <div *ngIf="transferErrorMessage" class="alert alert-warning" role="alert">
+        <h4 class="alert-heading f-18 f-w-500">Sorry, We could not proceed with your request.</h4>
+        <p>{{transferErrorMessage}}</p>
+        <a href="javascript:" class="btn btn-primary btn-round btn-sm float-right">Back</a>
+      </div>
+    </div>
+  </div> -->
+  <ibank-notifications [notification]="notifications" (vissibilityEvent)="visibilityHandler($event)"></ibank-notifications>
+</div>

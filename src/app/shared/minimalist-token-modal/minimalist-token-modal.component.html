@@ -1,0 +1,66 @@
+<div class="col-md-12 mx-auto">
+  <div class="card">
+    <div *ngIf="!(message || isLoading)" class="card-block">
+      <div class="text-center">
+        <i class="feather icon-lock f-16 text-dark"></i>
+        <h5 *ngIf="isToken === true" class="mt-2">Token Confirmation</h5>
+        <h5 *ngIf="isToken === false" class="mt-2">Confirm Transaction</h5>
+        <p [innerHTML]="activeService"></p>
+      </div>
+    </div>
+    <div *ngIf="isLoading" class="text-center card-block">
+      <div class="preloader4 mx-auto pb-0 mb-0">
+        <span>
+          <div class="double-bounce1 text-center"></div>
+          <div class="double-bounce2 text-center"></div>
+        </span>
+      </div>
+      <span class="f-10 text-muted mb-4"> Just a minute..</span>
+    </div>
+    <ng-container *ngIf="isToken === true">
+      <div *ngIf="!(message || isLoading)" class="card-block">
+        <div class="mx-auto form-material">
+          <div class="material-group material-group-primary w-75 mx-auto">
+            <div class="form-group form-primary">
+              <input type="number" #token class="form-control form-control-center" maxlength="6" aria-describedby="tokenHelp"
+                placeholder="Enter Token" onKeyDown="if(this.value.length==6 && event.keyCode!=8) return false;">
+              <span class="form-bar"></span>
+              <label class="float-label text-center d-none">Enter Token</label>
+            </div>
+          </div>
+        </div>
+        <small id="tokenHelp" class="form-text text-dark text-center py-2 f-12">
+          <span>
+            Use your <span class="text-primary">hardware token</span> or dial <span class="text-primary">*737*7#</span>
+            to generate 6 digit code.
+          </span>
+        </small>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="isToken ===false">
+      <div *ngIf="!(message || isLoading)" class="card-block text-center">
+        <p class="my-3">
+          <img class="img-menu-user img-circle img-60 my-2 z-depth-bottom-1" [src]="'assets/icon/smashicons/Upload Web - Webby.svg'" alt="success icon">
+        </p>
+      </div>
+      <small id="tokenHelp" class="form-text text-dark text-center py-2 f-12">
+        <span>Please confirm the transaction</span>
+      </small>
+    </ng-container>
+
+    <div [@fadeInOutTranslate] *ngIf="message" class="card-block text-center">
+      <p class="my-3">
+        <img [@slideUpDown] *ngIf="isSuccess" class="img-menu-user img-circle img-60 my-2 z-depth-bottom-1" [src]="'assets/icon/smashicons/alert/success.svg'"
+          alt="success icon">
+        <img [@slideUpDown] *ngIf="!isSuccess" class="img-menu-user img-circle img-60 my-2 z-depth-bottom-1" [src]="'assets/icon/smashicons/alert/error.svg'"
+          alt="error icon">
+      </p>
+      <p [innerHTML]="message" class=" my-auto"></p>
+    </div>
+    <div class="card-footer py-2">
+      <button type="button" class="btn btn-sm btn-outline-dark mr-2" (click)="closeTokenForm()">Back</button>
+      <button type="submit" class="btn btn-sm btn-primary mr-2" (click)="submitToken()">Submit</button>
+      <span *ngIf="isLoading" class="ml-2"><i class="fa fa-spin fa-spinner f-12 text-primary"></i></span>
+    </div>
+  </div>
+</div>

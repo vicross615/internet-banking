@@ -1,0 +1,18 @@
+<div class="form-group mb-0 pt-3">
+  <ng-template #rt let-r="result" let-t="term">
+    <div (click)="onChange();">
+      <span>
+        <p class="f-12">{{r?.name}}</p>
+      </span>
+    </div>
+  </ng-template>
+  <!-- (selectItem)="setModel($event)"  -->
+  <label [@fadeInOutTranslate] class="f-12" *ngIf="valuesInput.dirty" for="values">{{label}}:</label>
+  <input id="values" type="text" class="form-control" [(ngModel)]="valuesModel" [ngbTypeahead]="universalTypeahead"
+    [resultTemplate]="rt" [inputFormatter]="formatter" (focus)="Focus$.next($event.target.value); $event.target.value=''; clearInput()"
+    (click)="Click$.next($event.target.value); $event.target.value='';" #Instance="ngbTypeahead" [formControl]="valuesInput"
+    placeholder="{{label}}">
+  <div class="f-12 text-danger" *ngIf="valuesInput.touched && valuesInput.value === ''">
+    Please select {{label}}
+  </div>
+</div>

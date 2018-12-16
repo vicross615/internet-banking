@@ -1,0 +1,108 @@
+////////////////////////////////////
+///// CHANGE LOG: GTB-iBank ///////
+//////////////////////////////////
+
+ibank dev version: 1.0.0.3
+
+1.  Completed UI fo dashboard
+2.  Updated the Login form to look more simple and clean
+3.  Added Logout page with ratings
+4.  Added Lock-screen page with ratings
+5.  Added Forgot Password page
+6.  Added Registration page
+7.  Added Menu items on page template
+8.  Changed icons to a cleaner set.
+9.  Updated Notification dropdown list on top bar
+10. Fixed Navigation on all buttons
+11. Fixed bug that crashes browser on mobile phones
+12. Improved page responsiveness
+13. Updated Account Activity section on dashboard (It now has a dropdown to select a different account)
+14. Added number counter on notification and message badges.
+15. Added Live customizer (Click on animated button on right side of the screen)
+
+16. Removed Quick wins button on top bar (Will be available in next update)
+
+Please Note: Only Dashbard menu item is linked. All others will be available as their pages are created.
+
+///////////////////////////////////////////////////////////
+//////// NEXT UPDATE: WEDNESDAY, 28TH MARCH, 2018 /////////
+
+1.  Complete tranfer page
+2.  Complete beneficiaries page
+3.  Complete more menu page (to display other menu items in grid layout)
+
+
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+
+ibank dev version: 1.0.0.4 alpha ==>>>> 28th March, 2018
+
+1.  Quick wins buttons have been restored.
+2.  Transfers menu item has been linked to show Transfers
+3.  Added transfers page with tabs for each transfer type
+4.  Added interativity to form elements on transfers page.
+
+///////////////////////////////////////////////////////////
+//////// NEXT UPDATE: Friday, 30TH MARCH, 2018 /////////
+
+1.  Complete beneficiaries page
+2.  Complete more menu page (to display other menu items in grid layout),
+3.  Add form validation to all form input on transfers page.
+4.  Integrate the new Login and Logout web APIs.
+
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+
+ibank dev version: 1.0.0.5 alpha ==>>>> 2nd April, 2018
+
+1.  Token confirmation has been added using modal dialog on funds transfer page.
+2.  Added UI for Beneficiaries page with search, edit and delet buttons
+3.  Fixed Responsiveness to display quick wins buttons
+
+///////////////////////////////////////////////////////////
+//////// NEXT UPDATE: Friday, 3rd April, 2018 /////////
+
+1.  Complete more menu page (to display other menu items in grid layout),
+2.  Add form validation to all form input on transfers page.
+3.  Integrate the new Login and Logout web APIs.
+
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+
+ibank dev version: 1.0.0.6 alpha ==>>>> 9th April, 2018
+
+1.  Updated account activities UI on dashboard (Data grid is now responsive and will fit all views)
+2.  Added Bottom menu wich will only be visible on mobile devices
+3.  Added UI for Beneficiaries page with search, edit and delet buttons
+4.  Fixed Responsiveness to display quick wins buttons
+5.  Reduced funds transfer tabs to 2; Own Account and Beneficiaries
+6.  Added form validation to all form input on transfers page.
+
+///////////////////////////////////////////////////////////
+//////// NEXT UPDATE: Friday, 13rd April, 2018 /////////
+
+1.  Complete more menu page (to display other menu items in grid layout),
+3.  Integrate the new Login and Logout web APIs. (Pending: Yet to resolve CORS issue on APIs. Working with the API dev team to see this through)
+4.  Create Accounts Module (will include; View account details, Manage Accounts, View Transaction, Search Transaction history, Account Opening, Send Statement, Account Upgrade,View Transaction Receipt, View Account Manager details)
+5.  Make Accounts UI responsive. 
+
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+
+ibank dev version: 1.0.0.7 alpha ==>>>> 13th April, 2018
+
+1.  Accounts Module is created and also mobile responsive (Sub Modules will be completed next week)
+2.  Created Menu grid for Accounts Module. Click on floating action button at botttom right of page (Only available on mobile view)
+3.  Login WebAPI Integrated (Login with your UserID and Password)
+4.  Get User details Also Implemented User's personal information is now available. (see Sidebar and dropdown on user's name) 
+5.  Reduced funds transfer tabs to 2; Own Account and Beneficiaries
+6.  Added form validation to all form input on transfers page.
+
+///////////////////////////////////////////////////////////
+//////// NEXT UPDATE: Friday, 20th April, 2018 ///////////
+
+1.  Integrate Dashboard API
+3.  Complete UI for Accounts Sub-modules 
+4.  Start UI design for Bills Payment module
+
+

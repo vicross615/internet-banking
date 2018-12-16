@@ -1,0 +1,20 @@
+<app-modal-animation [@slideInOut]
+  [modalID]="'transferMessage'" [modalClass]="'md-effect-12 text-center modal-sm'">
+    <h4 class="py-3 f-w-400">Transfers</h4>
+    <div>
+        <div *ngIf="modal?.messageType === 'success'">
+            <p class="f-14 text-dark"> {{modal?.message}} <span> {{modal?.beneficiaryName | titlecase}}</span> was successful</p>
+            <p class="mb-0 pb-0 text-success">Transfer Amount</p>
+            <p class="text-success f-w-100 f-20 mt-0 pt-0">{{modal?.transferAmount | currency:'₦'}}</p>
+        </div>
+        <div *ngIf="modal?.messageType === 'error'">
+        <p class="f-12 text-danger"> 
+            {{modal?.message}}
+        </p>
+        </div>
+      
+      <button (click)="closeModal('#transferMessage')" class="btn  px-4 btn-success btn-round btn-sm mt-3 waves-light" mdbRippleRadius>
+      OK</button>
+    </div>
+    <button (click)="closeModal('transferMessage')" aria-label="Close" class="md-close-btn"><i class="icofont icofont-ui-close"></i></button>
+  </app-modal-animation>

@@ -1,0 +1,69 @@
+<form [formGroup]="cardHotlistForm" (ngSubmit)="onHotlist()" class="f-12 w-75 mx-auto py-3 mb-5" novalidate action="javascript:">
+  <!-- <div *ngIf="hotlisting" class="text-center col mb-4">
+    <div class="preloader4 mx-auto pb-0 mb-0">
+      <span>
+        <div class="double-bounce1 text-center"></div>
+        <div class="double-bounce2 text-center"></div>
+      </span>
+    </div>
+    <span class="f-10 text-muted mb-4"> Just a minute..</span>
+  </div> -->
+  <!-- <pre>{{cardHotlistForm.value | json}}</pre> -->
+  <div  *ngIf="cardHotlistMessage" [@fadeInOutTranslate] class="card badge-inverse-danger text-primary">
+    <div [@fadeInOutTranslate] class="card-block">
+      <p class="f-w-500 f-12"><span class="">{{cardHotlistMessage}}</span></p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="products text-white"><span class="text-white f-w-100">Select reason to Hotlist:</span></label>
+    <div ngbDropdown>
+      <button type="button" class="btn btn-block btn-light py-2" id="dropdownBasic1" ngbDropdownToggle>
+        {{selectedReason | uppercase}}
+      </button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <span>
+          <!-- <hr class="my-1"> -->
+          <button type="button" *ngFor="let reason of reasons" (click)="updateSelectedReason(reason)" class="dropdown-item f-12 text-dark">
+            <span class="d-block"> {{reason?.desc | uppercase}}</span>
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="form-group pl-0">
+    <label [@fadeInOutTranslate] *ngIf="cardHotlistForm.controls['SecretAnswer'].value" class="text-white f-w-100" for="SecretAnswer">Answer
+      to secret Question:</label>
+    <input type="password" class="form-control" placeholder="Answer to secret Question" formControlName="SecretAnswer">
+    <get-secret-question></get-secret-question>
+    <!-- <pre>Model: {{ otherBanksTransferForm.get('SecretAnswer').status}}</pre> -->
+  </div>
+  <div class="form-group form-primary">
+    <input
+    type="number"
+    class="form-control"
+    name="token"
+    id="token"
+    maxlength="6"
+    aria-describedby="tokenHelp"
+    placeholder="Enter Token"
+    formControlName="AuthValue"
+    onKeyDown="if(this.value.length==6 && event.keyCode!=8) return false;">
+    <span class="form-bar"></span>
+    <label class="float-label text-center d-none">Enter Token</label>
+  </div>
+  <div [@fadeInOutTranslate] *ngIf="!cardHotlistMessage" class="mb-2">
+    <p class="f-w-500 f-12">Notice: <span class="f-w-100">Card hotlisting is not reversible.</span></p>
+  </div>
+  <div class="form-group">
+    <div class="md-form">
+        <button [disabled]="true" *ngIf="hotlisting"
+        type="button" class="btn btn-success float-right waves-light md-trigger btn-sm" mdbRippleRadius>
+          Hotlisting..
+        </button>
+      <button [disabled]="!cardHotlistForm.valid" *ngIf="!hotlisting"
+      type="submit" class="btn btn-success float-right waves-light md-trigger btn-sm" mdbRippleRadius>
+        Continue
+      </button>
+    </div>
+  </div>
+</form>

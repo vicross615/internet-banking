@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>031 - Secure Payment</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="031---Secure-Payment" transform="translate(1.000000, 1.000000)" stroke="#dd4f05" stroke-width="1">
+            <path d="M3,36 L55,36 C56.6568542,36 58,37.3431458 58,39 L58,44 L0,44 L0,39 C-4.4408921e-16,37.3431458 1.34314575,36 3,36 Z" id="Shape"></path>
+            <path d="M21,36 L37,36 L37,38 C37,39.1045695 36.1045695,40 35,40 L23,40 C21.8954305,40 21,39.1045695 21,38 L21,36 Z" id="Shape"></path>
+            <path d="M6,0 L52,0 C53.1045695,0 54,0.8954305 54,2 L54,36 L4,36 L4,2 C4,0.8954305 4.8954305,0 6,0 Z" id="Shape"></path>
+            <circle id="Oval" cx="18" cy="18" r="10"></circle>
+            <!-- <path d="M19.975,23.00994 L13.97507,22.97994 C13.97507,22.97994 16.13413,22.99073 16.18807,16.74535 C16.24201,10.49997 20.02891,12.22225 20.02891,12.22225" id="Shape"></path>
+            <path d="M14.09096,17.98045 L18.99999,18.005" id="Shape"></path> -->
+            <rect id="Rectangle-path" x="34" y="17" width="16" height="11" rx="1"></rect>
+            <path d="M42,8 C45.3137085,8 48,10.6862915 48,14 L48,17 L36,17 L36,14 C36,10.6862915 38.6862915,8 42,8 Z" id="Shape"></path>
+            <polyline id="Shape" points="40 23 41 24 44 21"></polyline>
+        </g>
+    </g>
+</svg>

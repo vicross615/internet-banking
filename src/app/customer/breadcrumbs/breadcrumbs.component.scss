@@ -1,0 +1,10 @@
+.not-active {
+    pointer-events: none;
+    cursor: default;
+}
+
+.quicklink-top {
+    position: relative !important;
+    top: -30px;
+    z-index: 99;
+}

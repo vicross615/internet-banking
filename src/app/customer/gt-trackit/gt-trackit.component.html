@@ -1,0 +1,111 @@
+<!-- Nav Filter tab start -->
+<div class="col-12 px-0 py-0 filter-bar">
+  <nav class="navbar navbar-light bg-light p-2 z-depth-bottom-0">
+    <div class="nav-item nav-grid">
+      <div ngbDropdown>
+        <p class="f-w-400 f-10 mb-1 ml-2" for="">Select Request Type:</p>
+        <button class="btn btn-round btn-dark btn-sm py-2" id="dropdownBasic1" ngbDropdownToggle>
+          <span class="px-5">{{ requestType?.name }}</span>
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <span *ngFor="let r of requestTypeList; let i=index">
+            <!-- <hr class="my-1"> -->
+            <button (click)="changeTrackItList(r)" class="dropdown-item f-12 btn-light">
+              <span class="f-w-100 text-dark">{{r?.name}}</span>
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="nav-item nav-grid pt-3">
+      <ul class="nav navbar-nav align-self-end">
+        <li class="nav-item active">
+          <a class="nav-link text-primary f-w-500" href="javascript:;">Filter:
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li ngbDropdown="" class="nav-item dropdown">
+          <a ngbDropdownToggle="" class="nav-link dropdown-toggle" mdbRippleRadius href="javascript:;" id="bydate"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="icofont icofont-filter text-primary mr-3"></i><span class="px-2">{{searchCriteria?.name}}</span></a>
+          <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="bydate">
+            <a *ngFor="let s of searchCriteriaList" (click)="filter(s)" class="dropdown-item" mdbRippleRadius href="javascript:;">{{s.name}}</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div [@fadeInOutTranslate] *ngIf="isFilter" class="col-12 px-0 py-1 mb-0 d-flex justify-content-end">
+      <form [formGroup]="filterForm" class="" action="javascript:">
+        <div *ngIf="searchCriteria.code === 2" class="input-group input-group-sm mb-0">
+          <input [@fadeInOutTranslate] (click)="startDate.toggle();" class="form-control" placeholder="Start Date" name="dpStop"
+            ngbDatepicker #startDate="ngbDatepicker" formControlName="startDate">
+          <input [@fadeInOutTranslate] (click)="stopDate.toggle()" class="form-control" placeholder="Stop Date" name="dpStart"
+            ngbDatepicker #stopDate="ngbDatepicker" formControlName="stopDate">
+          <div class="input-group-append">
+            <button (click)="doFilter()" class="btn btn-outline-secondary" type="button" id="filterDate">Search</button>
+          </div>
+        </div>
+        <div *ngIf="searchCriteria.code === 3" class="input-group input-group-sm mb-0">
+          <input [@fadeInOutTranslate] type="number"
+            id="trackingId" class="form-control" placeholder="Enter Tracking ID" aria-label="Enter Tracking ID"
+            aria-describedby="trackingId" formControlName="trackingId">
+          <div class="input-group-append">
+            <button (click)="doFilter()" class="btn btn-outline-secondary" type="button" id="trackingId">Search</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="gtTrackItList" class="col-12 px-0 pt-2">
+      <div class="d-flex flex-row justify-content-end bd-highlight mb-0">
+        <div class="px-1 bd-highlight">
+          <p class="text-dark f-w-500 pt-1">Found {{gtTrackItList?.length}} record<span *ngIf="gtTrackItList?.length > 1">s</span></p>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+<!-- Nav Filter tab end -->
+<ng-container *ngIf="loading" class="mt-5 pt-5">
+  <div class="preloader4 mx-auto pb-0 mb-0">
+    <span>
+      <div class="double-bounce1 text-center"></div>
+      <div class="double-bounce2 text-center"></div>
+    </span>
+  </div>
+</ng-container>
+<ng-container *ngIf="(gtTrackItList?.length === 0) && !loading">
+  <div [@fadeInOutTranslate] class="card-body pt-5 text-center mt-5">
+
+    <i class="fas fa-info-circle fa-2x"></i>
+    <p class="mt-2 f-w-400 text-muted text-center mx-auto">
+      {{message}}
+    </p>
+    <p  *ngIf="!message" class="mt-2 f-w-400 text-muted text-center mx-auto">
+        No {{requestType?.name}} record.
+      </p>
+    <div class="mt-2">
+      <!-- <p>Use button below to go to Transfers</p> -->
+      <button *ngIf="requestType.code === 2" (click)="makeRequest('cards')" type="button" class="btn btn-primary btn-mini btn-round px-3 ml-1 waves-light"
+        mdbRippleRadius>Request debit Card</button>
+      <button *ngIf="requestType.code === 3" (click)="makeRequest('cards/dispense-error')" type="button" class="btn btn-primary btn-mini btn-round px-3 ml-1 waves-light"
+        mdbRippleRadius>Report Dispense Error</button>
+    </div>
+  </div>
+</ng-container>
+<ng-container [@slideUpDown] *ngIf="gtTrackItList?.length > 0">
+  <perfect-scrollbar [style.max-width]="'auto'" [style.max-height]="'100%'">
+    <div *ngFor="let list of gtTrackItList" class="list-group-item list-group-item-action flex-column align-items-start px-3 rounded-0">
+      <div class="d-flex w-100 justify-content-between">
+        <h6 class="f-w-700 text-custom m-b-0 ">{{list?.requestDescription | titlecase}}</h6>
+        <span class="f-10 text-muted">Track ID: {{list?.trackId}}</span>
+      </div>
+      <p class="my-2 col-10 pl-0 f-w-400">
+        Pick-up Branch: {{list.pickUpBranch}}
+      </p>
+      <div class="d-flex w-100 justify-content-between">
+        <span class="f-w-100 f-12">Request Date: {{list.requestDate | date}}</span>
+        <h5 class="text-right text-success f-w-600 f-14">{{list?.status}}</h5>
+      </div>
+    </div>
+  </perfect-scrollbar>
+</ng-container>

@@ -1,0 +1,16 @@
+<ng-template #rt let-r="result" let-t="term">
+  <div (click)="onFxAcctChange();">
+    <span class="d-block f-12">{{r?.nuban}}
+      <span class="text-inverse"> Balance: {{r.accountBalance | currency:currencySymbol[r?.altCurCode]}}</span>
+    </span>
+    {{ r.accountName}}
+  </div>
+</ng-template>
+<!-- (selectItem)="setModel($event)"  -->
+<label [@fadeInOutTranslate] class="f-12" *ngIf="fxacct.dirty" for="fxacct">{{label}}:</label>
+<input id="fxacct" type="text" class="form-control" [(ngModel)]="fxacctModel" [ngbTypeahead]="fxacctsTypeahead" [resultTemplate]="rt"
+  [inputFormatter]="fxformatter" (focus)="fxacctFocus$.next($event.target.value); fxacct.value=''; $event.target.value=''; fxacctModel = null"
+  (click)="fxacctClick$.next($event.target.value);" #fxacct="ngModel" #fxacctsInstance="ngbTypeahead" placeholder="{{label}}">
+<div class="f-12 text-danger" *ngIf="fxacct.value && !fxacctModel">
+  Please select {{label}}
+</div>

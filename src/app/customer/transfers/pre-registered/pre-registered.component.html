@@ -1,0 +1,168 @@
+<div class="card-header py-2 bg-white">
+  <div class="d-flex flex-row justify-content-between">
+    <div class="bd-highlight text-left">
+      <h6 class="text-primary f-w-400">
+          <img src="assets\icon\smashicons\transfer\gt.svg" class="img-fluid img-30 mb-2" alt="">
+        Pre-registered Transfers
+      </h6>
+    </div>
+    <div class="bd-highlight text-right">
+      <h6 class="f-w-100 f-12 text-right text-dark mb-0">Daily limit:
+        <span class="f-w-500 text-c-brand">{{transferLimit | currency:'₦'}}</span>
+      </h6>
+    </div>
+  </div>
+</div>
+<div *ngIf="preRegBeneficiaries" class="card-block">
+  <div  *ngIf="!formSubmit" class="row">
+    <div class="col-md-8 pt-3 mx-auto">
+      <div [@fadeInOutTranslate] class="m-t-5">
+          <form [formGroup]="preRegTransferForm" (ngSubmit)="openTokenConfirmation()"  class="" action="javascript:">
+            <gtibank-accounts-typeahead 
+            [label]="'Account to Debit'"
+            (acctToDebitEvent)="acctToDebitEventHander($event)">
+            </gtibank-accounts-typeahead>
+            <div class="form-group mt-3">
+              <ng-template #preRegBeneficiary let-r="result" let-t="term">
+                  <perfect-scrollbar [style.max-width]="'auto'" [style.max-height]="'200px'" [config]="config">
+                <div class="card-block p-0">
+                  <div class="d-flex flex-row justify-content-start my-0 py-0">
+                    <!-- <div class="p-2 bd-highlight">
+                      <img class="img-menu-user img-radius img-40" src="assets/images/placeholder.png" alt="User-Profile-Image">
+                    </div> -->
+                    <div class="p-0 bd-highlight">
+                      <p class="mb-1 f-12">{{r.beneficiaryName | uppercase}}</p>
+                      <p class="mb-1 f-10"> {{r.ledgerDescription | titlecase}}</p>
+                    </div>
+                  </div>
+                </div>
+              </perfect-scrollbar>
+              </ng-template>
+              
+              <label [@fadeInOutTranslate] *ngIf="preRegTransferForm.controls['preRegBeneficiary'].dirty" class="f-12" for="preRegBeneficiary">
+                  Beneficiary:
+              </label>
+              <input 
+                id="preRegBeneficiary" 
+                type="text" 
+                class="form-control" 
+                [(ngModel)]="preRegBeneficiariesModel" 
+                [ngbTypeahead]="PreRegBeneficiaries" 
+                [resultTemplate]="preRegBeneficiary"
+                [inputFormatter]="preRegformatter"
+                (focus)="preRegTransferForm.value.preRegBeneficiary=''; $event.target.value='';"
+                (click)="click$.next($event.target.value);"
+                #preRegBeneficiariesInstance="ngbTypeahead"
+                placeholder="Enter Pre-registered beneficiary's name"
+                formControlName="preRegBeneficiary">
+            </div>
+            <!-- Beneficiary Display Card -->
+            <div  [@fadeInOutTranslate] *ngIf="preRegTransferForm.value.preRegBeneficiary" class="card my-2 border-primary">
+              <div class="card-block p-1">
+                <div class="d-flex flex-row justify-content-between my-0 py-0">
+                  <div class="p-2 bd-highlight">
+                    <p class="mb-3">{{preRegTransferForm.value.preRegBeneficiary.beneficiaryName | titlecase}}</p>
+                    <!-- <span class="mb-2 f">{{preRegTransferForm.value.preRegBeneficiary.ledgerDescription | titlecase}}</span><br> -->
+                    <a (click)="clearBeneficiary()" class="btn btn-primary btn-round btn-mini text-white"  role="button" title="Clear Beneficiary">
+                      <i class="icofont icofont-trash mr-2"></i>Clear
+                    </a>
+                  </div>
+                  <div class="p-2 bd-highlight">
+                    <img class="img-menu-user img-radius img-60" src="assets/images/placeholder.png" alt="User-Profile-Image">
+                </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group pl-0">
+              <!-- Input: Amount to transfer -->
+              <label [@fadeInOutTranslate] class="f-12" for="transAmt">Amount to transfer:</label>
+              <input
+                (keyup)="util.formatCurrency(preRegTransferForm.controls['transferAmt'])"
+                id="transAmt"
+                class="form-control form-control-right"
+                placeholder="0.00"
+                formControlName="transferAmt">
+                <!-- <pre>amt: {{ preRegTransferForm.value.acctToDebit | json }}</pre> -->
+            </div>
+            <div class="form-group pl-0">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Remark"
+                formControlName="remark">
+              <div *ngIf="preRegTransferForm.controls['remark'].dirty" class="form-group d-none">
+              <div class="md-form">
+                <button
+                  id="customer"
+                  type="button"
+                  class="btn btn-block btn-sm btn-secondary waves-light md-trigger mt-1"
+                  mdbRippleRadius>Add new Transfer</button>
+              </div>
+              </div>
+            </div>
+            <div class="form-group pl-0"> 
+              <input
+              type="password"
+              class="form-control"
+              placeholder="Answer to secret Question"
+              formControlName="secretAnsw">
+              <get-secret-question></get-secret-question>
+            </div>
+            <div class="form-group">
+              <div class="md-form">
+                  <button
+                  [disabled]='!preRegTransferForm.valid'
+                  [@fadeInOutTranslate]
+                  id="customer"
+                  type="submit"
+                  class="btn btn-success waves-light md-trigger btn-sm"
+                  mdbRippleRadius>
+                  <span *ngIf="isLoading === true" class="">
+                    <i class="fa fa-spin fa-spinner"></i>
+                  </span>
+                  <span *ngIf="!isLoading" class="">
+                    Continue
+                  </span>
+                </button>
+              </div>
+              <p class="mt-3 f-12">You will be charged
+                <span class="text-primary">₦0.00</span> for this transfer
+              </p>
+            </div>
+          </form>
+      </div>
+    </div>
+    <div class="col-md-12 d-none">
+      <div class="card">
+        <div class="card-block">
+          <div class="multiple-transfers">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="formSubmit" [@fadeInOutTranslate] class="row">
+    <div class="col-md-9 pt-4 mx-auto">
+      <app-token-confirmation-modal
+      (resetFormEvent)="resetFormEventHandler($event)"
+      (tokenVissibilityEvent)="tokenEventHandler($event)"
+      [body]="reqBody"
+      [isToken]=false
+      [category]="'transfers'"
+      [transactionType]='"preRegTransfers"'
+      [isToken]='false'>
+
+      </app-token-confirmation-modal>
+    </div>
+  </div>
+</div>
+<div *ngIf="!preRegBeneficiaries" class="card-block">
+  <div [@slideUpDown] class="mx-auto my-5 text-center f-12">
+    <p class="text-primary mb-2">
+      <i-alert-circle class="d-block mx-auto mb-3"></i-alert-circle>
+      You have no Pre-Registered Beneficiary
+    </p>
+    <p>Visit any GTbank branch to add Pre-Registered Beneficiaries.</p>
+  </div>
+</div>

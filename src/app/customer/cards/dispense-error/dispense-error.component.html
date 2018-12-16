@@ -1,0 +1,115 @@
+<div [@fadeInOutTranslate] class="card" style="min-height: 100vh;">
+  <div class="mb-0 p-0 bg-primary card-block" style="height: 5px;"></div>
+  <div class="card-header bg-white p-0">
+    <!-- Nav Filter tab start -->
+    <div class="col-12 px-0 py-1 filter-bar">
+      <nav class="navbar navbar-light bg-faded p-3 justify-content-between">
+        <h5 class="text-primary">
+          <img src="assets\icon\smashicons\cards\dispense-error.svg" class="img-fluid img-40 mb-2" alt=""> Report
+          Dispense Error 
+        </h5>
+        <p *ngIf="transactionDetail" class="f-30 f-w-100 text-dark">Your card Transaction for {{transDate}}</p>
+      </nav>
+    </div>
+    <!-- Nav Filter tab end-->
+  </div>
+  <div *ngIf="!transactionDetail" class="card-block">
+    <div *ngIf="!selectedCard" class="text-center col mb-4">
+      <div class="preloader4 mx-auto pb-0 mb-0">
+        <span>
+          <div class="double-bounce1 text-center"></div>
+          <div class="double-bounce2 text-center"></div>
+        </span>
+      </div>
+      <span class="f-10 text-muted mb-4"> Just a minute..</span>
+    </div>
+    <form *ngIf="!transactionDetail && selectedCard" class="w-75 mx-auto" [formGroup]="dispenseErrorForm" novalidate
+      action="javascript:">
+      <p class="text-center" *ngIf="errorMessage">
+        <ngb-alert type="danger border-0" [dismissible]="false">
+          {{errorMessage}}
+        </ngb-alert>
+      </p>
+      <p class="text-center" *ngIf="successMessage">
+        <ngb-alert type="success border-0" [dismissible]="false">
+          {{successMessage}}
+        </ngb-alert>
+      </p>
+
+      <div class="form-group mt-3">
+        <div ngbDropdown class="text-left">
+          <button class="btn btn-round btn-dark btn-mini p-2" id="dropdownBasic1" ngbDropdownToggle>
+            <span class="f-12">{{selectedCard?.cardtype | uppercase}}
+              <span class="text-white"> {{selectedCard?.pan}}</span>
+            </span>
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <span *ngFor="let card of cards; let i=index">
+              <button (click)="cardsService.updateSelectedCard(card)" class="dropdown-item f-12 text-white bg-dark">
+                <span class="d-block">{{card?.cardtype | uppercase}}</span>
+                <span class="text-white">{{selectedCard?.pan}}</span>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <gtibank-universal-typeahead [label]="'Indicate Location/Bank'" [values]="bankName" (valuesEvent)="bankNameEventHander($event)">
+        </gtibank-universal-typeahead>
+      </div>
+
+      <div class="form-group">
+        <gtibank-accounts-typeahead [label]="'Account Number'" (acctToDebitEvent)="acctToDebitEventHander($event)">
+        </gtibank-accounts-typeahead>
+      </div>
+
+
+      <p></p>
+      <div class="form-group">
+        <label *ngIf="dispenseErrorForm.controls['transactionDate'].value " for="transactionDate" class="f-12 my-0 py-0">Transaction
+          Date</label>
+        <div class="input-group mb-0">
+          <input class="form-control" placeholder="Transaction Date" name="dp" (focus)="transactionDate.toggle()"
+            ngbDatepicker #transactionDate="ngbDatepicker" formControlName="transactionDate">
+          <div class="input-group-append">
+            <button class="btn btn-mini btn-inverse" (click)="transactionDate.toggle()" type="button">
+              <i-calendar style="width: 1.2rem; height: 0.5rem; cursor: pointer;"></i-calendar>
+              <!-- <img src="img/calendar-icon.svg" /> -->
+            </button>
+          </div>
+        </div>
+      </div>
+      <p></p>
+      <button [disabled]="!dispenseErrorForm.valid" [@fadeInOutTranslate] (click)="getTransactionDetails()" 
+      id="transaction" type="button" 
+      class="btn btn-outline-success btn-sm waves-light md-trigger mb-3"
+        mdbRippleRadius>
+        <span *ngIf="loadingTransactions === true" class="">
+          <i class="fa fa-spin fa-spinner mr-2"></i>
+          Loading Transactions..
+        </span>
+        <span *ngIf="!loadingTransactions" class="">
+          Get Transaction Details
+        </span>
+      </button>
+      <!--<pre>form values {{DispenseErrorForm.value | json}}</pre> -->
+    </form>
+    <ibank-notifications [notification]="notifications" (vissibilityEvent)="visibilityHandler($event)"></ibank-notifications>
+  </div>
+  <ng-template [ngIf]="transactionDetail">
+    <perfect-scrollbar [style.max-width]="'auto'" [style.height]="'100%'">
+      <div *ngFor="let t of transactionDetail" class="list-group-item list-group-item-action flex-column align-items-start px-3">
+        <div class="d-flex w-100 justify-content-end">
+          <h5 class="text-right text-primary f-20 f-w-300">{{t?.amount | currency: '₦'}}</h5>
+        </div>
+        <p class="f-12 f-w-400">Remark: {{t?.remarks}}</p>
+        <div class="d-flex w-100 justify-content-end">
+          <a (click)="logDispenseError(t)" name="" id="" class="float-right btn btn-outline-primary btn-round btn-mini py-2 f-12 text-primary"
+            role="button" title="Save Beneficiary">
+            <span class="f-12">Log Dispense Error</span>
+          </a>
+        </div>
+      </div>
+    </perfect-scrollbar>
+  </ng-template>
+</div>

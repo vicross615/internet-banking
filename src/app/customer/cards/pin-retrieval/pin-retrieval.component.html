@@ -1,0 +1,110 @@
+<div [@fadeInOutTranslate] class="card" style="height: 100vh;">
+  <div class="mb-0 p-0 bg-primary card-block" style="height: 5px;"></div>
+  <div class="card-header bg-white p-0">
+    <!-- Nav Filter tab start -->
+    <div class="col-12 px-0 py-1 filter-bar">
+      <nav class="navbar navbar-light bg-faded p-3 justify-content-between">
+        <h5 class="text-primary">
+          <img src="assets\icon\smashicons\cards\pin-retrieval.svg" class="img-fluid img-40 mb-2" alt="">
+          PIN Retrieval
+        </h5>
+      </nav>
+    </div>
+    <!-- Nav Filter tab end -->
+  </div>
+  <div class="card-block">
+    <div *ngIf="!selectedCard" class="text-center col mb-4">
+      <div class="preloader4 mx-auto pb-0 mb-0">
+        <span>
+          <div class="double-bounce1 text-center"></div>
+          <div class="double-bounce2 text-center"></div>
+        </span>
+      </div>
+      <span class="f-10 text-muted mb-4"> Just a minute..</span>
+    </div>
+    <div class="col px-0 d-flex justify-content-between">
+      <form *ngIf="selectedCard" class="w-75 mx-auto" [formGroup]="PinRetrievalForm" novalidate (ngSubmit)="onSubmitRtrval(PinRetrievalForm.value)"
+        action="javascript:">
+        <p class="text-center" *ngIf="errorMessage">
+          <ngb-alert type="danger border-0" [dismissible]="false">
+            {{errorMessage}}
+            <button (click)="clearError()" type="button" class="btn btn-dark btn-round btn-mini mt-2 float-right">close</button>
+          </ngb-alert>
+        </p>
+        <p class="text-center" *ngIf="successMessage">
+          <ngb-alert type="success border-0" [dismissible]="false">
+            {{successMessage}}
+            <button (click)="clearError()" type="button" class="btn btn-dark btn-round btn-mini mt-2 float-right">close</button>
+          </ngb-alert>
+        </p>
+        <div class="form-group">
+          <!--<pre>{{selectedCard?.cardtype | json}}  {{selectedCard?.pan | json}}</pre>-->
+          <div ngbDropdown class="text-left">
+            <button type="button" class="btn btn-round btn-dark btn-mini p-2" id="cardsdropdown" ngbDropdownToggle>
+              <span class="f-12">{{selectedCard?.cardtype | uppercase}}
+                <span class="text-white"> {{selectedCard?.pan}}</span>
+              </span>
+            </button>
+            <div ngbDropdownMenu aria-labelledby="cardsdropdown">
+              <span *ngFor="let card of cards; let i=index">
+                <!-- <hr class="my-1"> -->
+                <button type="button" (click)="cardsService.updateSelectedCard(card)" class="dropdown-item f-12 text-dark bg-light">
+                  <span class="d-block">{{card?.cardtype | uppercase}}</span>
+                  <span>{{card?.pan}}</span> <!--text-muted-->
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+       
+        <div class="form-group">
+          <gtibank-accounts-typeahead
+           [label]="'Select Card Account'" (acctToDebitEvent)="acctToDebitEventHander($event)">
+          </gtibank-accounts-typeahead>
+        </div>
+
+        <div class="form-group">
+          <input type="password" class="form-control" placeholder="Answer to Secret Question" formControlName="secretAnswer">
+          <get-secret-question></get-secret-question>
+        </div>
+
+        <div class="form-group">
+          <input type="password" class="form-control" placeholder="Enter Token Value" formControlName="tknvalue">
+        </div>
+        <!--
+           <div class="form-group">
+          <label *ngIf="PinRetrievalForm.controls['expiryDate'].value " for="expiryDate" class="f-12 my-0 py-0">Card Expiry Date
+          </label>
+          <div class="input-group mb-0">
+            <input class="form-control" placeholder="Card Expiry Date (MMYY)" name="dp" ngbDatepicker #expiryDate="ngbDatepicker" formControlName="expiryDate">
+            <div class="input-group-append">
+              <button class="btn btn-mini btn-inverse" (click)="expiryDate.toggle()" type="button">
+                <i-calendar style="width: 1.2rem; height: 0.5rem; cursor: pointer;"></i-calendar>
+              </button>
+            </div>
+          </div>
+        </div>
+
+            <div class="form-group">
+          <input type="password" class="form-control" placeholder="Enter your token" formControlName="tokenValue">
+        </div>
+        -->  
+        <div class="form-group">
+          <div class="md-form">
+            <button [disabled]='!PinRetrievalForm.valid' type="submit" class="btn btn-success waves-light md-trigger btn-sm" mdbRippleRadius>
+              <span *ngIf="loadingTransactions === true" class="">
+                <i class="fa fa-spin fa-spinner mr-2"></i>
+                Loading ....
+              </span>
+              <span *ngIf="!loadingTransactions" class="">
+                Submit
+              </span>
+
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <ibank-notifications [notification]="notifications" (vissibilityEvent)="visibilityHandler($event)"></ibank-notifications>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="59px" height="60px" viewBox="0 0 59 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
+    <title>1 -Moon Flag- (space, astronomy, outline)</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Space-2---Outline" transform="translate(-147.000000, -382.000000)">
+            <g id="1--Moon-Flag--(space,-astronomy,-outline)" transform="translate(149.000000, 383.000000)">
+                <path d="M54,58 C49.926,46.912 39.501,39 27,39 C14.498,39 4.074,46.911 0,58 L54,58 L54,58 Z" id="Stroke-1" stroke="#dd4f05" stroke-width="1" stroke-linecap="round"></path>
+                <path d="M27,44 L27,0" id="Stroke-3" stroke="#dd4f05" stroke-width="1" stroke-linecap="round"></path>
+                <path d="M44,19 L27,19 L27,3 L43.063,3 C43.58,3 44,3.42 44,3.937 L44,19 L44,19 Z" id="Stroke-5" stroke="#dd4f05" stroke-width="1" stroke-linecap="round"></path>
+                <path d="M55.0625,21 L44.9375,21 C44.4195,21 43.9995,20.58 43.9995,20.063 L43.9995,5 L55.0625,5 C55.5805,5 55.9995,5.42 55.9995,5.937 L55.9995,20.063 C55.9995,20.58 55.5805,21 55.0625,21 L55.0625,21 Z" id="Stroke-7" stroke="#dd4f05" stroke-width="1" stroke-linecap="round"></path>
+                <path d="M31,44 C31,46.209 29.209,48 27,48 C24.791,48 23,46.209 23,44" id="Stroke-9" stroke="#dd4f05" stroke-width="1" stroke-linecap="round"></path>
+                <polygon id="Stroke-11" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" points="27 11 35 11 35 3 27 3"></polygon>
+                <path d="M35,11 L44,11" id="Stroke-13" stroke="#dd4f05" stroke-width="1" stroke-linecap="round"></path>
+                <path d="M27,15 L44,15" id="Stroke-14" stroke="#dd4f05" stroke-width="1" stroke-linecap="round"></path>
+                <path d="M35,7 L44,7" id="Stroke-15" stroke="#dd4f05" stroke-width="1" stroke-linecap="round"></path>
+                <path d="M44,9 L56,9" id="Stroke-16" stroke="#dd4f05" stroke-width="1" stroke-linecap="round"></path>
+                <path d="M44,13 L56,13" id="Stroke-17" stroke="#dd4f05" stroke-width="1" stroke-linecap="round"></path>
+                <path d="M44,17 L56,17" id="Stroke-18" stroke="#dd4f05" stroke-width="1" stroke-linecap="round"></path>
+                <path d="M40.0002,49 C40.0002,50.658 41.3422,52 43.0002,52" id="Stroke-19" stroke="#dd4f05" stroke-width="1" stroke-linecap="round"></path>
+                <path d="M5.2648,49.0269 C5.9248,50.6879 7.5278,51.8689 9.4248,51.8689 C11.9098,51.8689 13.9248,49.8539 13.9248,47.3689 C13.9248,45.6939 12.9998,44.2499 11.6418,43.4779 C9.2518,45.0049 7.1058,46.8749 5.2648,49.0269 L5.2648,49.0269 Z" id="Stroke-20" stroke="#dd4f05" stroke-width="1" stroke-linecap="round"></path>
+                <path d="M33,54 C33,54.552 32.552,55 32,55 C31.448,55 31,54.552 31,54 C31,53.448 31.448,53 32,53 C32.552,53 33,53.448 33,54" id="Fill-21" fill="#dd4f05"></path>
+    1         <path d="M20,50 C20,50.552 19.552,51 19,51 C18.448,51 18,50.552 18,50 C18,49.448 18.448,49 19,49 C19.552,49 20,49.448 20,50" id="Fill-22" fill="#dd4f05"></path>
+    1     </g>
+        </g>
+    </g>
+</svg>

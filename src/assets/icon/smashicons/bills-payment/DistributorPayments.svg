@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="54px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>016 - Lorry </title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="016---Lorry-" transform="translate(1.000000, 1.000000)" stroke="#dd4f05" stroke-width="1">
+            <ellipse id="Oval" cx="13.9642" cy="45" rx="7.0057" ry="7"></ellipse>
+            <circle id="Oval" cx="13.9642" cy="45" r="3.00244"></circle>
+            <ellipse id="Oval" cx="46.0057" cy="45" rx="7.0057" ry="7"></ellipse>
+            <circle id="Oval" cx="46.0057" cy="45" r="3.00244"></circle>
+            <rect id="Rectangle-path" x="24.97315" y="41" width="8.00651" height="6" rx="1"></rect>
+            <path d="M58,30 L58,35 C57.9967543,36.1032223 57.1032223,36.9967543 56,37 L54,37 L54,28 L56,28 C57.1032314,28.0032238 57.9967762,28.8967686 58,30 Z" id="Shape"></path>
+            <path d="M33.98047,37 L37.98373,37" id="Shape"></path>
+            <path d="M41.98698,28 L44.98942,28" id="Shape"></path>
+            <path d="M24.97315,45 L20.96989,45" id="Shape"></path>
+            <path d="M39,45 L32.97966,45" id="Shape"></path>
+            <path d="M54,28 L54,21.47 C53.995763,21.1615662 53.9240867,20.8577952 53.79,20.58 L50.99,15" id="Shape"></path>
+            <path d="M54,28 L54,37 L53,37 L50,34 L42,34 L39,37 L38,37 L37.98,35 L37.98,12 C37.9816474,11.4483991 38.4283991,11.0016474 38.98,11 L47.76,11 C48.518196,11.003017 49.2102607,11.4321745 49.55,12.11 L50.99,15 L43.99,15 C43.4383991,15.0016474 42.9916474,15.4483991 42.99,16 L42.99,22 C42.9916474,22.5516009 43.4383991,22.9983526 43.99,23 L47.99,23 C47.99,23 54,23 54,28 Z" id="Shape"></path>
+            <path d="M34,37 L21,37 L18,34 L10,34 L7,37 L0,37 L0,31 C-1.11022302e-16,29.8954305 0.8954305,29 2,29 L38,29" id="Shape"></path>
+            <path d="M3,38 L3,43 C3,44.1045695 3.8954305,45 5,45 L7,45" id="Shape"></path>
+            <path d="M54,37 L52.15,41.64" id="Shape"></path>
+            <rect id="Rectangle-path" x="0" y="0" width="34" height="29" rx="2"></rect>
+            <path d="M0.59,0.59 L14.5,14.5 L15.58579,15.58579 C15.9608629,15.9608636 16.4695713,16.1715779 17.000005,16.1715779 C17.5304387,16.1715779 18.0391471,15.9608636 18.41422,15.58579 L19.5,14.5 L33.41,0.59" id="Shape"></path>
+            <path d="M14.5,14.5 L0.59,28.41" id="Shape"></path>
+            <path d="M33.41,28.41 L19.5,14.5" id="Shape"></path>
+        </g>
+    </g>
+</svg>

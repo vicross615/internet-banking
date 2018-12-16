@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>016 - Ship </title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="016---Ship-" transform="translate(1.000000, 1.000000)" stroke="#dd4f05" stroke-width="1">
+            <path d="M11,14 L11,10 C11,9.44771525 11.4477153,9 12,9 L16,9" id="Shape"></path>
+            <path d="M42.16,56 L50.95,25.95 C51.0320799,25.6967427 51.0082594,25.4210564 50.8839551,25.1856317 C50.7596509,24.9502069 50.5454278,24.7750532 50.29,24.7 L29.3,18.1 C29.1061308,18.0299669 28.8938692,18.0299669 28.7,18.1 L7.71,24.7 C7.45457216,24.7750532 7.24034912,24.9502069 7.11604486,25.1856317 C6.99174059,25.4210564 6.96792006,25.6967427 7.05,25.95 L15.69,55.5" id="Shape"></path>
+            <path d="M24,25 L13,28.459" id="Shape"></path>
+            <path d="M45,28.459 L34,25" id="Shape"></path>
+            <path d="M49,24.29 L49,15 C49,14.4477153 48.5522847,14 48,14 L10,14 C9.44771525,14 9,14.4477153 9,15 L9,24.29" id="Shape"></path>
+            <path d="M47,14 L47,10 C47,9.44771525 46.5522847,9 46,9 L42,9" id="Shape"></path>
+            <path d="M45,9 L45,5 C45,4.44771525 44.5522847,4 44,4 L14,4 C13.4477153,4 13,4.44771525 13,5 L13,9" id="Shape"></path>
+            <path d="M20,9 L23,9" id="Shape"></path>
+            <path d="M13,18 L16,18" id="Shape"></path>
+            <path d="M42,18 L45,18" id="Shape"></path>
+            <path d="M35,9 L38,9" id="Shape"></path>
+            <path d="M27,9 L31,9" id="Shape"></path>
+            <path d="M29,35 L29,18.05" id="Shape"></path>
+            <path d="M29,40 L29,46" id="Shape"></path>
+            <path d="M17,4 L17,0" id="Shape"></path>
+            <path d="M42,4 L42,0" id="Shape"></path>
+            <path d="M29,4 L29,0" id="Shape"></path>
+            <path d="M15,0 L44,0" id="Shape"></path>
+            <path d="M0,54 C3.22,54 3.22,58 6.44,58 C9.66,58 9.661,54 12.882,54 C16.103,54 16.103,58 19.325,58 C22.547,58 22.546,54 25.767,54 C28.988,54 28.989,58 32.211,58 C35.433,58 35.432,54 38.652,54 C41.872,54 41.875,58 45.098,58 C48.321,58 48.324,54 51.549,54 C54.774,54 54.775,58 58,58" id="Shape"></path>
+        </g>
+    </g>
+</svg>

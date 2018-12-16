@@ -1,0 +1,55 @@
+<ng-container *ngIf="investments; else errorMessageTemplate">
+  <perfect-scrollbar [style.max-width]="'auto'" [style.max-height]="'350px'" [config]="">
+    <div *ngFor="let i of investments" class="list-group list-group-flush">
+      <div class="list-group-item list-group-item-action flex-column align-item-start px-3">
+        <div class="d-flex w-100 justify-content-between mb-1">
+          <p class="f-w-500 text-primary f-16 text-uppercase mb-2">{{ i?.investmentType }}: {{i?.ref_Number }}</p>
+          <p class="text-muted mb-2 f-10">
+            <i class="icofont icofont-ui-calendar text-dark mr-1"></i>
+            <strong class="text-dark">Booked:</strong> {{ i?.start_Date | date:'MMM, y' }}
+          </p>
+          <!-- <p class="f-w-500 text-primary f-10 text-uppercase mb-2"><strong>Ref: </strong></p> -->
+        </div>
+        <p class="f-w-500 my-0 f-10 text-dark">Loan Amount</p>
+        <h4 class="f-w-100 mb-1 text-dark">{{ i?.amount | currency:i?.currency }}</h4>
+        <p class="text-muted mb-0 f-10 mr-2">
+          <i class="icofont icofont-time mr-1"></i>
+          <strong class="text-dark">Tenor:</strong> {{i?.tenor }} Days
+        </p>
+        <p class="my-1 f-10"></p>
+        <div class="d-flex w-100 justify-content-between f-10">
+          <p class="text-muted mb-0 f-10 ml-auto mr-2">
+            <i class="icofont icofont-ui-calendar text-dark mr-1"></i>
+            <strong class="text-dark">Matures:</strong> {{ i?.maturity_Date | date:'MMM, y' }}
+          </p>
+          <p class="text-muted mb-0 f-10">
+            <i class="icofont icofont-money-bag mr-1 text-dark"></i>
+            <strong class="text-dark">Interest At Maturity: </strong>
+            <strong class="text-success">{{ i?.interestAtMaturity | currency:i?.currency }}</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+  </perfect-scrollbar>
+</ng-container>
+<ng-template #errorMessageTemplate>
+  <div [@fadeInOutTranslate] *ngIf="errorMessage && !freqBeneficiaries" class="card-body pt-5 text-center mt-4">
+    <div *ngIf="errorMessage" class="mt-0">
+      <i class="fas fa-info-circle fa-2x"></i>
+      <p class="mt-2 f-w-400 text-muted text-center mx-auto">
+        {{errorMessage}}
+      </p>
+      <!-- <p>Use button below to go to Transfers</p> -->
+      <button (click)="investNow()" type="button" class="btn btn-primary btn-sm btn-round px-3 ml-1 waves-light"
+        mdbRippleRadius>Invest Now</button>
+    </div>
+  </div>
+</ng-template>
+<ng-container *ngIf="!(investments || errorMessage)" class="my-5 py-5">
+  <div class="preloader4 mx-auto pb-0 mb-0">
+    <span>
+      <div class="double-bounce1 text-center"></div>
+      <div class="double-bounce2 text-center"></div>
+    </span>
+  </div>
+</ng-container>

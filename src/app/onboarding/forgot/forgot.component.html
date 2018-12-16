@@ -1,0 +1,101 @@
+<div class="d-flex flex-column">
+
+<div class="p-2">
+  <img src="./assets/images/logo-blue.png" class="img-fluid white-text float-right img-60" alt="Responsive image">
+  <button 
+    [routerLink] = "['/onboarding/login']" 
+    [routerLinkActive] = "['active']" 
+    type="button" 
+    class="btn btn-primary btn-sm btn-round px-3 ml-1 waves-light" mdbRippleRadius>Back to Sign In</button>
+</div>
+
+<div class="align-items-center p-2">
+  <!--Card-->
+  <div class="card bg-transparent text-white">
+      <!--Card content-->
+      <div class="card-body">
+        <form  [formGroup]="forgotPwd" class="small-font w-75 mx-auto" (ngSubmit)="onSubmitForgotPwd()" >
+          <div class="formTitle mb-4">
+            <p class="text-custom f-30 f-w-100 mb-0">Recover your password</p>
+            <span class="text-white f-12">Enter your details below.</span>
+          </div>
+          <div *ngIf="errorMessage" class="alert alert-warning mb-0 py-1">
+            <button (click)="closeAlert()" type="button" class="close mt-1">
+              <i class="icofont icofont-close-line-circled text-danger"></i>
+            </button>
+            <strong>Warning!</strong> {{errorMessage}}
+          </div>
+          <div *ngIf="successMessage" class="alert alert-warning mb-0 py-1">
+            <button (click)="closeAlertSuccess()" type="button" class="close mt-1">
+              <i class="icofont icofont-close-line-circled text-danger"></i>
+            </button>
+            <strong class="text-success">Success!</strong> {{successMessage}}
+          </div>
+          <div class="form-row">
+            
+          </div>
+          <div class="form-row mb-2">
+            <div class="col-12">
+              <div>
+                <i class="fa fa-fw fa-envelope prefix text-custom"></i> <span class="f-14 f-w-300">User ID/Email:</span>
+                <input 
+                  type="text" 
+                  id="username" 
+                  class="form-control text-muted" 
+                  formControlName="username"
+                  mdbActive mdbInputValidate #username>
+                <label for="username" class="sr-only">Username/User ID/Email</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-12">
+              <div>
+                <i class="fas fa-fw fa-question-circle prefix text-custom"></i> <span class="f-14 f-w-300"> Answer your secret question:</span>
+                <input               
+                  type="text" 
+                  id="secretAnswer" 
+                  class="form-control text-muted" 
+                  formControlName="secretAnswer"
+                  mdbActive mdbInputValidate #secretAnswer>
+                <label for="username" class="sr-only">Answer your secret question</label>
+                <span class="float-right"><a [routerLink] = "['/onboarding/forgotsecret-question']"  class="f-12 f-w-400 text-primary">Forgot Secret Answer?</a></span>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-12 mt-4">
+              <div class="md-form">
+                <button                 
+                  id="customer" 
+                  type="submit"
+                  class="btn btn-success float-right btn-sm waves-light mt-2" 
+                  mdbRippleRadius>
+                  <span *ngIf="loading === true" class="">
+                    <i class="fa fa-spin fa-spinner mr-2"></i>
+                    Loading....
+                  </span>
+                  <span *ngIf="!loading" class="">
+                    Send my password
+                  </span>  
+                </button>
+              </div>
+              <div class="form-text">
+                 
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!--[routerLink] = "['/onboarding/login']" -->
+
+  </div>
+  <!--Card-->
+</div>
+<div class="mt-auto p-2 text-center w-100 text-white bottom">
+    <p>
+      <a  class="f-12 f-w-100">GTBank.com</a> |
+      <a  class="f-12 f-w-100">Terms and Conditions</a>
+    </p>
+  </div>
+</div>

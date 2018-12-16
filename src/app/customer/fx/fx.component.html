@@ -1,0 +1,78 @@
+<div class="row submenu text-center mx-1 mt-3">
+  <div class="px-1 col-6 mb-1">
+    <div [routerLink]="['other-bank-fx']" routerLinkActive="active-submenu" class="card mb-2 text-center order-visitor-card  z-depth-bottom-1"
+      style="max-height: 115px">
+      <div class="card-block px-2 card-grid text-primary">
+        <img src="assets\icon\smashicons\fx\fx-other.svg" class="img-fluid img-50 mb-2" alt="">
+        <h6 class="m-b-0 f-12 f-w-500">Fx Transfer to Other Bank</h6>
+      </div>
+    </div>
+  </div>
+  <div class="px-1 col-6 mb-1">
+    <div [routerLink]="['gtb-fx']" routerLinkActive="active-submenu" class="card mb-2 text-center order-visitor-card z-depth-bottom-1"
+      style="max-height: 115px">
+      <div class="card-block px-2 card-grid text-primary">
+        <img src="assets\icon\smashicons\fx\fx-gt.svg" class="img-fluid img-50 mb-2" alt="">
+        <h6 class="m-b-0 f-12 f-w-500">GT-GT Fx Transfer</h6>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="px-1 col-2 mb-1">
+      <div [routerLink]="['gtb-fx']" routerLinkActive="active-submenu" class="card mb-2 text-center order-visitor-card z-depth-bottom-1"
+        style="max-height: 115px">
+        <div class="card-block px-2 card-grid text-primary">
+          <img src="assets\icon\smashicons\accounts\open-dom-account.svg" class="img-fluid img-50 mb-2" alt="">
+          <p class="m-b-0 f-12 f-w-500">GT-GT Fx Transfer</p>
+        </div>
+      </div>
+    </div>
+    <div class="px-1 col-2 mb-1">
+        <div [routerLink]="['gtb-fx']" routerLinkActive="active-submenu" class="card mb-2 text-center order-visitor-card z-depth-bottom-1"
+          style="max-height: 115px">
+          <div class="card-block px-2 card-grid text-primary">
+            <img src="assets\icon\smashicons\accounts\open-dom-account.svg" class="img-fluid img-50 mb-2" alt="">
+            <p class="m-b-0 f-12 f-w-500">GT-GT Fx Transfer</p>
+          </div>
+        </div>
+      </div> -->
+  </div>
+  <div class="row submenu-content px-4">
+    <div class="col-md-7 px-0">
+      <div [@fadeInOutTranslate] class="card mb-2" style="min-height: 600px">
+        <div class="mb-0 p-0 bg-primary card-block" style="height: 5px;"></div>
+        <router-outlet>
+          <app-spinner>
+            <app-title></app-title>
+          </app-spinner>
+        </router-outlet>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="card bg-primary mb-1">
+        <div class="card-block p-0 mt-1">
+          <iframe width="100%" height="280" src="https://www.youtube.com/embed/o8s-Yhx31Ws/?playlist=o8s-Yhx31Ws&amp;loop=1&amp;autoplay=1&amp;controls=0&amp;rel=1&amp;mute=1" frameborder="0" allow="autoplay; loop" allowfullscreen></iframe>
+        </div>
+      </div>
+      <app-card [title]="'Frequent Transfers'" [cardClass]="'task-card freq-beneficiaries'">
+        <perfect-scrollbar [style.max-width]="'100%'" [style.max-height]="'300px'" [config]="">
+          <frequent-transfers></frequent-transfers>
+        </perfect-scrollbar>
+      </app-card>
+      <app-card [title]="'Today`s Transfers'" [cardClass]="'task-card trans-status mb-4 pb-3'">
+          <!-- <div class="d-flex flex-row list">
+            <div class="bd-highlight col-3">
+              <img class="img-menu-user img-circle m-2 img-40 d-block mx-auto" src="assets/images/avatar-9.jpg" alt="User-Profile-Image">
+            </div>
+            <div class="pt-2 pl-1 align-self-center bd-highlight align-self-stretch col-9">
+              <h6 class="mb-1 f-w-500 f-12">Zainab Olusegun - <span class="f-w-500">N20,000.00</span></h6>
+              <p class="mb-1"><i class="icofont icofont-bank mr-2"></i>0023456781-Fidelity</p>
+              <a name="" id="" class="btn btn-primary btn-mini float-right" href="#" role="button"><i class="far fa-redo m-r-5"></i>Retry</a>
+              <span title="Failed" class="text-danger float-left m-r-20"><i class="fas fa-circle f-12"></i></span>
+            </div>
+          </div> -->
+      </app-card>
+    </div>
+  </div>
+  <div class="row mt-3">
+    
+  </div>

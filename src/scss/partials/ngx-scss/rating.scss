@@ -1,0 +1,35 @@
+.br-horizontal .br-unit.br-active,
+.br-horizontal .br-unit.br-selected,
+.br-movie .br-unit.br-active,
+.br-movie .br-unit.br-selected,
+.br-vertical .br-unit.br-active,
+.br-vertical .br-unit.br-selected {
+  background-color: #dd4f05 !important;
+}
+
+.br-square .br-unit.br-active,
+.br-square .br-unit.br-selected {
+  border: 2px solid #dd4f05 !important;
+  color: #dd4f05 !important;
+}
+
+.br-fontawesome .br-selected:after,
+.br-default .br-selected:after,
+.br-fontawesome-o .br-selected:after,
+.br-fontawesome-o .br-fraction:after {
+  color: #dd4f05 !important;
+}
+
+.br-horizontal .br-unit,
+.br-movie .br-unit,
+.br-vertical .br-unit {
+  background-color: rgba(245, 202, 137, 0.4) !important;
+}
+
+.br-square .br-unit {
+  border: 2px solid rgba(255, 225, 180, 0.4) !important;
+}
+
+.stars .title {
+  top: -5px;
+}

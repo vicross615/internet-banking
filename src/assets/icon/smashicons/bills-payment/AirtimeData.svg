@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.1 (33804) - http://www.bohemiancoding.com/sketch -->
+    <title>65 - S5 (technology, device, gadget, outline)</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Icons" transform="translate(-730.000000, -957.000000)" stroke="#dd4f05" stroke-width="1">
+            <g id="S5" transform="translate(731.000000, 958.000000)">
+                <path d="M6,13 L10,9 L6,13 Z" id="Path"></path>
+                <path d="M6,18 L8,16 L6,18 Z" id="Path"></path>
+                <path d="M12,12 L15,9 L12,12 Z" id="Path"></path>
+                <path d="M6,23 L15,14 L6,23 Z" id="Path"></path>
+                <path d="M19,10 L20,9 L19,10 Z" id="Path"></path>
+                <path d="M28.257,58 L5.743,58 C2.571,58 0,55.429 0,52.257 L0,5.743 C0,2.571 2.571,0 5.743,0 L28.257,0 C31.429,0 34,2.571 34,5.743 L34,52.257 C34,55.429 31.429,58 28.257,58 L28.257,58 Z" id="Path"></path>
+                <polygon id="Path" points="3 6 31 6 31 49 3 49"></polygon>
+                <path d="M14,3 L20,3 L14,3 Z" id="Path"></path>
+                <path d="M28,3 L29,3 L28,3 Z" id="Path"></path>
+                <path d="M24,3 L25,3 L24,3 Z" id="Path"></path>
+                <path d="M19.5,55 L14.5,55 C13.675,55 13,54.325 13,53.5 C13,52.675 13.675,52 14.5,52 L19.5,52 C20.325,52 21,52.675 21,53.5 C21,54.325 20.325,55 19.5,55 L19.5,55 Z" id="Path"></path>
+            </g>
+        </g>
+    </g>
+</svg>

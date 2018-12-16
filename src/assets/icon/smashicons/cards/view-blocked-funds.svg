@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>015 - Secure Pay </title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="015---Secure-Pay-" transform="translate(1.000000, 1.000000)" stroke="#dd4f05" stroke-width="1">
+            <path d="M6,10.9999999 L6,3.99999997 C5.99970812,2.93904456 6.42104174,1.92145932 7.17125053,1.17125053 C7.92145933,0.421041742 8.93904457,-0.000291883154 9.99999998,-5.71690319e-15 L53.9999997,-5.71690319e-15 C55.0609551,-0.000291883154 56.0785404,0.421041742 56.8287492,1.17125053 C57.578958,1.92145932 58.0002916,2.93904456 57.9999997,3.99999997 L57.9999997,31.9999997 C58.0002916,33.0609551 57.578958,34.0785404 56.8287492,34.8287492 C56.0785404,35.578958 55.0609551,36.0002916 53.9999997,35.9999997 L27.2199999,35.9999997" id="Shape"></path>
+            <polyline id="Shape" points="28 30 58 30 58 23 28 23"></polyline>
+            <rect id="Rectangle-path" x="42" y="4" width="12" height="12" rx="1"></rect>
+            <polyline id="Shape" points="42 12 46 12 46 8 42 8"></polyline>
+            <polyline id="Shape" points="54 8 50 8 50 12 54 12"></polyline>
+            <path d="M46,8 L46,16" id="Shape"></path>
+            <path d="M50,4 L50,16" id="Shape"></path>
+            <path d="M26,11 C27.1045695,11 28,11.8954305 28,13 L28,32 C27.9982723,33.3709533 27.7334845,34.7288393 27.22,36 C24.26,43.33 14,47 14,47 C14,47 0,42 0,32 L0,13 C-1.11022302e-16,11.8954305 0.8954305,11 2,11 L26,11 Z" id="Shape"></path>
+            <path d="M14.02148,42.667 C11.021,41.28809 4,37.47461 4,32 L4,15 L24,15 L24,32 C23.9988641,32.8638248 23.8303973,33.7192497 23.50391,34.519 C21.93748,38.398 16.96582,41.3291 14.02148,42.667 Z" id="Shape"></path>
+            <polyline id="Shape" points="9 30 12 33 20 20"></polyline>
+        </g>
+    </g>
+</svg>

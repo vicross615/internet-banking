@@ -1,0 +1,41 @@
+<header> 
+  <!--Mask-->
+  <div  id="intro" class="view hm-black-light">
+      <div class="container-fluid full-bg-img px-0 d-flex h-100">
+          <div class="row w-100 mx-0">
+              <div class="col-lg-8 px-0 d-none d-lg-block">
+                  <!--Carousel Wrapper-->
+                  <mdb-carousel [isControls]="true" class="carousel slide carousel-fade h-100" [animation]="'fade'">
+                      <!--First slide-->
+                      <mdb-slide class="h-100">
+                          <img class="d-block w-100 h-100" src="assets/images/onboarding-slider/hubcredit-1366px-x-1268px.png" alt="First slide">
+                      </mdb-slide>
+                      <!--/First slide-->
+                      <!--Second slide-->
+                      <mdb-slide class="h-100">
+                          <img class="d-block w-100 h-100" src="assets/images/onboarding-slider/737bills.png" alt="Second slide">
+                      </mdb-slide>
+                      <!--/Second slide-->
+                      <!--Third slide-->
+                      <mdb-slide class="h-100">
+                          <img class="d-block w-100 h-100" src="assets/images/onboarding-slider/737limit-2.png" alt="Third slide">
+                      </mdb-slide>
+                      <mdb-slide class="h-100">
+                          <img class="d-block w-100 h-100" src="assets/images/onboarding-slider/737app.png" alt="Third slide">
+                      </mdb-slide>
+                      <!--/Third slide-->
+                  </mdb-carousel>
+                  <!--/.Carousel Wrapper-->
+              </div>
+              <div id="signin-wrapper" class="col-lg-4 col-md-12">
+                <!-- <simple-notifications [options]="options"></simple-notifications> -->
+                <router-outlet>
+                  <app-spinner><app-title></app-title></app-spinner>
+                </router-outlet>                
+              </div>
+          </div>
+          
+      </div>       
+  </div>
+  <!--/.Mask-->       
+</header>

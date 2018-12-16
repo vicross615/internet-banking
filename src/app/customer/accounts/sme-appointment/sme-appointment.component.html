@@ -1,0 +1,55 @@
+<div class="card-header bg-white py-2">
+  <div class="d-flex justify-content-start">
+    <p class="text-primary mr-2">
+      <!-- <i-plus class="mr-1"></i-plus> -->
+      <img src="assets\icon\smashicons\accounts\sme-appointment.svg" class="img-fluid img-30 mb-2" alt="">
+      SME Appointment
+    </p>
+  </div>
+</div>
+<div class="card-block" style="height: 450px">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <div [@fadeInOutTranslate] class="m-t-5">
+        <form [formGroup]="SMEAppointmentForm" (ngSubmit)="onSubmit(SMEAppointmentForm.value)" class="" action="javascript:">
+          <div class="form-row">
+            <div class="form-group">
+              
+            </div>
+          </div> 
+          <div id="validation" class="form-row">
+            <div class="form-group col-12"> 
+              <input
+              type="password"
+              class="form-control"
+              placeholder="Answer to secret Question"
+              formControlName="secretAnswer">
+              <get-secret-question></get-secret-question>
+            </div>
+            <div class="form-group col-12">
+              <div class="md-form">
+                <button
+                  [disabled]='!SMEAppointmentForm.valid'
+                  [@fadeInOutTranslate]
+                  id="validate"
+                  type="submit"
+                  class="btn btn-success waves-light md-trigger btn-sm"
+                  mdbRippleRadius>
+                  <span *ngIf="isLoading === true" class="">
+                    <i class="fa fa-spin fa-spinner"></i> Sending Request..
+                  </span>
+                  <span *ngIf="!isLoading" class="">
+                    Submit
+                  </span>
+                </button>
+              </div>
+              <p class="mt-3 f-12">You will be charged
+                <span class="text-primary">₦0.00</span> for this transfer
+              </p>
+            </div>
+          </div> 
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

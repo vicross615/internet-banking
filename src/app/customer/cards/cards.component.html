@@ -1,0 +1,156 @@
+<div class="row submenu text-center mx-1 mt-3">
+  <div class="px-1 col-md-2 col-sm-4 col-6 mb-1">
+    <div [routerLink]="['/cards/dispense-error']" routerLinkActive="active-submenu" class="card mb-2 text-center order-visitor-card z-depth-bottom-1"
+      style="max-height: 115px">
+      <div class="card-block px-2 card-grid text-primary">
+        <img src="assets\icon\smashicons\cards\dispense-error.svg" class="img-fluid img-50 mb-2" alt="">
+        <p class="m-b-0 f-12 f-w-500">Dispense Error</p>
+      </div>
+    </div>
+  </div>
+  <div class="px-1 col-md-2 col-sm-4 col-6 mb-1">
+    <div [routerLink]="['/cards/card-statement']" routerLinkActive="active-submenu" class="card mb-2 text-center order-visitor-card z-depth-bottom-1" style="max-height: 115px">
+      <div class="card-block px-2 card-grid text-primary">
+        <img src="assets\icon\smashicons\cards\card-statement.svg" class="img-fluid img-50 mb-2" alt="">
+        <p class="m-b-0 f-12 f-w-500">Card Statement</p>
+      </div>
+    </div>
+  </div>
+  <div class="px-1 col-md-2 col-sm-4 col-6 mb-1">
+    <div [routerLink]="['pin-retrieval']" routerLinkActive="active-submenu" class="card mb-2 text-center order-visitor-card z-depth-bottom-1"
+      style="max-height: 115px">
+      <div class="card-block px-2 card-grid text-primary">
+        <img src="assets\icon\smashicons\cards\pin-retrieval.svg" class="img-fluid img-50 mb-2" alt="">
+        <p class="m-b-0 f-12 f-w-500">PIN Retrieval</p>
+      </div>
+    </div>
+  </div>
+  <div class="px-1 col-md-2 col-sm-4 col-6 mb-1">
+    <div [routerLink]="['card-replacement']" routerLinkActive="active-submenu" class="card mb-2 text-center order-visitor-card z-depth-bottom-1"
+      style="max-height: 115px">
+      <div class="card-block px-2 card-grid text-primary">
+        <img src="assets\icon\smashicons\cards\card-replacement.svg" class="img-fluid img-50 mb-2" alt="">
+        <p class="m-b-0 f-12 f-w-500">Card Request</p>
+      </div>
+    </div>
+  </div>
+  <div class="px-1 col-md-2 col-sm-4 col-6 mb-1">
+    <div [routerLink]="['blocked-funds']" routerLinkActive="active-submenu" class="card mb-2 text-center order-visitor-card z-depth-bottom-1"
+      style="max-height: 115px">
+      <div class="card-block px-2 card-grid text-primary">
+        <img src="assets\icon\smashicons\cards\view-blocked-funds.svg" class="img-fluid img-50 mb-2" alt="">
+        <p class="m-b-0 f-12 f-w-500">View Blocked Funds</p>
+      </div>
+    </div>
+  </div>
+  <div class="px-1 col-md-2 col-sm-4 col-6 mb-1">
+    <div [routerLink]="['account-linking-delinking']" routerLinkActive="active-submenu" class="card mb-2 text-center order-visitor-card z-depth-bottom-1"
+      style="max-height: 115px">
+      <div class="card-block px-2 card-grid text-primary">
+        <img src="assets\icon\smashicons\cards\card-statement.svg" class="img-fluid img-50 mb-2" alt="">
+        <p class="m-b-0 f-12 f-w-500">Account Linking/Delinking</p>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="px-1 col-md-2 col-sm-4 col-6 mb-1">
+      <div 
+        (click)="toggleMenu()"
+        class="card mb-2 text-center order-visitor-card z-depth-bottom-1" style="max-height: 115px">
+        <div class="card-block px-2 card-grid text-primary">
+          <img src="assets\icon\smashicons\plus-square.svg" class="img-fluid img-50 mb-2" alt="">
+          <p [@fadeInOutTranslate] class="m-b-0 f-18 f-w-500"><span *ngIf="more">Less</span><span *ngIf="!more">More</span></p>
+        </div>
+      </div>
+  </div> -->
+</div>
+<div [@fadeInOutTranslate]  *ngIf="more" class="row submenu text-center mx-1 mt-1">
+  <!-- <div (click)="toggleMenu()" class="px-1 col-md-2 col-sm-4 col-6 mb-1">
+    <div [routerLink]="['card-protect']" routerLinkActive="active-submenu" class="card mb-2 text-center order-visitor-card z-depth-bottom-1"
+      style="max-height: 115px">
+      <div class="card-block px-2 card-grid text-primary">
+        <img src="assets\icon\smashicons\cards\view-blocked-funds.svg" class="img-fluid img-50 mb-2" alt="">
+        <p class="m-b-0 f-12 f-w-500">Card Protect</p>
+      </div>
+    </div>
+  </div> -->
+  <!-- <div class="px-1 col-md-2 col-sm-4 col-6 mb-1">
+    <div [routerLink]="['virtual-card-request']" routerLinkActive="active-submenu" class="card mb-2 text-center order-visitor-card z-depth-bottom-1"
+      style="max-height: 115px">
+      <div class="card-block px-2 card-grid text-primary">
+        <img src="assets\icon\smashicons\cards\virtual-card-request.svg" class="img-fluid img-50 mb-2" alt="">
+        <p class="m-b-0 f-12 f-w-500">My Virtual Card</p>
+      </div>
+    </div>
+  </div> -->
+</div>
+<div class="row submenu-content px-md-4">
+  <div class="col-md-7 px-0">
+    <router-outlet>
+      <app-spinner><app-title></app-title></app-spinner>
+    </router-outlet>
+  </div>
+  <div class="col-md-5">
+    <div class="card mb-0 z-depth-bottom-1 gt-card-display">
+      <div *ngIf="!errorMessage && !selectedCard" class="text-center card-block mb-4">
+        <div class="preloader4 mx-auto pb-0 mb-0">
+          <span>
+            <div class="double-bounce1 text-center"></div>
+            <div class="double-bounce2 text-center"></div>
+          </span>
+        </div>
+        <span class="f-10 text-white mb-4"> Loading your Card(s) ...</span>
+      </div>
+      <div [@fadeInOutTranslate] *ngIf="errorMessage" class="card-body py-5 text-center my-auto">
+        <div class="mt-0">
+          <i class="fas fa-info-circle text-white fa-2x"></i>
+          <p class="mt-2 f-w-400 text-white text-center mx-auto">
+            {{errorMessage}}
+          </p>
+          <!-- <p>Use button below to go to Transfers</p> -->
+          <button [routerLink]="'card-replacement'" type="button" class="btn btn-primary btn-sm btn-round px-3 ml-1 waves-light"
+            mdbRippleRadius>Request for card now</button>
+        </div>
+      </div>
+      <div *ngIf="selectedCard && !errorMessage"
+        [ngClass]="{'gt-platinum-card text-white': selectedCard?.cardtypecode === '08', 'gt-naira-card text-dark': selectedCard?.cardtypecode === '02' }" 
+        class="card-block mx-auto m-3 z-depth-bottom-0 bg-white" 
+        style="height: 200px; width: 320px; background-size: 100% 100%; border-radius: 15px; background-repeat: no-repeat;">
+        <div *ngIf="!errorMessage" class="d-flex align-items-start flex-column bd-highlight mb-1" style="height: 180px;">
+          <div class="mt-auto p-2 bd-highlight">
+            <p class="f-18 f-w-500 mb-0">
+                {{selectedCard?.editedPan}}
+            </p>
+            <span class="text-center pl-3 f-12"><span class="f-10">VALID THRU:</span> {{selectedCard?.expirydate | slice:0:2}}/{{selectedCard?.expirydate | slice:2:4}}</span><br>
+            <span class="text-uppercase f-w-400 text-card pl-1 mt-4 f-14">{{selectedCard.cardHolderName}}</span>
+          </div>
+        </div>
+        <h6 class="mb-4"> <i [ngClass]="{'text-danger': selectedCard?.fepString === 'Inactive'}" class="fas fa-circle f-10 text-success status-icon"></i><span class="font-weight-bold f-12 text-white"> {{selectedCard?.fepString}}</span></h6>
+      </div>
+      <div *ngIf="selectedCard" class="card-block bg-dark mt-3 p-0 text-white">
+        <div class="md-tabs">
+          <ngb-tabset>
+            <ngb-tab>
+              <ng-template ngbTabTitle>
+                <i class="feather icon-alert-triangle mr-2"></i>Card Hotlist
+              </ng-template>
+              <ng-template ngbTabContent>
+                  <div [@fadeInOutTranslate] class="py-4" style="min-height: 400px;">
+                   <app-card-hotlisting></app-card-hotlisting>
+                  </div>
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab>
+              <ng-template ngbTabTitle>
+                <i class="feather icon-shield mr-2"></i>Card Protect</ng-template>
+              <ng-template ngbTabContent>
+                <div [@fadeInOutTranslate] class="bg-white py-4" style="height: 400px;">
+                    <app-card-protect></app-card-protect>
+                </div>
+              </ng-template>
+            </ngb-tab>
+          </ngb-tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

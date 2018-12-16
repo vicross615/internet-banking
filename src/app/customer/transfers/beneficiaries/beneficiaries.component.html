@@ -1,0 +1,44 @@
+<div class="card">
+  <div class="card-block">
+    <div class="row">
+      <div class="col-md-12">
+        <h6 class="m-t-20">Saved Beneficiaries</h6>
+        <div class="form-group row">
+          <div class="col-md-6">
+            <ng-select [ngClass]="'ng-select'" [multiple]="true" placeholder="Search beneficiary.."></ng-select>
+          </div>
+          <div class="col-md-6 m-t-10">
+            <button 
+              class="btn btn-primary btn-sm waves-light float-right">
+              <i class="feather icon-user-plus"></i>Add New Beneficiary
+            </button>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-sm-6 col-lg-4">
+            <div class="card">
+              <div class="card-block beneficiaries-card">
+                <div class="row justify-content-start">
+                  <div class="col-3 text-center">
+                    <img class="media-object img-radius img-radius img-80" src="assets/images/avatar-3.jpg" alt="Josephin Doe">
+                  </div>
+                  <div class="col">
+                    <h6>Iziken Michael</h6>
+                    <p>0012345678-ACCESS BANK</p>
+                    <p><i class="feather icon-phone mr-1 f-w-600"></i>080701234567</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer text-right">
+                <a href="#"> <span><i class="feather icon-edit mr-1"></i>Edit </span></a>
+                <a href="#"><span><i class="feather icon-trash mr-1"></i>Delete </span></a> 
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>

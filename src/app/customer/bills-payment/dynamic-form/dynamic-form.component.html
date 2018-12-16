@@ -1,0 +1,161 @@
+<ng-container *ngIf="!validationDetails">
+  <p class="text-center" *ngIf="errorMessage">
+    <ngb-alert type="danger" [dismissible]="false">
+      {{errorMessage}}
+    </ngb-alert>
+  </p>
+  <div class="text-center col mb-3" *ngIf="isLoading">
+    <div class="preloader4 mx-auto pb-0 mb-0">
+      <span>
+        <div class="double-bounce1 text-center"></div>
+        <div class="double-bounce2 text-center"></div>
+      </span>
+    </div>
+    <span class="f-10 text-muted mb-4"> Loading form..</span>
+  </div>
+  <div *ngIf="formDataObject">
+    <form [formGroup]="dynamicForm" novalidate (ngSubmit)="validate()" action="javascript:">
+      <div *ngFor="let field of formDataObject" class="form-group mb-2">
+        <gtibank-dynamic-form-fields [field]='field' [form]='dynamicForm'></gtibank-dynamic-form-fields>
+      </div>
+      <div class="form-group">
+        <div class="md-form">
+          <button (click)="isSubmitButtonClicked = true" [disabled]='!dynamicForm.valid' type="submit" class="float-right btn-round light-shadow btn btn-success waves-light md-trigger btn-sm"
+            mdbRippleRadius>
+            <span *ngIf="isValidating === true" class="">
+              <i class="fas fa-spinner fa-spin mr-3 mb-1"></i>
+            </span>
+            <span *ngIf="!paying" class="">
+              Continue
+            </span>
+          </button>
+        </div>
+      </div>
+      <!-- <pre>form values {{dynamicForm.value | json}}</pre> -->
+    </form>
+  </div>
+</ng-container>
+<!--  -->
+<ng-container *ngIf="validationDetails">
+  <form class="mx-auto" [formGroup]="tokenValidationForm" novalidate (ngSubmit)="postCollection()" action="javascript:">
+    <ng-container id="validation_form">
+      <!-- <pre>{{tokenValidationForm.value | json}}</pre> -->
+      <div class="form-group pl-0">
+        <gtibank-accounts-typeahead [label]="'Account to Debit'" (acctToDebitEvent)="acctToDebitEventHander($event)">
+        </gtibank-accounts-typeahead>
+      </div>
+      <div class="form-group pl-0">
+        <label *ngIf="tokenValidationForm.controls['secretAnsw'].value" class="f-12" for="secretAnsw">Answer to secret
+          Question:</label>
+        <input type="password" class="form-control form-control-round" placeholder="Answer to secret Question"
+          formControlName="secretAnsw">
+        <get-secret-question></get-secret-question>
+      </div>
+      <div class="form-group pl-0">
+        <label *ngIf="tokenValidationForm.controls['token'].value" class="f-12" for="token">Enter Token:</label>
+        <input type="number" class="form-control form-control-bold form-control-round mx-auto" name="token" id="token"
+          maxlength="6" aria-describedby="tokenHelp" placeholder="Enter Token" formControlName="token" onKeyDown="if(this.value.length==6 && event.keyCode!=8) return false;">
+
+      </div>
+      <div class="form-group pl-3">
+        <div class="checkbox-color checkbox-primary ml-3">
+          <input class="form-control d-none form-control-sm" id="autobill2" type="checkbox" formControlName="autobill">
+          <label for="autobill2" class="f-12 f-w-100 pl-1">
+            Enable Autobill
+          </label>
+          <!-- <span class="text-white"> {{autobillForm.value | json}} </span> -->
+        </div>
+      </div>
+      <ng-container *ngIf="tokenValidationForm.controls['autobill'].value">
+        <form class="mx-auto text-left" [formGroup]="autobillForm" novalidate action="javascript:">
+          <div class="form-group pl-0">
+            <label *ngIf="autobillForm.controls['frequency'].value" class="f-12" for="autobill_frequency">Select
+              Frequency</label>
+            <select formControlName="frequency" class="form-control form-control-round form-control pt-2" name="autobill_frequency"
+              id="autobill_frequency">
+              <option value=0 disabled="true" [selected]="true">Select Autobill Frequency</option>
+              <option *ngFor="let f of frequencies" [value]=f.code>{{f?.name}}</option>
+            </select>
+          </div>
+          <div class="form-group pl-0">
+            <label *ngIf="autobillForm.controls['startDate'].value" class="f-12" for="startDate">Select Start Date
+              Question:</label>
+            <input type="date" class="form-control form-control-round" placeholder="Start Date" formControlName="startDate">
+          </div>
+          <div class="form-group pl-0">
+            <label *ngIf="autobillForm.controls['stopDate'].value" class="f-12" for="stopDate">Select Stop Date
+              Question:</label>
+            <input type="date" class="form-control form-control-round" placeholder="Stop Date" formControlName="stopDate">
+          </div>
+        </form>
+      </ng-container>
+      <div class="form-group d-block">
+        <div class="md-form float-right">
+          <button (click)="backtoValidationForm()" id="backtoValidationForm" type="button" class="btn btn-outline-dark btn-round waves-light mx-2 md-trigger btn-sm"
+            mdbRippleRadius>
+            <span class="px-3">
+              Back
+            </span>
+          </button>
+          <button [disabled]='!tokenValidationForm.valid' [ngClass]="{'btn-inverse': !tokenValidationForm.valid}" id="postPayment"
+            type="submit" class="btn btn-success btn-round light-shadow waves-light md-trigger btn-sm" mdbRippleRadius>
+            <span *ngIf="paying === true" class="">
+              <i class="fa fa-spin fa-spinner"></i>
+            </span>
+            <span *ngIf="!paying" class="">
+              Make Payment
+            </span>
+          </button>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </ng-container>
+    <ng-container id="validation_details">
+      <div [@slideUpDown] class="card bg-light light-shadow mt-3">
+        <div class="card-body pb-1">
+          <h4 class="card-title f-12 f-w-500 text-muted mb-2">Transaction details and charges. <span *ngIf="validationDetails.validationRef"
+              class="float-right f-10">Ref
+              No.: {{validationDetails?.validationRef}} </span></h4>
+          <div class="card-text d-flex justify-content-between">
+            <span>
+
+            </span>
+            <span (click)="toggleValidationDetails()" class="align-self-end gt-clickable card-text f-12 pb-2"
+              mdbRippleRadius>
+              <span *ngIf="!showValidationDetails">Show details <i class="icofont icofont-expand-alt"></i></span>
+              <span *ngIf="showValidationDetails">Collapse details <i class="icofont icofont-collapse"></i></span>
+            </span>
+          </div>
+        </div>
+        <ng-container [@slideUpDown] *ngIf="showValidationDetails">
+          <ul [@slideUpDown] class="list-group list-group-flush">
+            <perfect-scrollbar [style.max-width]="'auto'" [style.max-height]="'250px'">
+              <ng-container *ngFor="let f  of validationDetails.formFieldsDetails">
+                <li *ngIf="f.actual_value" class="list-group-item px-3">
+                  <p class="f-w-100 mb-1 text-uppercase text-muted f-10">{{f?.field_name}}</p>
+                  <p class="mb-1 f-w-400 f-12 text-dark">
+                    <span *ngIf="f.field_name.toLowerCase().includes('amount')">{{f?.actual_value | currency:'₦'}}</span>
+                    <span *ngIf="!(f.field_name.toLowerCase().includes('amount'))">{{f?.actual_value}}</span>
+                  </p>
+                </li>
+              </ng-container>
+            </perfect-scrollbar>
+          </ul>
+          <div *ngIf="validationDetails.formCharges.length" [@slideUpDown] class="card-body">
+            <h4 class="card-title f-12 text-dark">Transaction charges.</h4>
+          </div>
+          <ul *ngIf="validationDetails.formCharges.length" [@slideUpDown] class="list-group list-group-flush pb-3 bg-white mb-3">
+            <perfect-scrollbar [style.max-width]="'auto'" [style.max-height]="'150px'">
+              <li *ngFor="let c of validationDetails.formCharges" class="list-group-item px-3">
+                <p class="f-w-100 mb-1 text-uppercase text-muted f-10">{{ c?.charge_desc }}</p>
+                <p class="mb-1 f-w-400 f-12 text-dark">{{ c?.charge_amt | currency:"₦" }}</p>
+              </li>
+            </perfect-scrollbar>
+          </ul>
+        </ng-container>
+        <div class="mb-0 p-0 gt-bg-gradient-2 card-block" style="height: 5px;"></div>
+      </div>
+    </ng-container>
+  </form>
+</ng-container>
+<ibank-notifications [notification]="notifications" (vissibilityEvent)="visibilityHandler($event)"></ibank-notifications>

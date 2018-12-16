@@ -1,0 +1,66 @@
+<ngx-carousel [@fadeInOutTranslate] *ngIf="accounts" class="ngx-carousel  balance-summary" [inputs]="acctBalanceCarousel"
+  (carouselLoad)="acctBalanceCarouselLoad(this.accounts)">
+  <ngx-tile class="pb-0 mb-0 px-0" NgxCarouselItem *ngFor="let acct of acctBalanceCarouselItems; let i = index;">
+    <div (click)="onAcctClick(acct)" class="card mb-0 pb-0" mdbRippleRadius>
+      <div class="card-block py-2">
+        <div class="row">
+          <div class="col-12">
+            <h3 [ngClass]="{'text-danger':acct?.avail_bal <= 0}" class="f-w-300 text-left">
+              <span *ngIf="acct?.avail_bal < 0">(</span>
+              {{acct?.avail_bal | currency:currencySymbol[acct?.alt_cur_code]}}
+              <span *ngIf="acct?.avail_bal < 0">)</span>
+            </h3>
+            <p class="f-10 float-left pl-0">Book Balance:
+              <span [ngClass]="{'text-danger':acct?.crnt_bal <= 0}" class="f-w-400 f-12">
+                <span *ngIf="acct?.crnt_bal < 0">(</span>
+                {{acct?.crnt_bal | currency:currencySymbol[acct?.alt_cur_code]}}
+                <span *ngIf="acct?.crnt_bal < 0">)</span>
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer text-white" style="background-color: #dd4f05">
+        <div class="row">
+          <div class="col">
+            <h6 class="text-left f-12 f-w-100 mb-0">{{acct?.cusname}}</h6>
+            <h3 class="text-left f-18 f-w-100 mb-0">{{acct?.map_acc_no}}</h3>
+            <h3 class="text-uppercase f-10 text-left ">{{acct?.des_eng}}</h3>
+          </div>
+          <div class="col-2 text-right f-10">
+            <h6> <i class="fas fa-circle f-10 text-success status-icon"></i><span class="font-weight-light f-10">
+                {{acct?.sta_code}}</span></h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ngx-tile>
+  <button NgxCarouselPrev class="carousel-btn float-right mr-3 text-custom waves-light f-12 bg-transparent border-0"
+    mdbRippleRadius>MORE <i class="fas fa-angle-double-right blink"></i><i class="fas fa-angle-double-right blink"></i>
+  </button>
+  <span>MORE ACCOUNTS</span>
+  <button NgxCarouselNext class="carousel-btn text-center mr-3 text-custom waves-light f-12 bg-transparent border-0"
+    mdbRippleRadius> <i class="fas fa-angle-double-left blink"></i><i class="fas fa-angle-double-left blink"></i> MORE
+  </button>
+</ngx-carousel>
+<div *ngIf="!accounts" class="text-center col mb-4">
+  <div class="preloader4 mx-auto pb-0 mb-0">
+    <span>
+      <div class="double-bounce1 text-center"></div>
+      <div class="double-bounce2 text-center"></div>
+    </span>
+  </div>
+  <span class="f-10 text-muted mb-4"> Loading Accounts..</span>
+</div>
+<div [@fadeInOutTranslate] *ngIf="errorMessage" class="card-body pt-1 text-center mt-5">
+  <div class="mt-0">
+    <i class="fas fa-info-circle fa-2x"></i>
+    <p class="mt-2 f-w-400 text-muted text-center mx-auto">
+      {{errorMessage}}
+    </p>
+    <!-- <p>Use button below to go to Transfers</p> -->
+    <button *ngIf="!loading" (click)="retry()" type="button" class="btn btn-primary btn-sm btn-round px-3 ml-1 waves-light"
+  mdbRippleRadius>Retry</button>
+  </div>
+</div>
+<!-- <p *ngIf="errorMessage" class="f-w-400 text-muted text-center mx-auto">{{errorMessage}}</p> -->

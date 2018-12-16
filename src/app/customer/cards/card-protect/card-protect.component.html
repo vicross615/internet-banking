@@ -1,0 +1,143 @@
+<form *ngIf="status" class="mx-auto w-75 form-material" [formGroup]="cardProtectForm" novalidate action="javascript:">
+  <ng-container [@fadeInOutTranslate] *ngIf="!isToken">
+    <h5 class="text-dark mb-3">Enable or Disable card for channels.</h5>
+    <small *ngIf="successMessage" id="tokenHelp" class="form-text text-success text-center py-2 f-12">
+      <span>
+        {{successMessage}}
+      </span>
+    </small>
+    <div class="form-group my-0">
+      <div class="d-flex flex-row justify-content-between">
+        <div class="bd-highlight">
+          <label for="action" class="f-w-100 f-12 f-w-400 mb-0">All Channels</label>
+        </div>
+        <div class="bd-highlight">
+          <div class="btn-group btn-group-sm btn-block btn-group-toggle mx-auto text-white"
+            ngbRadioGroup name="action" formControlName="all">
+            <label ngbButtonLabel class="btn-outline-primary">
+              <input (click)="showToken('all', true)" ngbButton type="radio" value=true>
+            </label>
+            <label ngbButtonLabel class="btn-outline-secondary">
+              <input (click)="showToken('all', false)" ngbButton type="radio" value=false>
+            </label>
+          </div>
+        </div>
+      </div>
+      <hr class="border-default">
+    </div>
+    <div class="form-group my-0">
+      <div class="d-flex flex-row justify-content-between">
+        <div class="bd-highlight">
+          <label for="action" class="f-w-100 f-12 f-w-400 mb-0">Web</label>
+        </div>
+        <div class="bd-highlight">
+          <div class="btn-group btn-group-sm btn-block btn-group-toggle mx-auto text-white"
+            ngbRadioGroup name="action" formControlName="web">
+            <label ngbButtonLabel class="btn-outline-primary">
+              <input (click)="showToken('web', true)" ngbButton type="radio" value=true>
+            </label>
+            <label ngbButtonLabel class="btn-outline-secondary">
+              <input (click)="showToken('web', false)" ngbButton type="radio" value=false>
+            </label>
+          </div>
+        </div>
+      </div>
+      <hr class="border-default">
+    </div>
+    <div class="form-group my-0">
+      <div class="d-flex flex-row justify-content-between">
+        <div class="bd-highlight">
+          <label for="action" class="f-w-100 f-12 f-w-400 mb-0">ATM and POS</label>
+        </div>
+        <div class="bd-highlight">
+          <div class="btn-group btn-group-sm btn-block btn-group-toggle mx-auto text-white"
+            ngbRadioGroup name="action" formControlName="pos">
+            <label ngbButtonLabel class="btn-outline-primary">
+              <input (click)="showToken('pos', true)" ngbButton type="radio" value=true>
+            </label>
+            <label ngbButtonLabel class="btn-outline-secondary">
+              <input (click)="showToken('pos', false)" ngbButton type="radio" value=false>
+            </label>
+          </div>
+        </div>
+      </div>
+      <hr class="border-default">
+    </div>
+    <div class="form-group my-0">
+      <div class="d-flex flex-row justify-content-between">
+        <div class="bd-highlight">
+          <label for="action" class="f-w-100 f-12 f-w-400 mb-0">Local</label>
+        </div>
+        <div class="bd-highlight">
+          <div class="btn-group btn-group-sm btn-block btn-group-toggle mx-auto text-white"
+            ngbRadioGroup name="action" formControlName="local">
+            <label ngbButtonLabel class="btn-outline-primary">
+              <input (click)="showToken('local', true)" ngbButton type="radio" value=true>
+            </label>
+            <label ngbButtonLabel class="btn-outline-secondary">
+              <input (click)="showToken('local', false)" ngbButton type="radio" value=false>
+            </label>
+          </div>
+        </div>
+      </div>
+      <hr class="border-default">
+    </div>
+    <div class="form-group my-0">
+      <div class="d-flex flex-row justify-content-between">
+        <div class="bd-highlight">
+          <label for="action" class="f-w-100 f-12 f-w-400 mb-0">International</label>
+        </div>
+        <div class="bd-highlight">
+          <div class="btn-group btn-group-sm btn-block btn-group-toggle mx-auto" ngbRadioGroup name="beneficiaryOption"
+            formControlName="international">
+            <label ngbButtonLabel class="col-6 btn-outline-primary">
+              <input (click)="showToken('international', true)" ngbButton type="radio" value=true>
+            </label>
+            <label ngbButtonLabel class="col-6 btn-outline-secondary">
+              <input (click)="showToken('international', false)" ngbButton type="radio" value=false>
+            </label>
+          </div>
+        </div>
+      </div>
+      <hr class="border-default">
+    </div>
+  </ng-container>
+  <ng-container [@fadeInOutTranslate] *ngIf="isToken">
+    <small *ngIf="errorMessage" id="tokenHelp" class="form-text text-danger text-center py-2 f-12">
+      <span>
+       {{errorMessage}}
+      </span>
+    </small>
+    <small id="tokenHelp" class="form-text text-dark text-center py-2 f-12">
+      <span>
+        Use your <span class="text-primary">hardware token</span> or dial <span class="text-primary">*737*7#</span>
+        to generate 6 digit code.
+      </span>
+    </small>
+    <div class="material-group material-group-primary mx-auto mt-3">
+      <div class="form-group form-primary">
+        <!-- Input for Secret Question -->
+        <!-- <label [@fadeInOutTranslate] *ngIf="cardProtectForm.controls['token'].value" class="f-12" for="token">Please
+            enter Token:</label> -->
+        <input type="number" class="form-control form-control-center" name="token" id="token" maxlength="6"
+          aria-describedby="tokenHelp" placeholder="Enter Token" formControlName="token" onKeyDown="if(this.value.length==6 && event.keyCode!=8) return false;">
+        <span class="form-bar"></span>
+        <label class="float-label text-center d-none">Enter Token</label>
+        <span class="text-danger f-10" *ngIf="!cardProtectForm.value.token && cardProtectForm.controls['token'].touched">Token is required. Enter Token</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="md-form">
+        <button (click)="updateChannelStatus()" [disabled]='!cardProtectForm.valid' type="submit" class="btn btn-success btn-block waves-light md-trigger btn-sm"
+          mdbRippleRadius>
+          Continue
+        </button>
+        <button (click)="showToken = false" type="submit" class="btn btn-outline-secondary btn-block waves-light md-trigger btn-sm"
+          mdbRippleRadius>
+          Back
+        </button>
+      </div>
+    </div>
+  </ng-container>
+  <!-- <pre>form values {{cardProtectForm.value | json}}</pre> -->
+</form>

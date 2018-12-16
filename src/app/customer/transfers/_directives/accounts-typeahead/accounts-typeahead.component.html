@@ -1,0 +1,17 @@
+<ng-template #rt let-r="result" let-t="term">
+  <div (click)="onAcctChange();">
+    <span class="d-block f-12">{{r?.nuban}}
+      <span class="text-inverse"> Balance: {{r.accountBalance | currency:'₦'}}</span>
+    </span>
+    <p class="f-12 mb-0">{{ r.accountName}}</p>
+  </div>
+</ng-template>
+<!-- (selectItem)="setModel($event)"  -->
+<label [@fadeInOutTranslate] class="f-12 pl-2" *ngIf="acctInput.dirty" for="acct">{{label}}:</label>
+<input id="acct" type="text" class="form-control form-control-round" [(ngModel)]="acctModel" [ngbTypeahead]="acctsTypeahead"
+  [resultTemplate]="rt" [inputFormatter]="formatter" (focus)="acctFocus$.next($event.target.value); $event.target.value=''; clear();"
+  (click)="acctClick$.next($event.target.value); $event.target.value='';" [formControl]="acctInput" #acctsInstance="ngbTypeahead"
+  placeholder="{{label}}">
+<div class="f-10 text-danger pl-2" *ngIf="acctInput.touched && acctInput.value === null">
+  Please select {{label}}
+</div>

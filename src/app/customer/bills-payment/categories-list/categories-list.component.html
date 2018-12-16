@@ -1,0 +1,43 @@
+
+<div [@slideUpDown] class="row submenu text-center mx-1">
+  <p *ngIf="errorMessage" class="f-w-400 text-muted text-center mx-auto">{{errorMessage}}</p>
+  <!-- <p class="m-b-0 f-12 f-w-500">s: {{selectedCategory?.categoryName}}</p> -->
+  <div class="text-center col mb-4" *ngIf="!categories && !errorMessage">
+    <div class="preloader4 mx-auto pb-0 mb-0">
+      <span>
+        <div class="double-bounce1 text-center"></div>
+        <div class="double-bounce2 text-center"></div>
+      </span>
+    </div>
+    <span class="f-10 text-muted mb-4"> Loading Categories..</span>
+  </div>
+  <ng-container *ngIf="categories">
+    <!-- <h4 class="col-12 f-12 text-left text-dark">Featured Categories</h4>
+    <div *ngFor="let topCategory of categories  | slice:0:6; let i = index" class="px-1 col-md-2 col-sm-4 col-6 mb-0">
+      <div [ngClass]="{'active-submenu': selectedCategory?.categoryId === topCategory?.categoryId}" (click)="onClick(topCategory)"
+        class="card mb-2 text-center text-primary order-visitor-card z-depth-bottom-1" style="max-height: 115px"
+        placement="top" ngbTooltip="">
+        <div class="card-block px-2 card-grid">
+          <img src="assets/icon/smashicons/bills-payment/{{topCategory.categoryIconName}}.svg" class="img-fluid img-50 mb-2"
+            alt="">
+          <p class="m-b-0 f-12 f-w-500">{{topCategory?.categoryName}}</p>
+        </div>
+      </div>
+    </div> -->
+    <h4 class="col-12 f-20 f-w-100 text-left">Payment Categories</h4>
+    <div [@slideUpDown] *ngFor="let category of categories; let i = index" class="px-1 col-md-3 col-6 col-sm-4 mb-1">
+      <!-- -->
+      <div [ngClass]="{'active-submenu': selectedCategory?.categoryName === category?.categoryName, 'text-success': 0 === i % 2, 'text-primary': 1 === i % 2, 'text-info': 2 === i % 3}"
+        (click)="goToBillersList(category)" class="card mb-2 text-primary text-center category-list-card z-depth-bottom-1 light"
+        style="height: 130px" placement="top" ngbTooltip="">
+        <div class="card-block px-2" style="overflow: hidden;">
+          <!-- <h4 class="m-t-5"><i [ngClass]="categoryIcons[category?.categoryName]"  class="icofont fa-md"></i></h4> -->
+          <img src="assets/icon/smashicons/bills-payment/{{category.categoryIconName}}.svg" class="img-fluid img-50 mb-2"
+            alt="">
+          <p class="m-b-0 f-12 f-w-500">{{category?.categoryName}}</p>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+</div>

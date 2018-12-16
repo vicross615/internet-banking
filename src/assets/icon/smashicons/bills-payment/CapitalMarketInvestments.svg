@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="61px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>010 - monitor growth</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="010---monitor-growth" transform="translate(1.000000, 1.000000)">
+            <circle id="Oval" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" cx="36" cy="17" r="13"></circle>
+            <circle id="Oval" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" cx="36" cy="17" r="9"></circle>
+            <path d="M2.983,0 L57,0 C58.1045695,0 59,0.8954305 59,2 L59,40 L0.983,40 L0.983,2 C0.983,0.8954305 1.8784305,2.22044605e-16 2.983,0 Z" id="Shape" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+            <rect id="Rectangle-path" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" x="24" y="48" width="12" height="6"></rect>
+            <path d="M15.983,54 L44,54 C45.1045695,54 46,54.8954305 46,56 L46,58 L13.983,58 L13.983,56 C13.983,54.8954305 14.8784305,54 15.983,54 Z" id="Shape" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+            <rect id="Rectangle-path" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" x="5" y="24" width="6" height="12"></rect>
+            <rect id="Rectangle-path" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" x="11" y="11" width="6" height="25"></rect>
+            <rect id="Rectangle-path" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" x="17" y="4" width="6" height="32"></rect>
+            <path d="M1,40 L59,40 L59,45.862 C59,47.0427848 58.0427848,48 56.862,48 L3.138,48 C1.9572152,48 1,47.0427848 1,45.862 L1,40 Z" id="Shape" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+            <circle id="Oval" fill="#dd4f05" fill-rule="non1ero" cx="30" cy="44" r="1"></circle>
+            <path d="M46.964,23.964 C45.9397761,25.5742469 44.5742469,26.9397761 42.964,27.964 L50,35 C50.5303774,35.5305377 51.2498197,35.8286041 52,35.8286041 C52.7501803,35.8286041 53.4696226,35.5305377 54,35 C54.5305377,34.4696226 54.8286041,33.7501803 54.8286041,33 C54.8286041,32.2498197 54.5305377,31.5303774 54,31 L46.964,23.964 Z" id="Shape" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M23,17 L23,36 L29,36 L29,27.943 C25.262455,25.5593335 22.9999805,21.4329571 23,17 Z" id="Shape" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M29,27.943 L29,36 L35,36 L35,29.949 C32.8644972,29.7887242 30.8024899,29.0993264 29,27.943 Z" id="Shape" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M33,20 L39,14" id="Shape" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+            <polyline id="Shape" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" points="39 17 39 14 36 14"></polyline>
+        </g>
+    </g>
+</svg>

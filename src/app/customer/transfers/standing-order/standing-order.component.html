@@ -1,0 +1,321 @@
+<div class="card-header py-2 bg-white">
+  <div class="d-flex flex-row justify-content-between">
+    <div class="bd-highlight text-left">
+      <h6 class="text-primary f-w-400">
+          <img src="assets\icon\smashicons\transfer\others.svg" class="img-fluid img-30 mb-2" alt="">
+        Standing Order Request
+      </h6>
+    </div>
+    <div class="bd-highlight text-right">
+      <h6 class="f-w-100 f-12 text-right text-dark mb-0">Daily limit:
+        <span class="f-w-500 text-c-brand">{{transferLimit | currency:'₦'}}</span>
+      </h6>
+    </div>
+  </div>
+</div>
+<div class="card-block">
+  <div  *ngIf="!formSubmit" class="row">
+    <div class="col-md-8 pt-3 mx-auto">
+      <div [@fadeInOutTranslate] class="m-t-5">
+        <form [formGroup]="standingOrderForm" (ngSubmit)="openTokenConfirmationModal()" action="javascript:">
+          <!-- Standing Order Type -->
+            <div class="btn-group btn-group-sm btn-group-toggle" ngbRadioGroup name="SItype" formControlName="SItype">
+              <label ngbButtonLabel class="col-6 btn-outline-primary">
+                <input (click)="getBeneficiary('GTBThirdParty')" ngbButton type="radio" value="gtSI">SI to GTBank
+              </label>
+              <label ngbButtonLabel class="col-6 btn-outline-secondary text-center">
+                <input (click)="getBeneficiary('NIP')" ngbButton type="radio" value="othSI">SI to Other Banks
+              </label>
+            </div>
+          <!-- Dropdown for Account to debit-->
+          <div class="form-group mt-3">
+            <gtibank-accounts-typeahead 
+            [label]="'Account to Debit'"
+            (acctToDebitEvent)="acctToDebitEventHander($event)">
+            </gtibank-accounts-typeahead>
+          </div>
+          <div [@fadeInOutTranslate] class="form-group beneficiary-card mt-3">
+            <label [@fadeInOutTranslate] *ngIf="standingOrderForm.controls['bank'].value || standingOrderForm.controls['savedBeneficiary'].value" class="f-12" for="newBeneficiary">
+                {{beneficiaryLabel}}:
+            </label>
+            <!-- {{ values }} -->
+            <!-- Input for Saved Beneficiary -->
+            <div class="btn-group btn-group-sm btn-block btn-group-toggle mx-auto mb-2" ngbRadioGroup name="beneficiaryOption" formControlName="beneficiaryOption">
+              <label ngbButtonLabel class="col-6 btn-outline-secondary">
+                <input (click)="changeLabel('Enter Beneficiary`s name'); clearBeneficiary()" ngbButton type="radio" value="SAVED"> Saved Beneficiary
+              </label>
+              <label ngbButtonLabel class="col-6 btn-outline-secondary">
+                <input (click)="changeLabel('Enter Beneficiary`s Bank'); clearBeneficiary()" ngbButton type="radio" value="NEW"> New Beneficiary
+              </label>
+            </div>
+            <ng-template #banks let-r="result" let-t="term">
+                <div class="card-block p-0 w-100">
+                  <div class="d-flex flex-row justify-content-between my-0 py-0">
+                    <div class="p-1 bd-highlight">
+                      <p class="mb-1">{{r.name}}</p>
+                    </div>
+                    <div class="p-1 bd-highlight">
+                        <i class="icofont icofont-bank-alt f-20"></i>
+                      <!-- <img class="img-menu-user img-radius img-30" src="assets/images/avatar-8.jpg" alt="User-Profile-Image"> -->
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+              <input
+              *ngIf="standingOrderForm.controls['beneficiaryOption'].value === 'NEW' && standingOrderForm.controls['SItype'].value === 'othSI'"
+              (selectItem)="setBanksModel($event)" 
+              [ngbTypeahead]="Banks" 
+              [resultTemplate]="banks"
+              [inputFormatter]="banksFormatter"
+              (focus)="standingOrderForm.value.bank=''; $event.target.value='';"
+              (click)="click$.next($event.target.value);"
+              #banksInstance="ngbTypeahead"
+              id="bank"
+              type="text"
+              class="form-control mt-1"
+              placeholder="Enter Beneficiary's Bank"
+              formControlName="bank">
+              <!-- <pre>Model: {{ standingOrderForm.get('bank').status}}</pre> -->
+                <!-- Template to display saved Beneficiary list -->
+              <ng-template class="border-primary mt-3" #rt let-r="result" let-t="term">
+                <div class="card-block p-0">
+                  <div class="d-flex flex-row justify-content-start my-0 py-0">
+                    <!-- <div class="p-2 bd-highlight">
+                      <img class="img-menu-user img-radius img-40" src="assets/images/avatar-10.jpg" alt="User-Profile-Image">
+                    </div> -->
+                    <div class="px-2 py-0 bd-highlight">
+                      <p class="mb-1 f-12">{{r.name | uppercase}}</p>
+                      <p class="mb-1 f-10"> {{r.bank | titlecase}} - {{r.accountNumber}}</p>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+                <!-- *ngIf="standingOrderForm.controls['beneficiaryOption'].value === 'SAVED'" -->
+                <input
+                *ngIf="standingOrderForm.controls['beneficiaryOption'].value === 'SAVED'" 
+                #savedBeneficiary
+                (selectItem)="setSavedBeneficiariesModel($event)" 
+                [ngbTypeahead]="SavedBeneficiary" 
+                [resultTemplate]="rt"
+                [inputFormatter]="savedBeneficiariesFormatter"
+                (focus)="standingOrderForm.value.savedBeneficiaries=''; $event.target.value='';"
+                (click)="click$.next($event.target.value);"
+                #savedBeneficiariesInstance="ngbTypeahead"
+                id="savedBeneficiary"
+                type="text"
+                class="form-control"
+                placeholder="Enter name of saved beneficiary"
+                formControlName="savedBeneficiary">
+                <!-- <pre>Model: {{ standingOrderForm.get('savedBeneficiary').status}}</pre> -->
+              <hr class="my-0">
+          </div>
+          <div [@fadeInOutTranslate] class="form-group">
+            <!-- Template to display saved Beneficiary list -->
+            
+          </div>
+            <!-- Beneficiary Display Card -->
+            <div  [@fadeInOutTranslate] *ngIf="newBeneficiaryDetail" class="card my-2 border-primary">
+              <div class="card-block p-1">
+                <div class="d-flex flex-row justify-content-between my-0 py-0">
+                  <div class="p-2 bd-highlight">
+                    <p class="mb-1">{{newBeneficiaryDetail.accountName | titlecase}} <span>- {{newBeneficiaryDetail.nuban}}</span></p>
+                    <p class="mb-2 text-secondary">{{standingOrderForm.value.bank.name | titlecase}}</p>
+                    <a (click)="clearBeneficiary()" name="" id="" class="btn btn-primary btn-round btn-mini text-white mr-2"  role="button" title="Save Beneficiary">
+                      <i class="icofont icofont-save mr-2"></i>Save
+                    </a>
+                    <a (click)="clearBeneficiary()" name="" id="" class="btn btn-secondary btn-round btn-mini text-white"  role="button" title="Clear Beneficiary">
+                      <i class="icofont icofont-trash mr-2"></i>Clear
+                    </a>
+                  </div>
+                  <div class="p-2 bd-highlight">
+                    <img class="img-menu-user img-radius img-60" src="assets/images/placeholder.png" alt="User-Profile-Image">
+                </div>
+                </div>
+              </div>
+            </div>
+            <div  [@fadeInOutTranslate] *ngIf="standingOrderForm.value.savedBeneficiary" class="card my-2 border-primary">
+              <div class="card-block p-1">
+                <div class="d-flex flex-row justify-content-between my-0 py-0">
+                  <div class="p-2 bd-highlight">
+                    <p class="mb-3">{{standingOrderForm.value.savedBeneficiary.name | titlecase}} <span>- {{standingOrderForm.value.savedBeneficiary.accountNumber}}</span></p>
+                    <a (click)="clearBeneficiary()" class="btn btn-primary btn-round btn-mini text-white"  role="button" title="Clear Beneficiary">
+                      <i class="icofont icofont-trash mr-2"></i>Clear
+                    </a>
+                  </div>
+                  <div class="p-2 bd-highlight">
+                    <img class="img-menu-user img-radius img-60" src="assets/images/placeholder.png" alt="User-Profile-Image">
+                  </div>
+                </div>
+              </div>
+            </div>
+          <!-- Bank options -->
+          <div class="form-group">
+            <label 
+              [@fadeInOutTranslate] 
+              [ngClass]="{'d-none': newBeneficiaryDetail}"
+              *ngIf="standingOrderForm.controls['newBeneficiary'].value && standingOrderForm.controls['beneficiaryOption'].value === 'NEW'" 
+              class="f-12" 
+              for="transAmt">
+              Enter Beneficiary`s account number:
+            </label>
+            <!-- *ngIf="standingOrderForm.controls['beneficiaryOption'].value === 'NEW'" -->
+            <input
+            [@fadeInOutTranslate]
+            *ngIf ="standingOrderForm.controls['beneficiaryOption'].value === 'NEW' && (standingOrderForm.controls['bank'].value || standingOrderForm.controls['SItype'].value === 'gtSI')"
+            
+            #newBeneficiary
+            (keyup)="onkey(standingOrderForm.value.newBeneficiary, standingOrderForm.value.bank)"
+            [ngClass]="{'d-none': newBeneficiaryDetail}"
+            id="beneficiary"
+            maxlength="10"
+            type="text"
+            class="form-control"
+            placeholder="Enter Beneficiary`s account number"
+            formControlName="newBeneficiary">
+            <!-- <pre>Model: {{ standingOrderForm.get('newBeneficiary').status}}</pre> -->
+            <span [@fadeInOutTranslate] class="text-success f-12">{{successMessage}}</span>
+            <span [@fadeInOutTranslate] class="text-danger f-12">{{errorMessage}}</span>
+          </div>
+          <div class="form-group pl-0">
+            <!-- Input: Amount to transfer -->
+            <label [@fadeInOutTranslate] class="f-12" for="transAmt">Amount to transfer:</label>
+            <input
+              currencyMask
+              [options]="{ prefix: '', thousands: ',', decimal: '.', precision: '2', allowNegative: false }"
+              id="transAmt"
+              
+              class="form-control form-control-right"
+              placeholder="Enter Amount ₦ 0.00"
+              formControlName="transferAmt">
+              <!-- <pre>Model: {{ otherBanksTransferForm.get('transferAmt').status}}</pre> -->
+              <!-- <pre>Model: {{ otherBanksTransferForm.value.transferAmt | json }}</pre> -->
+          </div>
+
+          <div class="form-group row">
+          <div class="form-group col-6">
+            <label *ngIf="standingOrderForm.controls['endDate'].value || standingOrderForm.controls['startDate'].value" for="startDate" class="f-12 my-0 py-0">Start Date:</label>
+            <div class="input-group mb-0">
+              <input 
+                (click)="startDate.toggle()"
+                class="form-control" 
+                placeholder="Start Date"
+                name="dp" 
+                ngbDatepicker 
+                #startDate="ngbDatepicker"
+                formControlName="startDate">
+              <div class="input-group-append">
+                <button class="btn btn-mini btn-inverse" (click)="startDate.toggle()" type="button">
+                  <i-calendar style="width: 1.2rem; height: 0.5rem; cursor: pointer;"></i-calendar>
+                  <!-- <img src="img/calendar-icon.svg" /> -->
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-6 mb-0">
+            <label *ngIf="standingOrderForm.controls['endDate'].value || standingOrderForm.controls['startDate'].value" for="endDate" class="f-12 my-0 py-0">End Date:</label>
+            <div class="input-group mb-0">
+              <input 
+                (click)="endDate.toggle()"
+                class="form-control" 
+                placeholder="End Date"
+                name="endDate"
+                ngbDatepicker 
+                #endDate="ngbDatepicker"
+                formControlName="endDate">
+              <div class="input-group-append">
+                <button class="btn btn-mini btn-inverse" (click)="endDate.toggle()" type="button">
+                  <i-calendar style="width: 1.2rem; height: 0.5rem; cursor: pointer;"></i-calendar>
+                  <!-- <img src="img/calendar-icon.svg" /> -->
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+            <label [@fadeInOutTranslate] *ngIf="standingOrderForm.controls['frequency'].value" class="f-12" for="frequency">Frequency:</label>
+            <select #selectReason class="custom-select text-dark" name="frequencies" id="frequencies" placeholder="Select frequency" formControlName="frequency">
+                <option disabled value="">Select Frequency</option>
+              <option  *ngFor="let frequency of frequencies" value="{{frequency?.code}}">{{frequency?.name}}</option>
+            </select>
+          </div>
+
+          <div class="form-group pl-0">
+            <label [@fadeInOutTranslate] *ngIf="standingOrderForm.controls['pRemarks'].value" class="f-12" for="pRemarks">Remark:</label>
+            <input
+              type="textarea"
+              class="form-control"
+              placeholder="Remark"
+              formControlName="pRemarks">
+              <!-- <div *ngIf="standingOrderForm.controls['pRemarks'].dirty" class="form-group">
+                <div class="md-form">
+                  <button
+                    id="customer"
+                    type="button"
+                    class="btn btn-block btn-sm btn-secondary waves-light md-trigger mt-1"
+                    mdbRippleRadius>Add new Transfer</button>
+                </div>
+              </div> -->
+          </div>
+          <!-- Input for Secret Question -->
+          <div class="form-group pl-0">
+            <label [@fadeInOutTranslate] *ngIf="standingOrderForm.controls['secretAnsw'].value" class="f-12" for="secretAnsw">Answer to secret Question:</label>
+            <input
+            type="password"
+            class="form-control"
+            placeholder="Answer to secret Question"
+            formControlName="secretAnsw">
+            <get-secret-question></get-secret-question>
+            <!-- <pre>Model: {{ standingOrderForm.get('secretAnsw').status}}</pre> -->
+          </div>
+         
+          <div class="form-group">
+            <div class="md-form">
+              <button
+                [disabled]='!standingOrderForm.valid'
+                [@fadeInOutTranslate]
+                id="customer"
+                type="submit"
+                class="btn btn-success waves-light md-trigger btn-sm"
+                mdbRippleRadius>
+                <span *ngIf="isLoading === true" class="">
+                  <i class="fa fa-spin fa-spinner"></i>
+                </span>
+                <span *ngIf="!isLoading" class="">
+                  Continue
+                </span>
+              </button>
+            </div>
+            <p class="mt-3 f-12">You will be charged
+              <span class="text-primary">₦0.00</span> for this transfer
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-12 d-none">
+      <div class="card">
+        <div class="card-block">
+          <div class="multiple-transfers">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="formSubmit" [@fadeInOutTranslate] class="row">
+    <div class="col-md-9 pt-4 mx-auto">
+      <app-token-confirmation-modal
+      (resetFormEvent)="resetFormEventHandler($event)"
+      (tokenVissibilityEvent)="tokenEventHandler($event)"
+      [body]="reqBody"
+      [isToken]=true
+      [category]="'transfers'"
+      [transactionType]='standingOrderForm.value.SItype'>
+
+      </app-token-confirmation-modal>
+    </div>
+  </div>
+</div>
+
+  

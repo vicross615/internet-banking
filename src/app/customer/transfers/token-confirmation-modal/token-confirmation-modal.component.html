@@ -1,0 +1,69 @@
+<div class="col-md-12 mx-auto">
+  <div class="card">
+    <div [@fadeInOutTranslate] *ngIf="!message" class="card-block">
+      <div class="text-center">
+        <img [@slideUpDown] class="img-menu-user img-circle img-40 my-2" [src]="'assets/icon/smashicons/alert/locked.svg'"
+          alt="lock icon">
+        <h5 *ngIf="isToken === true" class="mt-2">Token Confirmation</h5>
+        <h5 *ngIf="isToken === false" class="mt-2">Confirm Your Transfer</h5>
+        <p *ngIf="category === 'transfers'">
+          You are sending
+          <span class="text-primary">
+            <ng-container *ngIf="body.currency; else defaultTemplate">
+              {{body?.amount | currency:body.currency}}
+            </ng-container>
+            <ng-template #defaultTemplate>
+              {{body?.amount | currency:'₦'}}
+            </ng-template>
+          </span>
+          to {{body?.beneName || body?.destinationAccName | titlecase}}
+        </p>
+      </div>
+    </div>
+    <ng-container *ngIf="isToken === true">
+      <div *ngIf="!message" class="card-block">
+        <form [formGroup]="tokenForm" class="mx-auto form-material">
+          <div class="material-group material-group-primary w-75 mx-auto">
+            <!-- <div class="material-addone">
+            <i class="icofont icofont-lock"></i>
+          </div> -->
+            <div class="form-group form-primary">
+              <input type="number" class="form-control form-control-center" name="token" id="token" maxlength="6"
+                aria-describedby="tokenHelp" placeholder="Enter Token" formControlName="authValue" onKeyDown="if(this.value.length==6 && event.keyCode!=8) return false;">
+              <span class="form-bar"></span>
+              <label class="float-label text-center d-none">Enter Token</label>
+            </div>
+          </div>
+        </form>
+        <small id="tokenHelp" class="form-text text-dark text-center py-2 f-12">
+          <span>
+            Use your <span class="text-primary">hardware token</span> or dial <span class="text-primary">*737*7#</span>
+            to generate 6 digit code.
+          </span>
+          <!-- <span *ngIf="tokenForm.value['authMode'] === 'STOKEN'">
+          For 737 or software token, Dial <span class="text-primary">*737*7#</span>
+        </span>  -->
+        </small>
+      </div>
+    </ng-container>
+    <div [@fadeInOutTranslate] *ngIf="message" class="card-block text-center">
+      <p class="my-3">
+        <img [@slideUpDown] *ngIf="isSuccess" class="img-menu-user img-circle img-60 my-2 z-depth-bottom-1" [src]="'assets/icon/smashicons/alert/success.svg'"
+          alt="success icon">
+        <img [@slideUpDown] *ngIf="!isSuccess" class="img-menu-user img-circle img-60 my-2 z-depth-bottom-1" [src]="'assets/icon/smashicons/alert/error.svg'"
+          alt="error icon">
+      </p>
+      <p [innerHTML]="message" class=" my-auto"></p>
+    </div>
+    <div class="card-footer py-2">
+      <button type="button" class="btn btn-sm btn-outline-dark mr-2" (click)="closeTokenForm()">Back</button>
+      <button *ngIf="!submited" type="submit" class="btn btn-sm btn-primary mr-2" (click)="InitiateTransaction(tokenForm.value)">Submit</button>
+      <span *ngIf="isLoading" class="ml-2"><i class="fa fa-spin fa-spinner f-12 text-primary"></i></span>
+    </div>
+  </div>
+  <div class="card bg-primary my-1">
+    <div class="card-block p-0 mt-1">
+      <img src="assets\images\ads\Salary-Advance-Ad-10092018-600x400.jpg" class="img-fluid mb-1" alt="">
+    </div>
+  </div>
+</div>

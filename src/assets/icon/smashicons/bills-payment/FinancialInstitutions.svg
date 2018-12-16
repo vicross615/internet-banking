@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>017 - Bank</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="017---Bank" transform="translate(1.000000, 1.000000)" stroke="#dd4f05" stroke-width="1">
+            <path d="M2,53 L56,53 C57.1045695,53 58,53.8954305 58,55 L58,58 L0,58 L0,55 C-1.11022302e-16,53.8954305 0.8954305,53 2,53 Z" id="Shape"></path>
+            <path d="M4,48 L54,48 C55.1045695,48 56,48.8954305 56,50 L56,53 L2,53 L2,50 C2,48.8954305 2.8954305,48 4,48 Z" id="Shape"></path>
+            <rect id="Rectangle-path" x="7" y="25" width="6" height="18"></rect>
+            <path d="M5,20 L15,20 L15,23 C15,24.1045695 14.1045695,25 13,25 L7,25 C5.8954305,25 5,24.1045695 5,23 L5,20 Z" id="Shape"></path>
+            <rect id="Rectangle-path" x="26" y="25" width="6" height="18"></rect>
+            <path d="M24,20 L34,20 L34,23 C34,24.1045695 33.1045695,25 32,25 L26,25 C24.8954305,25 24,24.1045695 24,23 L24,20 Z" id="Shape"></path>
+            <rect id="Rectangle-path" x="45" y="25" width="6" height="18"></rect>
+            <path d="M43,20 L53,20 L53,23 C53,24.1045695 52.1045695,25 51,25 L45,25 C43.8954305,25 43,24.1045695 43,23 L43,20 Z" id="Shape"></path>
+            <path d="M7,43 L13,43 C14.1045695,43 15,43.8954305 15,45 L15,48 L5,48 L5,45 C5,43.8954305 5.8954305,43 7,43 Z" id="Shape"></path>
+            <path d="M26,43 L32,43 C33.1045695,43 34,43.8954305 34,45 L34,48 L24,48 L24,45 C24,43.8954305 24.8954305,43 26,43 Z" id="Shape"></path>
+            <path d="M45,43 L51,43 C52.1045695,43 53,43.8954305 53,45 L53,48 L43,48 L43,45 C43,43.8954305 43.8954305,43 45,43 Z" id="Shape"></path>
+            <path d="M58,14.9999999 L58,18.9999999 C58,19.5522846 57.5522847,19.9999999 57,19.9999999 L1,19.9999999 C0.44771525,19.9999999 0,19.5522846 0,18.9999999 L0,14.9999999 L20.48,0.369999997 C20.8188448,0.129164339 21.2242866,-0.00015761512 21.64,-1.39642169e-16 L36.36,-1.39642169e-16 C36.7757134,-0.00015761512 37.1811552,0.129164339 37.52,0.369999997 L58,14.9999999 Z" id="Shape"></path>
+            <polyline id="Shape" points="58 15 29 15 0 15"></polyline>
+        </g>
+    </g>
+</svg>

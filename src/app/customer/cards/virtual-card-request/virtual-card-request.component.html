@@ -1,0 +1,50 @@
+<div [@fadeInOutTranslate] class="card">
+    <div class="mb-0 p-0 bg-primary card-block" style="height: 5px;"></div>
+    <div class="card-header bg-white p-0">
+      <div class="px-0 py-1 filter-bar">
+        <nav class="navbar navbar-light bg-faded p-3 justify-content-between">
+          <h5 class="text-primary">
+            <i-cloud></i-cloud>
+            Virtual Card Request
+          </h5>
+          <span [@fadeInOutTranslate] *ngIf="!virtualCard && errorMessage" class="float-right">
+              <button  [routerLink]="['virtual-card-request']" type="button" class="btn btn-primary py-2 btn-round btn-mini mt-2 float-right">Request for virtual cards</button>   
+          </span>
+        </nav>
+      </div>
+    </div>
+    <p [@fadeInOutTranslate] class="text-center mt-5 f-12" *ngIf="errorMessage">
+        <i-alert-circle class="d-block mx-auto mb-3"></i-alert-circle>
+      <ngb-alert type="danger border-0" [dismissible]="false">
+        {{errorMessage}}<br>
+        <button (click)="clearError()" type="button" class="btn btn-dark btn-round btn-mini mt-2 float-right">Close</button>   
+      </ngb-alert>
+    </p>
+    <div *ngIf="virtualCard" [ngClass]="{'gt-platinum-card text-white': virtualCard?.cardtype === 'PLATINUM MASTERCARD', 'gt-naira-card text-dark': virtualCard?.cardtype === 'Mastercard Naira3' }"
+      class="card-block mx-auto m-3 z-depth-bottom-0 bg-white" style="height: 200px; width: 320px; background-size: 100% 100%; border-radius: 15px; background-repeat: no-repeat;">
+      <div *ngIf="!errorMessage" class="d-flex align-items-start flex-column bd-highlight mb-1" style="height: 180px;">
+        <div class="mt-auto p-2 bd-highlight">
+          <p class="f-20 f-w-500 mb-0">
+            {{virtualCard?.pan}}
+          </p>
+          <span class="text-center pl-3">VALID THRU:{{virtualCard?.expiry | slice:0:2}}/{{virtualCard?.expiry | slice:2:4}}</span>
+          <br>
+          <span class="text-uppercase f-w-500 text-card pl-3 mt-4 f-16">Adebayo Salami</span>
+        </div>
+      </div>
+    </div>
+    <div  *ngIf="!(virtualCard || errorMessage)" class="card-block">
+      <div [@fadeInOutTranslate] class="m-t-15">
+          <div *ngIf="!(selectedAcctToLink && acctToDebit)" class="text-center col mb-4">
+            <div class="preloader4 mx-auto pb-0 mb-0">
+              <span>
+                <div class="double-bounce1 text-center"></div>
+                <div class="double-bounce2 text-center"></div>
+              </span>
+            </div>
+            <span class="f-10 text-muted mb-4"> Just a minute..</span>
+          </div>
+          <p *ngIf="errorMessage" class="f-w-400 text-muted text-center mx-auto">{{errorMessage}}</p> 
+      </div>
+    </div>
+  </div>

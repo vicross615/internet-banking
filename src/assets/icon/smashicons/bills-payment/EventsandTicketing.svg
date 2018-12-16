@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>013 - Passport &amp; Ticket </title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="013---Passport-&amp;-Ticket-" transform="translate(1.000000, 1.000000)">
+            <path d="M26,52 L26,56 C26.0032948,57.1032019 26.8967981,57.9967052 28,58 L56,58 C57.1032019,57.9967052 57.9967052,57.1032019 58,56 L58,17.85 C58.0107704,17.43233 57.7589461,17.0525949 57.37,16.9 C56.5492509,16.6302328 55.9944998,15.8639464 55.9944998,15 C55.9944998,14.1360536 56.5492509,13.3697672 57.37,13.1 C57.7589461,12.9474051 58.0107704,12.56767 58,12.15 L58,2 C57.9967052,0.896798134 57.1032019,0.00329480111 56,0 L28,0 C26.8967981,0.00329480111 26.0032948,0.896798134 26,2 L26,6" id="Shape" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+            <circle id="Oval" fill="#dd4f05" fill-rule="nonzero" cx="36" cy="15" r="1"></circle>
+            <circle id="Oval" fill="#dd4f05" fill-rule="nonzero" cx="40" cy="15" r="1"></circle>
+            <circle id="Oval" fill="#dd4f05" fill-rule="nonzero" cx="44" cy="15" r="1"></circle>
+            <circle id="Oval" fill="#dd4f05" fill-rule="nonzero" cx="48" cy="15" r="1"></circle>
+            <circle id="Oval" fill="#dd4f05" fill-rule="nonzero" cx="52" cy="15" r="1"></circle>
+            <path d="M0,6 L30,6 C31.1045695,6 32,6.8954305 32,8 L32,50 C32,51.1045695 31.1045695,52 30,52 L0,52 L0,6 Z" id="Shape" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+            <circle id="Oval" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" cx="16" cy="24" r="10"></circle>
+            <path d="M20.331,19 C20.7856049,20.6274107 21.0107783,22.310321 21,24 C21,29.523 18.761,34 16,34" id="Shape" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M11.669,29 C11.2143951,27.3725893 10.9892217,25.689679 11,24 C11,18.477 13.239,14 16,14" id="Shape" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M16,18 L16,30" id="Shape" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M6,24 L26,24" id="Shape" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M9,40 L22,40" id="Shape" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M13,45 L18,45" id="Shape" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M32,39.012 L39.83,37.492 L40,42 L36.79,45.01 C36.3744872,45.3504884 36.2494661,45.9329695 36.488656,46.4139804 C36.7278459,46.8949912 37.2677453,47.1468305 37.79,47.021 L40,46.561 L40.73,49.061 C40.8894392,49.6313681 41.4077748,50.0268541 42,50.03 L42.01,50.03 C42.5984231,50.0251648 43.1142861,49.6356273 43.28,49.071 L44,46.651 L46.24,47.151 C46.7611863,47.256976 47.2878575,46.9958947 47.5190794,46.5169349 C47.7503014,46.0379751 47.627153,45.4631878 47.22,45.121 L44,42 L44.17,37.49 L53.2,39.24 C53.84,39.42 54.27,38.55 53.8,38.03 L44.7,31.03 L44.67,31.03 L45.04,26.18 C45.0327203,25.696297 44.8265533,25.2369424 44.47,24.91 L42.94,23.38 C42.416728,22.8709068 41.583272,22.8709068 41.06,23.38 L39.53,24.91 C39.1734467,25.2369424 38.9672797,25.696297 38.96,26.18 L39.33,31.03 L39.3,31.03 L32,36.653" id="Shape" stroke="#dd4f05" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+        </g>
+    </g>
+</svg>

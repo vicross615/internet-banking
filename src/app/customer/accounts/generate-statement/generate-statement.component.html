@@ -1,0 +1,170 @@
+<div class="card-header bg-white py-2">
+  <div class="d-flex justify-content-between">
+    <p *ngIf="showHistory" class="text-primary f-18 mr-2">
+      <img src="assets\icon\smashicons\accounts\send-statement.svg" class="img-fluid img-40 mb-2" alt="">
+      Third Party Statement History
+    </p>
+    <p *ngIf="!showHistory" class="text-primary f-18 mr-2">
+      <img src="assets\icon\smashicons\accounts\send-statement.svg" class="img-fluid img-40 mb-2" alt="">
+      Send Statement
+    </p>
+    <p class="f-10">
+      <a *ngIf="!showHistory" (click)="toggleHistory()" name="toggleHistory" id="toggleHistory" class="btn shadow-sm btn-primary btn-round btn-sm"
+        href="javascript:" role="button">
+        <i class="icofont icofont-history"></i> View History
+      </a>
+      <a *ngIf="showHistory" (click)="toggleHistory()" name="toggleHistory" id="toggleHistory" class="btn shadow-sm btn-primary btn-round btn-sm"
+        href="javascript:" role="button">
+        <i class="icofont icofont-mail"></i> Send Statement
+      </a>
+    </p>
+  </div>
+</div>
+<ng-container *ngIf="showHistory; else sendStatementView">
+  <div class="card-body p-0">
+    <ul class="list-group list-group-flush">
+      <perfect-scrollbar [style.max-width]="'auto'" [style.max-height]="'100vh'">
+        <li *ngFor="let d of statementDetails" class="list-group-item list-group-item-action px-3">
+          <div class="d-flex w-100 justify-content-between">
+            <h6 class="f-w-400 text-primary m-b-0 "><span class="text-dark">Ticket ID: </span>{{d?.ticketId | uppercase}}</h6>
+            <p title="Request Date"><i class="icofont icofont-ui-calendar text-dark f-w-400 mr-2 f-12"></i>{{d?.requestDate | date}}</p>
+          </div>
+          <div class="d-flex justify-content-start">
+            <p class="mr-5 mb-1"><span class="f-w-500 text-dark d-block">Account Number:</span>{{d?.accountNo}}</p>
+            <p class="mr-5 mb-1"><span class="f-w-500 text-dark d-block">No. of Pages:</span>{{d?.numberOfPages}}</p>
+            <p class="mr-5 mb-1"><span class="f-w-500 text-dark d-block">Charged Amount:</span>{{d?.amount | currency: '₦'}}</p>
+            <p class="mr-5 mb-1"><span class="f-w-500 text-dark d-block">Applicant(s):</span>{{d?.applicants | titlecase}}</p>
+          </div>
+        </li>
+      </perfect-scrollbar>
+    </ul>
+  </div>
+</ng-container>
+<ng-template #sendStatementView>
+  <div class="card-block">
+    <div *ngIf="!formSubmit" class="row">
+      <div class="col-md-8 mx-auto" style="min-height: 400px;">
+        <div [@fadeInOutTranslate] class="m-t-5">
+          <form [formGroup]="sendStatementForm" (ngSubmit)="openTokenConfirmation(sendStatementForm.value)" class=""
+            action="javascript:">
+            <div [@fadeInOutTranslate] class="form-group mt-3">
+              <label [@fadeInOutTranslate] class="f-12" for="statementType">
+                Select Statement Type:
+              </label>
+              <!-- Input for Saved Beneficiary -->
+              <div class="btn-group round btn-group-sm btn-block btn-group-toggle mx-auto" ngbRadioGroup name="statementType"
+                formControlName="statementType">
+                <label ngbButtonLabel class="col-6 btn-outline-primary btn-round">
+                  <input #embassy class="" (click)="changeDestinationList(embassy.value)" ngbButton type="radio" value="1">
+                  Embassy
+                </label>
+                <label ngbButtonLabel class="col-6 btn-outline-primary btn-round">
+                  <input #thirdParty class="" (click)="changeDestinationList(thirdParty.value)" ngbButton type="radio" value="2">
+                  Other Third Parties
+                </label>
+              </div>
+            </div>
+            <p *ngIf="destinationError" class="f-w-400 text-muted text-center mx-auto py-5">{{destinationError}}</p>
+            <div [@fadeInOutTranslate] *ngIf="destinationList" class="form-row">
+              <div class="form-group col-12">
+                <ng-template #rt let-r="result" let-t="term">
+                  <div>
+                    <p class="f-12 mb-0">{{ r.destination}}</p>
+                  </div>
+                </ng-template>
+                <!-- (selectItem)="setModel($event)"  -->
+                <label *ngIf="destinationLabel && sendStatementForm.controls['destination'].dirty"
+                  [@fadeInOutTranslate] class="f-12" for="destination">{{destinationLabel}}:</label>
+                <input id="destination" type="text" class="form-control form-control-round" [(ngModel)]="destinationModel" [ngbTypeahead]="destinationListTypeahead"
+                  [resultTemplate]="rt" [inputFormatter]="formatter" (focus)="destinationFocus$.next($event.target.value); $event.target.value=''; destinationModel = null"
+                  (click)="destinationClick$.next($event.target.value);" #destinationInstance="ngbTypeahead"
+                  placeholder="{{destinationLabel}}" formControlName="destination">
+                <div class="f-12 text-danger" *ngIf="sendStatementForm.controls['destination'].touched && !destinationModel">
+                  {{destinationLabel}}
+                </div>
+              </div>
+              <div class="form-group col-12">
+                <label *ngIf="sendStatementForm.controls['role'].value" for="role" class="">Select a role:</label>
+                <select name="role" id="role" class="custom-select text-muted form-control-round" aria-describedby="role" formControlName="role">
+                  <option value="" selected>Select role</option>
+                  <option value="Applicant">Applicant</option>
+                  <option value="Sponsor">Sponsor</option>
+                  <option value="Guarantor">Guarantor</option>
+                </select>
+                <small *ngIf="sendStatementForm.controls['role'].value" id="role" class="text-muted f-10">The role
+                  defines your purpose of sending the statement</small>
+              </div>
+              <div class="form-group col-12">
+                <label *ngIf="sendStatementForm.controls['applicant'].value" for="applicant" class="">Enter Applicants
+                  name:</label>
+                <input type="text" name="applicant" id="applicant" class="form-control form-control-round" placeholder="Enter Applicants name"
+                  aria-describedby="applicant" formControlName="applicant">
+                <small *ngIf="sendStatementForm.controls['applicant'].value" id="applicants" class="text-muted f-10">Separate
+                  multiple names with coma e.g (John Adebayo, Bumi Davies)</small>
+              </div>
+              <div class="form-group col-12">
+                <gtibank-accounts-typeahead [label]="'Statement Account'" (acctToDebitEvent)="statementAccountEventHandler($event)"></gtibank-accounts-typeahead>
+              </div>
+              <div class="form-group col-6">
+                <label *ngIf="sendStatementForm.controls['endDate'].value || sendStatementForm.controls['startDate'].value"
+                  for="startDate" class="f-12 my-0 py-0">Start Date:</label>
+                <div class="input-group mb-0">
+                  <input (click)="startDate.toggle()" class="form-control form-control-round" placeholder="Start Date" name="dp"
+                    ngbDatepicker #startDate="ngbDatepicker" formControlName="startDate">
+                  <div class="input-group-append">
+                    <button class="btn btn-mini btn-inverse btn-round" (click)="startDate.toggle()" type="button">
+                      <i-calendar style="width: 1.2rem; height: 0.5rem; cursor: pointer;"></i-calendar>
+                      <!-- <img src="img/calendar-icon.svg" /> -->
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-6 mb-0">
+                <label *ngIf="sendStatementForm.controls['endDate'].value || sendStatementForm.controls['startDate'].value"
+                  for="endDate" class="f-12 my-0 py-0">End Date:</label>
+                <div class="input-group mb-0">
+                  <input (click)="endDate.toggle()" class="form-control form-control-round" placeholder="End Date" name="endDate"
+                    [(ngModel)]="endDateModel" ngbDatepicker #endDate="ngbDatepicker" formControlName="endDate">
+                  <div class="input-group-append">
+                    <button class="btn btn-mini btn-inverse btn-round" (click)="endDate.toggle()" type="button">
+                      <i-calendar style="width: 1.2rem; height: 0.5rem; cursor: pointer;"></i-calendar>
+                      <!-- <img src="img/calendar-icon.svg" /> -->
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-12">
+                <gtibank-accounts-typeahead [label]="'Account to Debit'" (acctToDebitEvent)="acctToDebitEventHandler($event)"></gtibank-accounts-typeahead>
+              </div>
+              <div class="form-group col-12">
+                <div class="md-form">
+                  <button [disabled]='!sendStatementForm.valid || isLoading' [@fadeInOutTranslate] id="validate" type="submit"
+                    class="btn btn-success btn-round float-right light-shadow waves-light md-trigger btn-sm" mdbRippleRadius>
+                    <span *ngIf="isLoading === true" class="">
+                      <i class="fa fa-spin fa-spinner mr-3"></i>
+                      Processing..
+                    </span>
+                    <span *ngIf="!(isLoading === true)" class="">
+                      Send Statement
+                    </span>
+                  </button>
+                </div>
+                <!-- <p class="mt-3 f-12">You will be charged
+                  <span class="text-primary">₦0.00</span> for this transfer
+                </p> -->
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="formSubmit" [@fadeInOutTranslate] class="row">
+      <div class="col-md-9 pt-4 mx-auto">
+        <app-token-confirmation-modal (resetFormEvent)="resetFormEventHandler($event)" (tokenVissibilityEvent)="tokenEventHandler($event)"
+          [body]="reqBody" [transactionType]='"sendStatement"' [isToken]='true' [category]='"services"'>
+        </app-token-confirmation-modal>
+      </div>
+    </div>
+    <ibank-notifications [notification]="notifications" (vissibilityEvent)="visibilityHandler($event)"></ibank-notifications>
+  </div>
+</ng-template>

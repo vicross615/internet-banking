@@ -1,0 +1,385 @@
+<div class="row submenu text-center mx-md-1 mt-3">
+  <div class="px-1 col-md-2 col-sm-4 col-6 mb-1">
+    <div [routerLink]="['statement']" routerLinkActive="active-submenu" class="card mb-2 text-center order-visitor-card z-depth-bottom-1"
+      style="max-height: 115px">
+      <div class="card-block px-2 card-grid text-primary">
+        <img src="assets\icon\smashicons\accounts\sme-appointment.svg" class="img-fluid img-50 mb-2" alt="">
+        <p class="m-b-0 f-12 f-w-500">View Statement</p>
+      </div>
+    </div>
+  </div>
+  <div class="px-1 col-md-2 col-sm-4 col-6 mb-1">
+    <div [routerLink]="['generate-statement']" routerLinkActive="active-submenu" class="card mb-2 text-center order-visitor-card z-depth-bottom-1"
+      style="max-height: 115px">
+      <div class="card-block px-2 card-grid text-primary">
+        <img src="assets\icon\smashicons\accounts\send-statement.svg" class="img-fluid img-50 mb-2" alt="">
+        <p class="m-b-0 f-12 f-w-500">Send Statement to Third Party</p>
+      </div>
+    </div>
+  </div>
+  <div class="px-1 col-md-2 col-sm-4 col-6 mb-1">
+    <div [routerLink]="['open-dom-account']" routerLinkActive="active-submenu" class="card mb-2 text-center order-visitor-card z-depth-bottom-1"
+      style="max-height: 115px">
+      <div class="card-block px-2 card-grid text-primary">
+        <img src="assets\icon\smashicons\accounts\open-dom-account-1.svg" class="img-fluid img-50 mb-2" alt="">
+        <p class="m-b-0 f-12 f-w-500">Open Dom. Account</p>
+      </div>
+    </div>
+  </div>
+  <div class="px-1 col-md-2 col-sm-4 col-6 mb-1">
+    <div [routerLink]="['additional-account']" routerLinkActive="active-submenu" class="card mb-2 text-center order-visitor-card z-depth-bottom-1"
+      style="max-height: 115px">
+      <div class="card-block px-2 card-grid text-primary">
+        <img src="assets\icon\smashicons\accounts\open-dom-account.svg" class="img-fluid img-50 mb-2" alt="">
+        <p class="m-b-0 f-12 f-w-500">Open Additional Account</p>
+      </div>
+    </div>
+  </div>
+  <div class="px-1 col-md-2 col-sm-4 col-6 mb-1">
+    <div [routerLink]="['account-upgrade']" routerLinkActive="active-submenu" class="card mb-2 text-center order-visitor-card z-depth-bottom-1"
+      style="max-height: 115px">
+      <div class="card-block px-2 card-grid text-primary">
+        <img src="assets\icon\smashicons\accounts\account-upgrade.svg" class="img-fluid img-50 mb-2" alt="">
+        <p class="m-b-0 f-12 f-w-500">Account Upgrade</p>
+      </div>
+    </div>
+  </div>
+  <div class="px-1 col-md-2 col-sm-4 col-6 mb-1">
+    <div [routerLink]="['secure-email']" routerLinkActive="active-submenu" class="card mb-2 text-center order-visitor-card z-depth-bottom-1"
+      style="max-height: 115px">
+      <div class="card-block px-2 card-grid text-primary">
+        <img src="assets\icon\smashicons\accounts\secure-email.svg" class="img-fluid img-50 mb-2" alt="">
+        <p class="m-b-0 f-12 f-w-500">Secure Email</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row submenu-content px-md-4">
+  <div class="col-md-8 px-0">
+    <div [@fadeInOutTranslate] class="card mb-2" style="min-height: 100vh">
+      <div class="mb-0 p-0 bg-primary card-block" style="height: 5px;"></div>
+      <router-outlet>
+        <app-spinner>
+          <app-title></app-title>
+        </app-spinner>
+      </router-outlet>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <app-card [title]="'Account Manager'" [cardClass]="'text-center mb-1'" *ngIf="!acctManagers">
+
+      <div *ngIf="!srcUrl" class="text-center col mb-4">
+        <div class="preloader4 mx-auto pb-0 mb-0">
+          <span>
+            <div class="double-bounce1 text-center"></div>
+            <div class="double-bounce2 text-center"></div>
+          </span>
+        </div>
+        <span class="f-10 text-muted mb-4"> Just a minute..</span>
+      </div>
+
+      <div class="card-block  mt-3 p-0 text-black" *ngIf="!acctManagers && srcUrl">
+        <div class="card-block  mt-3 p-0 text-black" *ngIf="!showComment">
+          <div class="card-header-img">
+            <!--"assets/images/user-card/AcctMgr.png"-->
+            <img class="img-fluid img-radius img-80 border-dark mb-2" src="{{srcUrl}}" alt="card-img">
+          </div>
+          <!-- ============= Account Manager details ============== -->
+          <h4 class="f-16 text-center my-1">{{fullName}}</h4>
+          <p class="my-1 f-12">{{email}}</p>
+          <p class="my-1 f-12">{{branchLocation}}</p>
+          <p class="my-1 f-12" *ngIf="bankingExperience" >{{bankingExperience}} Year
+            <span *ngIf="bankingExperience > 1">s</span> of Banking Experience
+          </p>
+          <p class="mb-2 f-w-500">{{phoneNumber}}</p>
+          <p [@fadeInOutTranslate] class="text-center m-2 f-12 text-white" *ngIf="errorMessage || successMessage">
+            <span *ngIf="errorMessage" class="text-danger">{{errorMessage}}</span>
+            <span *ngIf="successMessage" class="text-success">{{successMessage}}</span>
+            <br>
+            <!-- <button (click)="clearError()" type="button" class="btn btn-dark btn-round btn-mini mt-2">Close</button> -->
+          </p>
+          <div class="row justify-content-center rating">
+            <div class="col-auto gt-clickable" (click)="showCommentM()">
+              <div class="label-icon text-center rating-icon">
+                <img (mouseout)="ratingString = 'Rate me'" (mouseover)="changeRating('Very Bad')" src="assets\icon\smashicons\ratings\sad-2-gt.svg"
+                  class="img-fluid img-30 mb-2 mx-auto img-circle " alt="" mdbRippleRadius>
+              </div>
+            </div>
+            <div class="col-auto gt-clickable" (click)="showCommentM()">
+              <div class="label-icon text-center rating-icon">
+                <img (mouseout)="ratingString = 'Rate me'" (mouseover)="changeRating('Bad!')" src="assets\icon\smashicons\ratings\impassive-gt.svg"
+                  class="img-fluid img-30 mb-2 mx-auto img-circle " alt="" mdbRippleRadius>
+              </div>
+            </div>
+            <div class="col-auto gt-clickable" (click)="showCommentM()">
+              <div class="label-icon text-center rating-icon">
+                <img (mouseout)="ratingString = 'Rate me'" (mouseover)="changeRating('Fair!')" src="assets\icon\smashicons\ratings\happy-2-gt.svg"
+                  class="img-fluid img-30 mb-2 mx-auto img-circle " alt="" mdbRippleRadius>
+              </div>
+            </div>
+            <div class="col-auto gt-clickable" (click)="showCommentM()">
+              <div class="label-icon text-center rating-icon">
+                <img (mouseout)="ratingString = 'Rate me'" (mouseover)="changeRating('Good')" src="assets\icon\smashicons\ratings\happy-gt.svg"
+                  class="img-fluid img-circle img-30 mb-2 mx-auto " alt="" mdbRippleRadius>
+              </div>
+            </div>
+            <div class="col-auto gt-clickable" (click)="showCommentM()">
+              <div class="label-icon text-center rating-icon">
+                <img (mouseout)="ratingString = 'Rate me'" (mouseover)="changeRating('Very Good')" src="assets\icon\smashicons\ratings\lovely-gt.svg"
+                  class="img-fluid img-30 mb-2 mx-auto  img-circle " alt="" mdbRippleRadius>
+              </div>
+            </div>
+          </div>
+          <p class="f-12 mt-3 text-center">{{ratingString}}</p>
+          <a href="mailto:{{email}}">
+            <button type="button" *ngIf="!showComment" class="btn btn-outline-primary btn-round btn-mini mx-2">
+              <i class="icofont icofont-mail"></i>Send Mail</button>
+          </a>
+          <button type="button" *ngIf="showSwitchbtn && !showComment" type="submit" (click)="showAccountManagerList()" class="btn btn-outline-primary btn-round btn-mini mx-2 gt-clickable">
+            <span *ngIf="loading === true" class="">
+              <i class="fa fa-spin fa-spinner mr-2"></i>Loading...
+            </span>
+            <span *ngIf="!loading" class="">
+              <i class="icofont icofont-exchange"></i>Switch Officer
+            </span>
+          </button>
+        </div>
+        <div class="card-block  mt-3 p-0 text-white" *ngIf="showComment">
+          <form [formGroup]="commentForm" class="" action="javascript:" (ngSubmit)="rateAccountManger()">
+            <div class="form-group col-12">
+              <label *ngIf="commentForm.controls['comment'].value" for="comment" class="f-12">Enter Comment:</label>
+              <textarea name="comment" id="comment" class="form-control" placeholder="Enter Your Comment" aria-describedby="comment" rows="6"
+                formControlName="comment"></textarea>
+              <small *ngIf="commentForm.controls['comment'].value" id="Comment" class="text-muted f-10"></small>
+            </div>
+            <div class="form-row col-12">
+              <div class="md-form">
+                <button [@fadeInOutTranslate] id="submit" type="submit" class="btn btn-success btn-round btn-mini text-white mx-3" mdbRippleRadius>
+                  <span *ngIf="loading === true" class="">
+                    <i class="fa fa-spin fa-spinner"></i>
+                  </span>
+                  <span class="">
+                    Rate Account Manager
+                  </span>
+                </button>
+
+                <button id="submit" type="button" (click)="clearComment()" class="btn btn-primary btn-round btn-mini text-white" mdbRippleRadius>
+                  <span class="">
+                    <i class="icofont icofont-recycle mr-2"></i>Clear Clear
+                  </span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- ============ Account Manager image ======== -->
+    </app-card>
+    <app-card [title]="'Switch Account Manager'" [cardClass]="'text-center mb-1'" *ngIf="acctManagers">
+      <div class="card-block" [style.min-height]="'500px'">
+        <p class="text-center m-2 f-12 text-white" *ngIf="errorMessage">
+          <ngb-alert type="text-danger border-0" [dismissible]="false">
+            {{errorMessage}}
+            <button (click)="clearError()" type="button" class="btn btn-dark btn-round btn-mini mt-2 float-right">Close</button>
+          </ngb-alert>
+        </p>
+        <p class="text-center m-2 f-12 text-white" *ngIf="successMessage">
+          <ngb-alert type=" text-success  border-0" [dismissible]="false">
+            {{successMessage}}
+            <button (click)="clearError()" type="button" class="btn btn-dark btn-round btn-mini mt-2 float-right">Close</button>
+          </ngb-alert>
+        </p>
+        <p>
+          <button (click)="backbtn()" type="button" class="btn btn-primary btn-round btn-mini text-white mt-2 mb-2 float-left">
+            <i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i> Back</button>
+        </p>
+        <perfect-scrollbar [style.max-width]="'200'" [style.max-height]="'395px'" [config]="">
+          <div class="list-group-item list-group-item-action flex-column align-items-start px-3 mb-2 mx-3" *ngFor="let acctMgrDetails of acctManagers; let i=index">
+            <div class="card-header-img">
+              <img class="img-fluid img-radius img-80 border-dark mb-2" src="data:{{acctMgrDetails.mimeType}};base64,{{acctMgrDetails.photo}}"
+                alt="card-img">
+              <!--srcUrlAcctMgrs-->
+              <!--- acctMgrDetails?.photo ? data:{{acctMgrDetails.mimeType}};base64,{{acctMgrDetails.photo}} : assets/images/user-card/AcctMgr.png-->
+            </div>
+            <h4 class="f-16 text-center my-1">{{acctMgrDetails?.fullName}}</h4>
+            <p class="my-1 f-12">{{acctMgrDetails?.email}}</p>
+            <!--<p class="my-1 f-12">{{acctMgrDetails?.department}}</p>-->
+            <p class="my-1 f-12" >{{acctMgrDetails?.yearsOfBankingExperience}} Year
+              <span *ngIf="acctMgrDetails?.yearsOfBankingExperience > 1">s</span>
+              of Banking Experience</p>
+            <p class="mb-2 f-w-500">{{acctMgrDetails.phoneNumber}}</p>
+
+            <form [formGroup]="commentForm" class="" action="javascript:" (ngSubmit)="switchAccountManager()" (mouseover)="selectedAcctMgr(acctMgrDetails)">
+              <div class="form-group col-12">
+                <label *ngIf="commentForm.controls['comment'].value" for="comment" class="f-12">Enter Reason For Switching:
+                </label>
+                <textarea name="comment" id="comment" class="form-control" placeholder="Reason For Switching" aria-describedby="comment"
+                  rows="2" formControlName="comment"></textarea>
+                <small *ngIf="commentForm.controls['comment'].value" id="Comment" class="text-muted f-10"></small>
+              </div>
+              <div class="form-row col-12">
+                <div class="md-form">
+                  <button [@fadeInOutTranslate] id="submit" type="submit" class="btn btn-success btn-round btn-mini text-white mx-6" mdbRippleRadius>
+                    <span *ngIf="loading === true" class="">
+                      <i class="fa fa-spin fa-spinner"></i>Switching...
+                    </span>
+                    <span class="" *ngIf="!loading">
+                      <i class="icofont icofont-exchange"></i> Switch
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </perfect-scrollbar>
+      </div>
+    </app-card>
+    <div class="card bg-primary my-1">
+      <div class="card-block p-0 mt-1">
+        <img src="assets\images\ads\Embassy-800x800.png" class="img-fluid mb-1" alt="">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="gt-float-btn d-none d-inline z-depth-bottom-2" mdbRippleRadius>
+  <button type="button" class="btn btn-primary btn-icon waves-light" (click)="modalLightBox.show()">
+    <i class="fas fa-th f-20 pt-1"></i>
+  </button>
+</div>
+<div class="menu-modal d-none">
+  <app-modal-basic #modalLightBox [hideHeader]="true" [hideFooter]="true">
+    <div class="app-modal-body">
+      <div class="col-12">
+        <div class="row">
+          <div class="col mt-0 menu-modal-header d-flex justify-content-between">
+            <p class="text-white text-uppercase">Accounts Submenu</p>
+            <button class="btn btn-link btn-outline btn-sm waves-light" (click)="modalLightBox.hide()" mdbRippleRadius>
+              <span aria-hidden="true">
+                <i class="feather icon-x text-white"></i>
+              </span>
+            </button>
+          </div>
+        </div>
+        <div class="row text-center mt-5">
+          <div class="col-4 p-1">
+            <div class="card text-center order-visitor-card mb-0" placement="top" ngbTooltip="Add a new GTBank Account">
+              <div class="card-block my-auto p-2">
+                <h4 class="my-0">
+                  <i class="icon f-w-100 feather icon-plus"></i>
+                </h4>
+                <p class="m-b-0 f-12 mx-a5to">Add Account</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-4 p-1">
+            <div class="card text-center order-visitor-card mb-0" placement="top" ngbTooltip="Send Account statement in PDF or Excel format">
+              <div class="card-block my-auto p-2">
+                <h4 class="my-0">
+                  <i class="icon f-w-100 feather icon-mail text-warning"></i>
+                </h4>
+                <p class="m-b-0 f-12">Send Statement</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-4 p-1">
+            <div class="card text-center order-visitor-card mb-0">
+              <div class="card-block my-auto p-2">
+                <h4 class="my-0">
+                  <i class="icon f-w-100 feather icon-arrow-up text-custom"></i>
+                </h4>
+                <p class="m-b-0 f-12">Upgrade Account</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-4 p-1">
+            <div class="card text-center order-visitor-card mb-0">
+              <div class="card-block my-auto p-2">
+                <h4 class="my-0">
+                  <i class="icon f-w-100 feather icon-share-2 text-custom"></i>
+                </h4>
+                <p class="m-b-0 f-12">GT 5weep Services</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-4 p-1">
+            <div class="card text-center order-visitor-card mb-0">
+              <div class="card-block my-auto p-2">
+                <h4 class="my-0">
+                  <i class="f-w-100 feather icon-home text-info"></i>
+                </h4>
+                <p class="m-b-0 f-12">GT 5omes</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-4 p-1">
+            <div class="card text-center order-visitor-card mb-0">
+              <div class="card-block my-auto p-2">
+                <h4 class="my-0">
+                  <i class="f-w-100 feather icon-disc text-custom"></i>
+                </h4>
+                <p class="m-b-0 f-12">GT 5oin</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-4 p-1">
+            <div class="card text-center order-visitor-card mb-0">
+              <div class="card-block my-auto p-2">
+                <h4 class="my-0">
+                  <i class="f-w-100 feather icon-shopping-cart text-info"></i>
+                </h4>
+                <p class="m-b-0 f-12">Spe5d to Save</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-4 p-1">
+            <div class="card text-center order-visitor-card mb-0">
+              <div class="card-block my-auto p-2">
+                <h4 class="my-0">
+                  <i class="f-w-100 feather icon-shield text-primary"></i>
+                </h4>
+                <p class="m-b-0 f-12">Sec5re Email</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-4 p-1">
+            <div class="card text-center order-visitor-card mb-0">
+              <div class="card-block my-auto p-2">
+                <h4 class="my-0">
+                  <i class="f-w-100 feather icon-briefcase text-danger"></i>
+                </h4>
+                <p class="m-b-0 f-12">SME5Appointment</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-4 p-1">
+            <div class="card text-center order-visitor-card mb-0">
+              <div class="card-block my-auto p-2">
+                <h4 class="my-0">
+                  <i class="f-w-100 feather icon-link-2 text-warning"></i>
+                </h4>
+                <p class="m-b-0 f-12">BVN5Linker</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-4 p-1">
+            <div class="card text-center order-visitor-card mb-0">
+              <div class="card-block my-auto p-2">
+                <h4 class="my-0">
+                  <i class="icon f-w-100 feather icon-thumbs-up text-c-green"></i>
+                </h4>
+                <p class="m-b-0 f-12">I R5fer</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 mx-auto">
+            <button class="btn btn-link btn-outline btn-sm waves-light mt-2" (click)="modalLightBox.hide()" mdbRippleRadius>
+              <span aria-hidden="true" class="text-white">Close</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </app-modal-basic>
+</div>

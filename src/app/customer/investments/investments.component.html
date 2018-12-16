@@ -1,0 +1,176 @@
+<div class="row submenu text-center mx-1 mt-3">
+  <!--<div class="px-1 col-md-2 col-sm-3 col-6">
+    <div class="card mb-2 text-center order-visitor-card z-depth-bottom-1"  placement="top" ngbTooltip="Initiate a fixed deposit account">
+      <div class="card-block text-primary px-1">
+        <h4 class="m-t-5"><i class="icon f-w-100 f-16 fas fa-piggy-bank"></i></h4>
+        <p class="mb-0 f-10">Book Fixed Deposit</p>
+      </div>
+    </div>
+  </div>-->
+  <div class="px-1 col-md-2 col-sm-4 col-6 mb-1">
+    <div [routerLink]="['/investments/salary-advance']" routerLinkActive="active-submenu" class="card mb-2 text-center order-visitor-card z-depth-bottom-1"
+      style="max-height: 115px">
+      <div class="card-block px-2 card-grid text-primary">
+        <img src="assets\icon\smashicons\investment\salary-advance.svg" class="img-fluid img-50 mb-2" alt="">
+        <p class="m-b-0 f-12 f-w-500">Salary Advance</p>
+      </div>
+    </div>
+  </div>
+  <div class="px-1 col-md-2 col-sm-4 col-6 mb-1">
+    <div [routerLink]="['/investments/school-fees-advance']" routerLinkActive="active-submenu" class="card mb-2 text-center order-visitor-card z-depth-bottom-1"
+      style="max-height: 115px">
+      <div class="card-block px-2 card-grid text-primary">
+        <img src="assets\icon\smashicons\investment\school-fees-advance-2.svg" class="img-fluid img-50 mb-2" alt="">
+        <p class="m-b-0 f-12 f-w-500">School Fees Advance</p>
+      </div>
+    </div>
+  </div>
+  <div class="px-1 col-md-2 col-sm-4 col-6 mb-1">
+    <div [routerLink]="['/investments/maximum-advance']" routerLinkActive="active-submenu" class="card mb-2 text-center order-visitor-card z-depth-bottom-1"
+      style="max-height: 115px">
+      <div class="card-block px-2 card-grid text-primary">
+        <img src="assets\icon\smashicons\investment\maximum-advance.svg" class="img-fluid img-50 mb-2" alt="">
+        <p class="m-b-0 f-12 f-w-500">Max Advance</p>
+      </div>
+    </div>
+  </div>
+  <div class="px-1 col-md-2 col-sm-4 col-6">
+    <div routerLinkActive="active-submenu" class="bg-light text-muted card mb-2 text-center z-depth-bottom-1" style="max-height: 115px">
+      <div class="card-block card-grid px-1">
+        <img src="assets\icon\smashicons\investment\premium-advance.svg" class="img-fluid img-50 mb-2" alt="">
+        <p class="mb-0 f-12 f-w-500">Premium Advance</p>
+      </div>
+    </div>
+  </div>
+  <div class="px-1 col-md-2 col-sm-4 col-6">
+    <div routerLinkActive="active-submenu" class="bg-light text-muted card mb-2 text-center z-depth-bottom-1" style="max-height: 115px">
+      <div class="card-block card-grid px-1">
+        <img src="assets\icon\smashicons\investment\travel-advance.svg" class="img-fluid img-50 mb-2" alt="">
+        <p class="mb-0 f-12 f-w-500">Travel Advance</p>
+      </div>
+    </div>
+  </div>
+  <div class="px-1 col-md-2 col-sm-4 col-6">
+    <div routerLinkActive="active-submenu" class="bg-light text-muted card mb-2 text-center z-depth-bottom-1" style="max-height: 115px">
+      <div class="card-block card-grid px-1">
+        <img src="assets\icon\smashicons\investment\payday-loan.svg" class="img-fluid img-50 mb-2" alt="">
+        <p class="mb-0 f-12 f-w-500">PayDay Loan</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row submenu-content px-4">
+  <div class="col-md-7 px-0">
+    <div [@fadeInOutTranslate] class="card mb-2" style="min-height: 600px">
+      <div class="mb-0 p-0 bg-primary card-block" style="height: 5px;"></div>
+      <router-outlet>
+        <app-spinner>
+          <app-title></app-title>
+        </app-spinner>
+      </router-outlet>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <app-card [title]="'Investment and Loan Status'" [cardClass]="'task-card freq-beneficiaries'">
+      <div class="md-tabs bg-white">
+        <ngb-tabset>
+          <ngb-tab title="Investments">
+            <ng-template ngbTabContent>
+              <gtibank-investment-status></gtibank-investment-status>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="Your Loan Reqest">
+            <ng-template ngbTabContent>
+              <perfect-scrollbar [style.max-width]="'auto'" [style.max-height]="'350px'" [config]="">
+                <p class="text-center" *ngIf="errorMessageLoanStatus">
+                  <ngb-alert type="danger border-0" [dismissible]="false">
+                    {{errorMessageLoanStatus}}
+                  </ngb-alert>
+                </p>
+                <div class="list-group list-group-flush">
+                  <!--*ngFor="let loanStatus of loanStatusDetail"-->
+                  <div *ngFor="let loanStatus of loanStatusDetail" class="list-group-item list-group-item-action-flex-column-align-item-start px-3">
+                    <div class="d-flex w-100 justify-content-between">
+                      <span>
+                        <small>{{loanStatus?.advanceType}}</small>
+                        <h3 class="f-w-400 text-uppercase m-b-0">{{loanStatus?.requestedAmount | currency:'₦'}}</h3>
+                      </span>
+                      <span class="">
+                        <small>
+                          <strong>Book Date: </strong>{{loanStatus?.dateReqeusted | date:'shortDate' }}</small>
+                      </span>
+                    </div>
+                    <p class="my-2 f-12">
+                      <strong>Tenure: </strong>{{loanStatus?.tenor}} days</p>
+                    <div class="d-flex w-100 justify-content-between">
+                      <h6 class="text-c-black">{{loanStatus?.statusMessage}}</h6>
+                    </div>
+                  </div>
+                </div>
+              </perfect-scrollbar>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </div>
+    </app-card>
+    <div class="card">
+        <div class="card-body m-0">
+          <div class="md-tabs bg-white">
+            <ngb-tabset>
+              <ngb-tab title="View Loan Details">
+                <ng-template ngbTabContent>
+                  <div class="list-group list-group-flush">
+                    <div class="list-group-item list-group-item-action-flex-column-align-item-start">
+                      <div class="d-flex w-100 justify-content-between">
+                        <span>
+                          <small>Amount Requested</small>
+                          <h3 class="f-w-500 text-uppercase m-b-0">N12,500.00</h3>
+                        </span>
+                        <span class=""><small><strong>Book Date: </strong>10.05am</small></span>
+                      </div>
+                      <p class="my-2 f-12">30 days tenure loan</p>
+                      <div class="d-flex w-100 justify-content-between">
+                        <h6 class="text-success">APPROVED</h6>
+                        <span class="float-right">
+                          <button
+                          id="acceptLoan"
+                          type="submit"
+                          class="btn btn-sm btn-success waves-light md-trigger py-1"
+                          mdbRippleRadius><i class="feather icon-check"></i>Accept</button>
+                          <button
+                          id="acceptLoan"
+                          type="submit"
+                          class="btn btn-sm btn-warning waves-light md-trigger py-1"
+                          mdbRippleRadius><i class="feather icon-x"></i>Decline</button>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="list-group-item list-group-item-action-flex-column-align-item-start">
+                      <div class="d-flex w-100 justify-content-between">
+                        <span>
+                          <small>Amount Requested</small>
+                          <h3 class="f-w-500 text-uppercase m-b-0">N120,500.00</h3>
+                        </span>
+                        <span class=""><small><strong>Book Date: </strong>March 17</small></span>
+                      </div>
+                      <p class="my-2 f-12">30 days tenure loan</p>
+                      <div class="d-flex w-100 justify-content-between">
+                        <h6 class="text-c-red">REJECTED</h6>
+                        <span class="float-right">
+                          <button
+                          id="acceptLoan"
+                          type="submit"
+                          class="btn btn-sm btn-info waves-light md-trigger py-1"
+                          mdbRippleRadius><i class="feather icon-eye"></i>View Details</button>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-tab>
+            </ngb-tabset>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

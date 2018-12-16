@@ -1,0 +1,55 @@
+<div class="card-header p-0 mb-2 bg-white border-0">
+  <div class="btn-group btn-group-sm btn-block btn-group-toggle" ngbRadioGroup name="beneficiaryOption">
+    <label [ngClass]="{'current': transferType == 2, 'text-dark f-w-400': transferType == 3}" ngbButtonLabel class="col-6 btn-light rounded-0">
+      <input (click)="resetList(2)" ngbButton type="radio" value=true> GTBank Transfers
+    </label>
+    <label [ngClass]="{'current': transferType == 3,  'text-white f-w-400': transferType == 2}" ngbButtonLabel class="col-6 btn-secondary text-white rounded-0">
+      <input (click)="resetList(3)" ngbButton type="radio" value=false>Other Banks Transfers
+    </label>
+  </div>
+</div>
+<ng-container *ngIf="loading" class="mt-5 pt-5">
+  <div class="preloader4 mx-auto pb-0 mb-0">
+    <span>
+      <div class="double-bounce1 text-center"></div>
+      <div class="double-bounce2 text-center"></div>
+    </span>
+  </div>
+</ng-container>
+<div [@fadeInOutTranslate] *ngIf="errorMessage && !freqBeneficiaries" class="card-body pt-5 text-center mt-4">
+  <div class="mt-0">
+    <i class="fas fa-info-circle fa-2x"></i>
+    <p class="mt-2 f-w-400 text-muted text-center mx-auto">
+      {{errorMessage}}
+    </p>
+    <!-- <p>Use button below to go to Transfers</p> -->
+    <button (click)="goToTransfers()" type="button" class="btn btn-primary btn-sm btn-round px-3 ml-1 waves-light"
+      mdbRippleRadius>Transfer Cash now</button>
+  </div>
+</div>
+<ng-container *ngIf="freqBeneficiaries">
+  <perfect-scrollbar [style.max-width]="'auto'" [style.max-height]="'250px'">
+    <div [@fadeInOutTranslate] class="card-columns mb-0 px-3 mt-0">
+      <div *ngFor="let beneficiary of freqBeneficiaries | slice:0:4" (click)="repeatTransfer(beneficiary)" class="card mb-1 text-center frequent-transfers-card"
+        style="min-height: 110px;">
+        <div class="card-block p-2">
+          <img class="img-menu-user img-radius img-40 my-2 shadow" src="assets/images/placeholder.png" alt="Beneficiary image">
+          <h6 class="m-b-0 f-12 f-w-600 text-overflow">{{beneficiary?.customerName | titlecase}}</h6>
+          <h6 class="f-10 mb-0 text-overflow f-w-400 text-dark">{{beneficiary?.bankName}}</h6>
+          <h4 class="f-14 mb-0 f-w-500 text-c-brand text-overflow">{{beneficiary?.amount | currency:'₦'}}</h4>
+        </div>
+      </div>
+    </div>
+    <div [@fadeInOutTranslate] class="card-columns mb-3 px-3">
+      <div *ngFor="let beneficiary of freqBeneficiaries | slice:4" (click)="repeatTransfer(beneficiary)" class="card mb-1 text-center frequent-transfers-card"
+        style="height: 110px;">
+        <div class="card-block p-2">
+          <img class="img-menu-user img-radius img-40 my-2 shadow" src="assets/images/placeholder.png" alt="Beneficiary image">
+          <h6 class="m-b-0 f-12 f-w-600 text-overflow">{{beneficiary?.customerName | titlecase}}</h6>
+          <h6 class="f-10 mb-0 text-overflow f-w-400 text-dark">{{beneficiary?.bankName | titlecase}}</h6>
+          <h4 class="f-14 mb-0 f-w-500 text-c-brand text-overflow">{{beneficiary?.amount | currency:'₦'}}</h4>
+        </div>
+      </div>
+    </div>
+  </perfect-scrollbar>
+</ng-container>

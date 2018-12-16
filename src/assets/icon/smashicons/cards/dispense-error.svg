@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>003 - Atm </title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="003---Atm-" transform="translate(1.000000, 0.000000)" stroke="#dd4f05" stroke-width="1">
+            <path d="M6.96,48.84 C-1.3862416,39.0763045 -2.31471142,24.9852848 4.67825617,14.2108751 C11.6712238,3.4364655 24.919091,-1.45361714 37.2353071,2.19334301 C49.5515233,5.84030316 58.0009339,17.1551762 58,30 C58.0141385,36.9114029 55.5440306,43.5977296 51.04,48.84" id="Shape"></path>
+            <path d="M14.29,55 C23.3715356,60.333336 34.6284644,60.333336 43.71,55" id="Shape"></path>
+            <rect id="Rectangle-path" x="11" y="25" width="36" height="4"></rect>
+            <path d="M11,25 L11,15" id="Shape"></path>
+            <path d="M47,25 L47,15" id="Shape"></path>
+            <path d="M23,25 L23,20" id="Shape"></path>
+            <path d="M35,25 L35,20" id="Shape"></path>
+            <path d="M44.53756,33 L13.46244,33 C12.5914821,32.999996 11.8206588,33.5636321 11.55658,34.39359 L6.244,51.09039 C5.95381028,52.0024159 6.11619708,52.9981672 6.68111111,53.7707431 C7.24602514,54.543319 8.14566041,54.999988 9.10274,55 L48.89726,55 C49.8543396,54.999988 50.7539749,54.543319 51.3188889,53.7707431 C51.8838029,52.9981672 52.0461897,52.0024159 51.756,51.09039 L46.44339,34.39359 C46.1793146,33.5636427 45.4085069,33.000009 44.53756,33 Z" id="Shape"></path>
+            <polygon id="Shape" points="24 55 14 55 18 33 24 33"></polygon>
+            <path d="M29,37 L29,42" id="Shape"></path>
+            <path d="M29,46 L29,51" id="Shape"></path>
+            <polygon id="Shape" points="46 51 38 51 38 45 44 45"></polygon>
+            <rect id="Rectangle-path" x="16" y="9" width="26" height="4" rx="2"></rect>
+        </g>
+    </g>
+</svg>

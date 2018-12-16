@@ -1,0 +1,99 @@
+<div [@fadeInOutTranslate] class="card" style="height: 700px;">
+  <div class="mb-0 p-0 bg-primary card-block" style="height: 5px;"></div>
+  <div class="card-header bg-white p-0">
+    <!-- Nav Filter tab start -->
+    <div class="col-12 px-0 py-1 filter-bar">
+      <nav class="navbar navbar-light bg-faded p-3 justify-content-between">
+        <h5 class="text-primary">
+          <i-slash></i-slash>
+          Account Linking/Delinking
+        </h5>
+      </nav>
+    </div>
+  </div>
+  <div class="card-block" style="height: 400px;">
+    <p class="text-center" *ngIf="errorMessage">
+      <ngb-alert type="danger border-0" [dismissible]="false">
+        {{errorMessage}}
+      </ngb-alert>
+    </p>
+    <p class="text-center" *ngIf="successMessage">
+        <ngb-alert type="success border-0" [dismissible]="false">
+          {{successMessage}}
+        </ngb-alert>
+      </p>
+
+      <div *ngIf="!selectedCard" class="text-center col mb-4">
+          <div class="preloader4 mx-auto pb-0 mb-0">
+            <span>
+              <div class="double-bounce1 text-center"></div>
+              <div class="double-bounce2 text-center"></div>
+            </span>
+          </div>
+          <span class="f-10 text-muted mb-4"> Just a minute..</span>
+        </div>
+
+    <form *ngIf="selectedCard" class="w-75 mx-auto" [formGroup]="accountLinkingDelinkingForm"  (ngSubmit)="onSubmit()" action="javascript:">
+      <div class="form-group">
+        <div class="btn-group btn-group-toggle" ngbRadioGroup name="linkType" formControlName="linkType">
+          <label ngbButtonLabel class="btn-outline-primary">
+            <input ngbButton type="radio" value="0" ng-selected="true">Link
+          </label>
+          <label ngbButtonLabel class="btn-outline-secondary bg-c-blue">
+            <input ngbButton type="radio" value="1">Delink
+          </label>
+        </div>
+      </div>
+      <div class="form-group mt-3"> 
+          <label for="dropdownBasic1" class="f-12">Select Card Number:</label>
+        <div ngbDropdown class="text-left">
+          <button class="btn btn-round btn-dark btn-mini p-2" type="button" id="dropdownBasic1" ngbDropdownToggle>
+            {{selectedCard?.cardtype | uppercase}}
+            <span class="text-white">{{selectedCard?.pan}}</span>
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <span>
+              <button *ngFor="let card of cards" (click)="cardsService.updateSelectedCard(card)" type="button" class="dropdown-item f-12 text-white bg-dark">
+                <span class="d-block"> {{card?.cardtype | uppercase}}</span>
+                <span class="text-white">{{card?.pan}}</span>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <gtibank-accounts-typeahead
+         [label]="'Account to Link/Delink from the Card'" (acctToDebitEvent)="acctToDebitEventHander($event)">
+        </gtibank-accounts-typeahead>
+      </div>
+      <div class="form-group">
+        <label [@fadeInOutTranslate] *ngIf="accountLinkingDelinkingForm.controls['secretAnsw'].value" class="f-12" for="secretAnsw">Answer to secret Question:</label>
+        <input type="password" class="form-control" placeholder="Answer to secret Question" formControlName="secretAnsw">
+        <get-secret-question></get-secret-question>
+        <!-- <pre>Model: {{ standingOrderForm.get('secretAnsw').status}}</pre> -->
+      </div>
+      <div class="form-group">
+        <label [@fadeInOutTranslate] *ngIf="accountLinkingDelinkingForm.controls['tokenValue'].value" class="f-12" for="tokenValue">Enter Your Token Here:</label>
+        <input type="text" class="form-control" placeholder="Enter your Token Value" formControlName="tokenValue">
+        <!-- <pre>Model: {{ standingOrderForm.get('secretAnsw').status}}</pre> -->
+      </div>
+      <div class="form-group">
+        <div class="md-form">
+          <button [disabled]='!accountLinkingDelinkingForm.valid' type="submit" class="btn btn-success waves-light md-trigger btn-sm"
+            mdbRippleRadius>
+            <span *ngIf="loadingTransactions === true" class="">
+                <i class="fa fa-spin fa-spinner mr-2"></i>
+                Loading....
+              </span>
+              <span *ngIf="!loadingTransactions" class="">
+               Submit
+              </span>
+          </button>
+        </div>
+      </div>   
+      <div class="form-group">
+        </div>
+    </form>
+    <ibank-notifications [notification]="notifications" (vissibilityEvent)="visibilityHandler($event)"></ibank-notifications>
+  </div>
+</div>

@@ -1,0 +1,503 @@
+<div class="card-header py-2 bg-white text-dark">
+  <div class="d-flex flex-row justify-content-between">
+    <div class="bd-highlight text-left">
+      <h6 class="text-primary f-w-500">
+        <i class="feather icon-briefcase"></i>
+        FX Transfer
+      </h6>
+    </div>
+
+  </div>
+</div>
+<div class="card-block">
+  <div *ngIf="!formSubmit" class="row">
+    <div class="col-md-9 pt-4 mx-auto">
+      <div [@fadeInOutTranslate] class="m-t-5">
+        <form [formGroup]="gtFXTransferForm" (ngSubmit)="openTokenConfirmation()" class="" action="javascript:">
+          <!-- <pre>{{gtFXTransferForm.value | json}}</pre> -->
+          <div class="form-group">
+            <h4 class="mt-3 f-12">Sender Details</h4>
+          </div>
+          <!-- <div class="form-row"> -->
+            <!-- Select account to debit for principal -->
+            <div class="form-group">
+              <gtibank-fxaccounts-typeahead [label]="'Account to Debit'" (fxacctToDebitEvent)="FXacctToDebitEventHander($event)"></gtibank-fxaccounts-typeahead>
+            </div>
+            <div class="form-group">
+              <!-- Select account to debit for charge -->
+              <!-- <div class="form-group"> -->
+              <ng-template #rt let-r="result" let-t="term">
+                <!--  *ngFor="let acct of acctToDebit"> -->
+                <div>
+                  <span class="d-block f-12">{{r?.nuban}}
+                    <span class=""> Balance: {{r.accountBalance | currency:currencySymbol[r?.altCurCode]}}</span>
+                  </span>
+                  <p class="f-12 mb-0">{{ r.accountName}}</p>
+                </div>
+              </ng-template>
+              <!-- (selectItem)="setModel($event)"  -->
+              <label [@fadeInOutTranslate] class="f-12" *ngIf="gtFXTransferForm.controls['acctToDebit'].dirty" for="acct">Account to Debit for Charge:</label>
+              <input id="acct" type="text" class="form-control" [(ngModel)]="acctModel" [ngbTypeahead]="acctToChargeTypeahead" [resultTemplate]="rt"
+                [inputFormatter]="chargeAcctformatter" (focus)="chargAcctFocus$.next($event.target.value); $event.target.value=''; clear();"
+                (click)="chargAcctClick$.next($event.target.value); $event.target.value='';" #chargeAcctInstance="ngbTypeahead"
+                placeholder="Account to charge" formControlName="acctToDebit">
+              <div class="f-12 text-danger" *ngIf="gtFXTransferForm.controls['acctToDebit'].touched && gtFXTransferForm.controls['acctToDebit'].value === null">
+                Please select Account to Debit for Charge
+              </div>
+              
+            </div>
+          <!-- </div> -->
+          <!-- Input amount to transfer -->
+          <!-- <div class="form-row"> -->
+            <div class="form-group">
+              <label [@fadeInOutTranslate] class="f-12" for="transAmt">Amount to transfer:</label>
+              <input min="-10.50" max="transferLimit" (keyup)="util.formatCurrency(gtFXTransferForm.controls['transferAmt'])"
+                id="transAmt" class="form-control form-control-right" placeholder="Enter Amount 0.00" formControlName="transferAmt">
+            </div>
+            <!-- Select Currency to transfer -->
+            <div class="form-group">
+              <span class="f-12 pb-2 pr-4">Select Currency:</span>
+              <div ngbDropdown placement="bottom-left" class="d-inline-block">
+                <button class="btn btn-round btn-sm btn-success" id="currency" type="button" ngbDropdownToggle>{{selectedCurrency?.name}}</button>
+                <div ngbDropdownMenu aria-labelledby="currency">
+                  <button (click)="optionSelected(opt)" *ngFor="let opt of currencies" type="button" class="dropdown-item f-12">
+                    <span class="">{{opt?.name}}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          <!-- </div> -->
+          <!-- Funds source -->
+          <div class="form-group">
+            <label [@fadeInOutTranslate] *ngIf="gtFXTransferForm.controls['fundSource'].value">Source of Funds:</label>
+            <select class="custom-select text-dark" formControlName="fundSource">
+              <option disabled value="">Select Source of Funds</option>
+              <option *ngFor="let source of fundSource" [ngValue]='source'>{{source?.name}}</option>
+            </select>
+          </div>
+          <!-- <div class="form-group">
+            <gtibank-universal-typeahead [label]="'Source of Funds'" [values]="fundSource" (valuesEvent)="fundSourceEventHander($event)"></gtibank-universal-typeahead>
+          </div> -->
+          <!-- others for Funds source -->
+          <div *ngIf="gtFXTransferForm.controls['fundSource'].value.name === 'Others'" class="form-group">
+            <label [@fadeInOutTranslate] *ngIf="gtFXTransferForm.controls['others'].value" class="f-12" for="others">Others:</label>
+            <input type="text" id="others" class="form-control" placeholder="Please specify" formControlName="others">
+          </div>
+          <!-- Biz Nature -->
+          <div class="form-group">
+            <label [@fadeInOutTranslate] *ngIf="gtFXTransferForm.controls['biznature'].value">Nature of Sender’s Business:</label>
+            <select class="custom-select text-dark" formControlName="biznature">
+              <option disabled value="">Select Nature of Sender’s Business</option>
+              <option *ngFor="let biz of biznature" [ngValue]='biz'>{{biz?.name}}</option>
+            </select>
+          </div>
+          <!-- <div class="form-group">
+            <gtibank-universal-typeahead [label]="'Nature of Sender’s Business'" [values]="biznature" (valuesEvent)="biznatureEventHander($event)"></gtibank-universal-typeahead>
+          </div> -->
+          <!-- others for Biz Nature -->
+          <div *ngIf="gtFXTransferForm.controls['biznature'].value.name === 'Others'" class="form-group">
+            <label [@fadeInOutTranslate] *ngIf="gtFXTransferForm.controls['bizOthers'].value" class="f-12" for="bizOthers">Others:</label>
+            <input type="text" id="bizOthers" class="form-control" placeholder="Please specify" formControlName="bizOthers">
+          </div>
+          <div class="form-group">
+            <h3 class="mt-3 f-12">Beneficiary Details</h3>
+          </div>
+
+          <div [@fadeInOutTranslate] class="form-group beneficiary-card">
+            <!-- Input: Amount to transfer -->
+            <label [@fadeInOutTranslate] *ngIf="gtFXTransferForm.controls['newBeneficiary'].value || gtFXTransferForm.controls['savedFxBeneficiary'].value"
+              class="f-12" for="newBeneficiary">
+              {{FXbeneficiaryLabel}}:
+            </label>
+
+            <!-- Input for Saved Beneficiary -->
+            <div class="btn-group btn-group-sm btn-block btn-group-toggle mx-auto" ngbRadioGroup name="beneficiaryOption" formControlName="beneficiaryOption">
+              <label ngbButtonLabel class="col-6 btn-outline-primary">
+                <input (click)="changeLabel('Enter Beneficiary`s name'); clearBeneficiary()" ngbButton type="radio" value="SAVED"> Saved Beneficiary
+              </label>
+              <label ngbButtonLabel class="col-6 btn-outline-primary">
+                <input (click)="changeLabel('Enter Beneficiary`s account number'); clearBeneficiary()" ngbButton type="radio" value="NEW"> New Beneficiary
+              </label>
+            </div>
+          </div>
+
+          <div [@fadeInOutTranslate] class="form-group">
+            <!-- *ngIf="gtTransferForm.controls['beneficiaryOption'].value === 'NEW'" (keyup)="onkey(gtFXTransferForm.value.newBeneficiary)"-->
+            <input *ngIf="gtFXTransferForm.controls['beneficiaryOption'].value === 'NEW'" #newBeneficiary (focus)="newBeneficiaryDetail=''; $event.target.value='';"
+              id="beneficiary"  type="text" class="form-control" placeholder="Enter Beneficiary`s account number"
+              formControlName="newBeneficiary">
+
+            <!-- Template to display saved Beneficiary list -->
+            <ng-template class="bg-white border-primary mt-3" #ben let-r="result" let-t="term">
+              <span (click)="GetFxBeneficiaryDetails(r)">
+                <p class="mb-1">{{r.benName | titlecase}} - {{r.benBankAcctIBAN}}</p>
+              </span>
+
+            </ng-template>
+            <!-- *ngIf="gtTransferForm.controls['beneficiaryOption'].value === 'SAVED'" GetFxBeneficiaryDetails-->
+            <input *ngIf="gtFXTransferForm.controls['beneficiaryOption'].value === 'SAVED'" #savedFxBeneficiary (selectItem)="setSavedBeneficiariesFXModel($event)"
+              [ngbTypeahead]="SavedFxBeneficiary" [resultTemplate]="ben" [inputFormatter]="savedFxBeneficiariesFormatter" (focus)="gtFXTransferForm.value.savedFXBeneficiaries=''; $event.target.value='';"
+              (click)="click$.next($event.target.value);" #savedFXBeneficiariesInstance="ngbTypeahead" id="savedFxBeneficiary"
+              type="text" class="form-control" placeholder="Enter name of saved beneficiary" formControlName="savedFxBeneficiary">
+            <!-- Beneficiary Display Card -->
+            <div [@fadeInOutTranslate] *ngIf="newBeneficiaryDetail" class="card my-2 border-primary">
+              <div class="card-block p-1">
+                <div class="d-flex flex-row justify-content-between my-0 py-0">
+                  <div class="p-2 bd-highlight">
+                    <p class="mb-3">{{newBeneficiaryDetail.accountName | titlecase}}
+                      <span>- {{newBeneficiaryDetail.nuban}}</span>
+                    </p>
+                    <a (click)="clearBeneficiary()" name="savedFxBeneficiary" id="savedFxBeneficiary" class="btn btn-success btn-round btn-mini text-white"
+                      role="button" title="Save Beneficiary">
+                      <i class="icofont icofont-save mr-2"></i>Save
+                    </a>
+                    <a (click)="clearBeneficiary()" name="clearBeneficiary" id="clearBeneficiary" class="btn btn-primary btn-round btn-mini text-white"
+                      role="button" title="Clear Beneficiary">
+                      <i class="icofont icofont-trash mr-2"></i>Clear
+                    </a>
+                  </div>
+                  <div class="p-2 bd-highlight">
+                    <img class="img-menu-user img-radius img-60" src="assets/images/avatar-8.jpg" alt="User-Profile-Image">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div [@fadeInOutTranslate] *ngIf="gtFXTransferForm.value.savedFxBeneficiary" class="card my-2 border-primary">
+              <div class="card-block p-1">
+                <div class="d-flex flex-row justify-content-between my-0 py-0">
+                  <div class="p-2 bd-highlight">
+                    <p class="mb-3">{{gtFXTransferForm.value.savedFxBeneficiary?.benName | titlecase}}
+                      <span> - {{gtFXTransferForm.value.savedFxBeneficiary?.benBankAcctIBAN}}</span>
+                    </p>
+                    <a (click)="clearBeneficiary()" class="btn btn-primary btn-round btn-mini text-white" role="button" title="Clear Beneficiary">
+                      <i class="icofont icofont-trash mr-2"></i>Clear
+                    </a>
+                  </div>
+                  <div class="p-2 bd-highlight">
+                    <img class="img-menu-user img-radius img-60" src="assets/images/avatar-8.jpg" alt="User-Profile-Image">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <span [@fadeInOutTranslate] class="text-success f-12">{{successMessage}}</span>
+            <span [@fadeInOutTranslate] class="text-danger f-12">{{errorMessage}}</span>
+            <span *ngIf="loadingBeneficiary && !errorMessage" [@fadeInOutTranslate] class="text-danger f-12">Loading Beneficiary</span>
+          </div>
+
+          <!-- Ben Name -->
+          <div class="form-group" *ngIf="!gtFXTransferForm.value.savedFxBeneficiary">
+            <label [@fadeInOutTranslate] *ngIf="gtFXTransferForm.controls['BeneName'].value" class="f-12" for="bizOthers">Beneficiary Name:</label>
+            <input type="text" id="BeneName" class="form-control" placeholder="Enter beneficiary name" formControlName="BeneName">
+          </div>
+          <!-- Ben Address -->
+          <div class="form-group">
+            <label [@fadeInOutTranslate] *ngIf="gtFXTransferForm.controls['BeneAddress'].value" class="f-12" for="BeneAddress">Beneficiary Address:</label>
+            <input type="text" id="BeneAddress" class="form-control" placeholder="Enter beneficiary address" formControlName="BeneAddress">
+          </div>
+
+          <!-- Ben Country -->
+          <div class="form-group">
+            <label [@fadeInOutTranslate] *ngIf="gtFXTransferForm.controls['countries'].value">Country:</label>
+            <select class="custom-select text-dark" formControlName="countries">
+              <option disabled value="">Select Country</option>
+              <option *ngFor="let country of countries" [ngValue]='country.code'>{{country?.name}}</option>
+            </select>
+          </div>
+          <!-- <div class="form-group">
+            <gtibank-universal-typeahead [label]="'Country'" [values]="countries" (valuesEvent)="countriesEventHander($event)"></gtibank-universal-typeahead>
+          </div> -->
+          <!-- Ben Biz Nature  -->
+          <div class="form-group">
+            <label [@fadeInOutTranslate] *ngIf="gtFXTransferForm.controls['benBiznature'].value">Nature of Beneficiary’s Business:</label>
+            <select class="custom-select text-dark" formControlName="benBiznature">
+              <option disabled value="">Select Nature of Beneficiary’s Business</option>
+              <option *ngFor="let benbiz of benBiznature" [ngValue]='benbiz'>{{benbiz?.name}}</option>
+            </select>
+          </div>
+          <!-- <div class="form-group">
+            <gtibank-universal-typeahead [label]="'Nature of Beneficiary’s Business'" [values]="biznature" (valuesEvent)="BenbiznatureEventHander($event)"></gtibank-universal-typeahead>
+          </div> -->
+          <!-- others for Ben Biz Nature *ngIf="gtFXTransferForm.controls['biznature'].value.name === 'Others'"-->
+          <div *ngIf="gtFXTransferForm.controls['benBiznature'].value.name === 'Others'" class="form-group">
+            <label [@fadeInOutTranslate] *ngIf="gtFXTransferForm.controls['BenbizOthers'].dirty" class="f-12" for="BenbizOthers">Others:</label>
+            <input type="text" id="BenbizOthers" class="form-control" placeholder="Please specify" formControlName="BenbizOthers">
+          </div>
+
+          <!-- Beneficiary’s Institution -->
+          <div class="form-group">
+            <label [@fadeInOutTranslate] *ngIf="gtFXTransferForm.controls['BenInstitution'].value" class="f-12" for="BenInstitution">Name of Beneficiary’s Institution:</label>
+            <input type="text" id="BenInstitution" class="form-control" placeholder="Enter Beneficiary’s Institution" formControlName="BenInstitution">
+          </div>
+
+          <!-- Ben-sender Rel -->
+          <div class="form-group">
+            <label [@fadeInOutTranslate] *ngIf="gtFXTransferForm.controls['relationship'].value">Sender and Beneficiary Relationship:</label>
+            <select class="custom-select text-dark" formControlName="relationship">
+              <option disabled value="">Select Relationship</option>
+              <option *ngFor="let rel of relationship" [ngValue]='rel'>{{rel?.name}}</option>
+            </select>
+          </div>
+          <!-- <div class="form-group">
+            <gtibank-universal-typeahead [label]="'Relationship between Sender and Beneficiary:'" [values]="relationship" (valuesEvent)="relationshipEventHander($event)"></gtibank-universal-typeahead>
+          </div> -->
+          <!-- others for Ben-sender Rel. -->
+          <div *ngIf="gtFXTransferForm.controls['relationship'].value.name === 'Others'" class="form-group">
+            <label [@fadeInOutTranslate] *ngIf="gtFXTransferForm.controls['relationshipOthers'].dirty" class="f-12" for="relationshipOthers">Others:</label>
+            <input type="text" id="relationshipOthers" class="form-control" placeholder="Please specify" formControlName="relationshipOthers">
+          </div>
+
+          <!-- Beneficiary Bank Name -->
+          <div class="form-group">
+            <label [@fadeInOutTranslate] *ngIf="gtFXTransferForm.controls['BenBankname'].value" class="f-12" for="BenBankname">Beneficiary Bank Name:</label>
+            <input type="text" id="BenBankname" class="form-control" placeholder="Enter Beneficiary Bank Name" formControlName="BenBankname">
+          </div>
+
+          <!-- Beneficiary Bank Address -->
+          <div class="form-group">
+            <label [@fadeInOutTranslate] *ngIf="gtFXTransferForm.controls['BenBankAddress'].value" class="f-12" for="BenBankAddress">Beneficiary Bank Address:</label>
+            <input type="text" id="BenBankAddress" class="form-control" placeholder="Enter Beneficiary Bank Address" formControlName="BenBankAddress">
+          </div>
+
+          <!-- Beneficiary Bank BIC/SWIFT Code -->
+          <div class="form-group">
+            <label [@fadeInOutTranslate] *ngIf="gtFXTransferForm.controls['BenSwiftCode'].value" class="f-12" for="BenSwiftCode">Beneficiary Bank BIC/SWIFT Code:</label>
+            <input type="text" id="BenSwiftCode" class="form-control" placeholder="Enter Bank SWIFT Code" formControlName="BenSwiftCode">
+          </div>
+
+          <!-- Beneficiary Account No/IBAN: -->
+          <!-- <div class="form-group">
+                  <label [@fadeInOutTranslate] *ngIf="gtFXTransferForm.controls['BenBankAcctNoIBAN'].dirty" class="f-12" for="BenBankAcctNoIBAN">Beneficiary Account No/IBAN:</label>
+                  <input type="text" id="BenBankAcctNoIBAN" class="form-control" placeholder="Enter Beneficiary Account No." formControlName="BenBankAcctNoIBAN">
+                </div> -->
+
+          <!-- Beneficiary Bank Routing No/Sort Code -->
+          <div class="form-group">
+            <label [@fadeInOutTranslate] *ngIf="gtFXTransferForm.controls['BenSortCode'].value" class="f-12" for="BenSortCode">Beneficiary Bank Routing No/Sort Code:</label>
+            <input type="text" id="BenSortCode" class="form-control" placeholder="Enter Sort Code" formControlName="BenSortCode">
+          </div>
+          <!-- Intermediary Bank -->
+          <div class="form-group" [@fadeInOutTranslate]>
+            <span class="f-12 pb-2 pr-3">Is There an Intermediary Bank?</span>
+            <div class="btn-group btn-group-toggle" ngbRadioGroup formControlName="isInterbankRequired">
+              <label ngbButtonLabel class="btn-outline-secondary btn-mini">
+                <input ngbButton type="radio" value="YES">YES
+              </label>
+              <label ngbButtonLabel class="btn-outline-secondary btn-mini">
+                <input ngbButton type="radio" value="NO">NO
+              </label>
+            </div>
+          </div>
+          <div *ngIf="gtFXTransferForm.controls['isInterbankRequired'].value === 'YES'">
+            <!-- Intermediary Bank Name -->
+            <div class="form-group">
+              <label [@fadeInOutTranslate] *ngIf="gtFXTransferForm.controls['InterBankName'].value" class="f-12" for="InterBankName">Intermediary Bank Name:</label>
+              <input type="text" id="InterBankName" class="form-control" placeholder="Enter Intermediary Bank Name" formControlName="InterBankName">
+            </div>
+
+            <!-- Intermediary Bank Address -->
+            <div class="form-group">
+              <label [@fadeInOutTranslate] *ngIf="gtFXTransferForm.controls['InterBankAddress'].value" class="f-12" for="InterBankAddress">Intermediary Bank Address:</label>
+              <input type="text" id="InterBankAddress" class="form-control" placeholder="Enter Intermediary Bank Address" formControlName="InterBankAddress">
+            </div>
+
+            <!-- Intermediary Bank BIC/SWIFT Code -->
+            <div class="form-group">
+              <label [@fadeInOutTranslate] *ngIf="gtFXTransferForm.controls['InterBankSwiftCode'].value" class="f-12" for="InterBankSwiftCode">Intermediary Bank BIC/SWIFT Code:</label>
+              <input type="text" id="InterBankSwiftCode" class="form-control" placeholder="Enter Intermediary Bank SWIFT Code" formControlName="InterBankSwiftCode">
+            </div>
+
+            <!-- Intermediary Beneficiary Account No/IBAN: -->
+            <div class="form-group">
+              <label [@fadeInOutTranslate] *ngIf="gtFXTransferForm.controls['InterBenBankAcct'].value" class="f-12" for="InterBenBankAcct">Beneficiary Bank Account With Intermediary Bank:</label>
+              <input type="text" id="InterBenBankAcct" class="form-control" placeholder="Enter Beneficiary Account No." formControlName="InterBenBankAcct">
+            </div>
+
+            <!-- Intermediary Bank Routing No/Sort Code -->
+            <div class="form-group">
+              <label [@fadeInOutTranslate] *ngIf="gtFXTransferForm.controls['InterBankSortCode'].value" class="f-12" for="InterBankSortCode">Intermediary Bank Routing No/Sort Code:</label>
+              <input type="text" id="InterBankSortCode" class="form-control" placeholder="Enter Intermediary Sort Code" formControlName="InterBankSortCode">
+            </div>
+          </div>
+          <!-- Bank In Canada: -->
+          <div class="form-group" [@fadeInOutTranslate]>
+            <span class="f-12 pb-2 pr-3">Is Beneficiary Bank In Canada?</span>
+            <div class="btn-group btn-group-toggle" ngbRadioGroup formControlName="isBenBankInCanada">
+              <label ngbButtonLabel class="btn-outline-secondary btn-mini">
+                <input ngbButton type="radio" value="YES">YES
+              </label>
+              <label ngbButtonLabel class="btn-outline-secondary btn-mini">
+                <input ngbButton type="radio" value="NO">NO
+              </label>
+            </div>
+          </div>
+
+          <div *ngIf="gtFXTransferForm.controls['isBenBankInCanada'].value === 'YES'">
+            <!-- Transit No: -->
+            <div class="form-group">
+              <label [@fadeInOutTranslate] *ngIf="gtFXTransferForm.controls['TransitNo'].value" class="f-12" for="TransitNo">Transit Number:</label>
+              <input type="text" id="TransitNo" class="form-control" placeholder="Enter Transit Number" formControlName="TransitNo">
+            </div>
+
+            <!-- Institution Number -->
+            <div class="form-group">
+              <label [@fadeInOutTranslate] *ngIf="gtFXTransferForm.controls['InstitutionNumber'].value" class="f-12" for="InstitutionNumber">Institution Number:</label>
+              <input type="text" id="InstitutionNumber" class="form-control" placeholder="Enter Institution Number" formControlName="InstitutionNumber">
+            </div>
+
+          </div>
+
+          <div class="form-group">
+            <h3 class="mt-3 f-12">Additional Information</h3>
+          </div>
+
+          <div class="form-group" ngbRadioGroup>
+            <div class="checkbox-fade fade-in-primary">
+              <label>
+                <input #input type="checkbox" formControlName="Notice">
+                <span class="cr">
+                  <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
+                </span>
+                <span class="f-12 f-w-100 d-block">Transfers for Commercial purposes to account in other banks within Nigeria are not allowed in line with CBN
+                  regulation.
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <!-- similar transaction-->
+          <div class="form-group" [@fadeInOutTranslate]>
+            <span class="f-12 pb-2 pr-3">Should we expect similar transaction in future?</span>
+            <div class="btn-group btn-group-toggle" ngbRadioGroup formControlName="SimilarTrans">
+              <label ngbButtonLabel class="btn-outline-secondary btn-mini">
+                <input ngbButton type="radio" value="YES">YES
+              </label>
+              <label ngbButtonLabel class="btn-outline-secondary btn-mini">
+                <input ngbButton type="radio" value="NO">NO
+              </label>
+            </div>
+          </div>
+          <!-- third-party-->
+          <div class="form-group" [@fadeInOutTranslate]>
+            <span class="f-12 pb-2 pr-3">Is this transaction on behalf of a third-party?</span>
+            <div class="btn-group btn-group-toggle" ngbRadioGroup formControlName="thirdparty">
+              <label ngbButtonLabel class="btn-outline-secondary btn-mini">
+                <input ngbButton type="radio" value="YES">YES
+              </label>
+              <label ngbButtonLabel class="btn-outline-secondary btn-mini">
+                <input ngbButton type="radio" value="NO">NO
+              </label>
+            </div>
+          </div>
+          <!-- Offshore Charges-->
+          <div class="form-group" [@fadeInOutTranslate]>
+            <span class="f-12 pb-2 pr-3">Take GTBank Offshore Charges:</span>
+            <div class="btn-group btn-group-toggle" ngbRadioGroup formControlName="Offshore">
+              <label ngbButtonLabel class="btn-outline-secondary btn-mini">
+                <input ngbButton type="radio" value="Locally">Locally
+              </label>
+              <label ngbButtonLabel class="btn-outline-secondary btn-mini">
+                <input ngbButton type="radio" value="Beneficiary">Beneficiary
+              </label>
+            </div>
+          </div>
+
+          <!-- payment purpose -->
+          <div class="form-group">
+            <label [@fadeInOutTranslate] *ngIf="gtFXTransferForm.controls['paymentpurpose'].value">Payment Purpose:</label>
+            <select class="custom-select text-dark" formControlName="paymentpurpose">
+              <option disabled value="">Select payment purpose</option>
+              <option *ngFor="let purpose of paymentpurpose" [ngValue]='purpose'>{{purpose?.name}}</option>
+            </select>
+          </div>
+
+          <!-- others for payment purpose -->
+          <div *ngIf="gtFXTransferForm.controls['paymentpurpose'].value.name === 'OTHERS'" class="form-group">
+            <label [@fadeInOutTranslate] *ngIf="gtFXTransferForm.controls['paymentPurposeOthers'].dirty" class="f-12" for="others">Others:</label>
+            <input type="text" id="others" class="form-control" placeholder="Please specify" formControlName="paymentPurposeOthers">
+          </div>
+          <!-- <div class="form-group">
+            <gtibank-universal-typeahead [label]="'Payment Purpose'" [values]="paymentpurpose" (valuesEvent)="purposeEventHander($event)"></gtibank-universal-typeahead>
+          </div> -->
+
+          <!-- Remark -->
+          <div class="form-group">
+            <label [@fadeInOutTranslate] *ngIf="gtFXTransferForm.controls['fxTransferRemark'].dirty" class="f-12" for="fxTransferRemark">Remark:</label>
+            <input type="text" id="fxTransferRemark" class="form-control" placeholder="Enter Remark" formControlName="fxTransferRemark">
+          </div>
+
+          <!-- Input for Secret Question -->
+          <div class="form-group">
+            <label [@fadeInOutTranslate] *ngIf="gtFXTransferForm.controls['secretAnsw'].value" class="f-12" for="secretAnsw">Answer to secret Question:</label>
+            <div class="form-group pl-0">
+              <input type="password" class="form-control" placeholder="Answer to secret Question" formControlName="secretAnsw">
+              <get-secret-question></get-secret-question>
+            </div>
+          </div>
+          <div class="form-group col-12" ngbRadioGroup>
+            <span class="mt-5 mb-2 f-12 d-block">
+              By selecting the check box below and Submiting this request, I agree to the
+              <a href="https://www.google.com">Terms and Conditions</a> governing the operations of the FX Transfer and agree to be bound by them.
+            </span>
+            <div class="checkbox-fade fade-in-primary">
+              <label>
+                <input #input type="checkbox" formControlName="TermConditions">
+                <span class="cr">
+                  <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
+                </span>
+                <span class="mt-3 f-12">Click here to Agree</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- <div class="form-group col-12">
+              <span class="mt-3 f-12">
+                By selecting the check box below and Submiting this request, I agree to the <a ng-href="https://www.google.com">Terms and Conditions</a>  governing the operations of the FX Transfer and agree to be bound by them.
+              
+              </span>
+            </div> -->
+
+          <div class="form-group">
+            <div class="md-form">
+              <!-- [disabled]='!gtFXTransferForm.valid' -->
+              <button 
+              [disabled]="!(gtFXTransferForm.valid  && (gtFXTransferForm.controls['TermConditions'].value === true && gtFXTransferForm.controls['Notice'].value === true))"
+              [@fadeInOutTranslate] id="customer" type="submit" class="btn btn-success waves-light md-trigger btn-sm" mdbRippleRadius>
+                <span *ngIf="isLoading === true" class="">
+                  <i class="fa fa-spin fa-spinner"></i>
+                </span>
+                <span *ngIf="loadingBeneficiary === true" class="">
+                  <i class="fa fa-spin fa-spinner"></i> Loading beneficiary details...
+                </span>
+                <span *ngIf="!isLoading && !loadingBeneficiary" class="">
+                  Continue
+                </span>
+              </button>
+            </div>
+            <p class="mt-3 f-12">You will be charged
+              <span class="text-primary">₦0.00</span> for this transfer
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-12 d-none">
+      <div class="card">
+        <div class="card-block">
+          <div class="no-data">
+            <i class="feather icon-alert-circle fa-2x text-danger"></i>
+            <h5 class="mt-2">No Transfers to Display</h5>
+            <p>Use the form below to add transfer(s)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="formSubmit" [@fadeInOutTranslate] class="row">
+    <div class="col-md-9 pt-4 mx-auto">
+      <app-token-confirmation-modal (resetFormEvent)="resetFormEventHandler($event)" (tokenVissibilityEvent)="tokenEventHandler($event)"
+        [body]="reqBody" [isToken]=true [category]="'fx'" [transactionType]='"OtherbankfxTransfer"'>
+
+      </app-token-confirmation-modal>
+    </div>
+  </div>
+</div>

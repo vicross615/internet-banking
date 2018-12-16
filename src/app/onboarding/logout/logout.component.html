@@ -1,0 +1,49 @@
+<!--
+<div class="alert-box">
+  <span class="alert alert-info error" role="alert" *ngIf="message" id="formError"></span>
+</div>
+-->
+  <div class="d-flex flex-column">
+  
+  <div class="p-2">
+    <img src="./assets/images/logo-blue.png" class="img-fluid white-text float-right img-60" alt="Responsive image">
+    <button 
+      [routerLink] = "['/onboarding']" 
+      type="button" 
+      class="btn btn-primary btn-sm btn-round px-3 ml-1 waves-light" mdbRippleRadius>Back to Sign In</button>
+  </div>
+  <div class="align-items-center p-2">
+    <!--Card-->
+    <div class="card bg-transparent text-white">
+        <!--Card content-->
+        <div class="card-body">
+          <form class="small-font">
+            <div class="formTitle mb-4 text-center">
+              <p class="text-custom f-30 f-w-100 mb-0">You've been Logged out!</p>
+              <span class="text-muted f-12">Thank you for using internet banking today.</span>
+            </div>
+            
+            <div class="form-row">
+              <div class="col-12">
+                <div class="md-form">
+                 <app-rating></app-rating>
+                </div>
+                <div class="form-text">
+                   
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <!--/.Card content-->
+  
+    </div>
+    <!--Card-->
+  </div>
+  <div class="mt-auto p-2 text-center w-100 text-white bottom">
+      <p>
+        <a  class="f-12 f-w-100">GTBank.com</a> |
+        <a  class="f-12 f-w-100">Terms and Conditions</a>
+      </p>
+    </div>
+  </div>

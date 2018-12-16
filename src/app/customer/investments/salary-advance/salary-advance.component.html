@@ -1,0 +1,225 @@
+<div class="card-header py-2 bg-white">
+  <div class="d-flex flex-row justify-content-between">
+    <div class="bd-highlight text-left">
+      <h6 class="text-primary f-w-400">
+        <img src="assets\icon\smashicons\transfer\standingOrder.svg" class="img-fluid img-30 mb-2" alt=""> Salary Advance
+      </h6>
+    </div>
+    <div class="bd-highlight text-right">
+      <h6 class="f-w-100 f-12 text-right text-dark mb-0">Eligible Amount:
+        <span class="f-w-500 text-c-brand">{{eligibleAmt }}</span>
+      </h6>
+    </div>
+  </div>
+</div>
+<div class="card-block">
+  <div *ngIf="!formSubmit" class="row">
+    <div class="col-md-9 mx-auto">
+      <div [@fadeInOutTranslate] class="m-t-5">
+        <form [formGroup]="salaryAdvanceForm" (ngSubmit)="openTokenConfirmationModal()" action="javascript:">
+          <!-- <pre>{{salaryAdvanceForm.value | json}}</pre> -->
+          <!-- Dropdown for Account to Credit-->
+          <div [@fadeInOutTranslate] class="form-group">
+            <gtibank-accounts-typeahead [label]="'Account to Credit'" (acctToDebitEvent)="acctToDebitEventHander($event)">
+            </gtibank-accounts-typeahead>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-6">
+              <!-- Input: Loan Amount -->
+              <label class="f-12 pl-2" for="loanAmt">Loan Amount:</label>
+              <input currencyMask [options]="{ prefix: '', thousands: ',', decimal: '.', precision: '2' }" id="transAmt" class="form-control form-control-round form-control-right"
+                placeholder="Enter Amount ₦ 0.00" formControlName="loanAmt">
+            </div>
+            <!-- Loan tenor -->
+            <div class="col-md-6">
+              <label class="f-12 pl-2" for="tenor">Tenor(in days):</label> <!--{{tenor}}-->
+              <input type="text" id="tenor" class="form-control form-control-round tenor30" placeholder="{{tenor}}" 
+              formControlName="tenor" [disabled]="!isValid">
+            </div>
+          </div>
+
+          <!-- Employers Name  -->
+          <div class="form-group">
+            <label [@fadeInOutTranslate] *ngIf="salaryAdvanceForm.controls['employerName'].dirty" class="f-12 pl-2" for="employerName">Employers Name:</label>
+            <input type="text" id="employerName" class="form-control form-control-round" placeholder="Employers Name" formControlName="employerName">
+          </div>
+
+          <!-- Employers Address -->
+          <div class="form-group">
+            <label [@fadeInOutTranslate] *ngIf="salaryAdvanceForm.controls['employersAddress'].dirty" class="f-12 pl-2" for="employersAddress">Employers Address:</label>
+            <input type="text" id="employersAddress" class="form-control form-control-round" placeholder="Employers Address" formControlName="employersAddress">
+          </div>
+
+          <!-- Job Designation -->
+          <div class="form-group">
+            <label [@fadeInOutTranslate] *ngIf="salaryAdvanceForm.controls['jobDesig'].dirty" class="f-12 pl-2" for="jobDesig">Job Designation:</label>
+            <input type="text" id="jobDesig" class="form-control form-control-round" placeholder="Job Designation" formControlName="jobDesig">
+          </div>
+
+          <div class="form-group pl-0">
+            <!-- Input: Net monthly Salary -->
+            <!-- <label [@fadeInOutTranslate] *ngIf="salaryAdvanceForm.controls['monthlySalary'].dirty" class="f-12 pl-2" for="monthlySalary">Net Monthly Salary:</label> -->
+            <label class="f-12 pl-2" for="monthlySalary">Net Monthly Salary:</label>
+            <input currencyMask [options]="{ prefix: '', thousands: ',', decimal: '.', precision: '2' }" id="monthlySalary" class="form-control form-control-round form-control-right"
+              placeholder="Enter your Net monthly Salary ₦ 0.00" formControlName="monthlySalary">
+          </div>
+
+          <!-- Nxt Pay Date -->
+          <div class="form-group pl-0">
+            <label *ngIf="salaryAdvanceForm.controls['nxtSalaryPayDate'].value || salaryAdvanceForm.controls['nxtSalaryPayDate'].value"
+              for="nxtSalaryPayDate" class="f-12 pl-2 my-0 py-0">Next Salary PayDay:</label>
+            <div class="input-group mb-0">
+              <input (click)="nxtSalaryPayDate.toggle()" class="form-control form-control-round" placeholder="Next Salary Payday" name="dp" ngbDatepicker #nxtSalaryPayDate="ngbDatepicker" formControlName="nxtSalaryPayDate">
+              <div class="input-group-append">
+                <button class="btn btn-mini btn-round btn-inverse" (click)="nxtSalaryPayDate.toggle()" type="button">
+                  <i-calendar style="width: 1.2rem; height: 0.5rem; cursor: pointer;"></i-calendar>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group pl-0">
+            <!-- Input: Net monthly Salary -->
+            <!-- <label [@fadeInOutTranslate] *ngIf="salaryAdvanceForm.controls['monthlySalary'].dirty" class="f-12 pl-2" for="monthlySalary">Net Monthly Salary:</label> -->
+            <label class="f-12 pl-2" for="annualGrossSalary">Gross Annual Salary:</label>
+            <input currencyMask [options]="{ prefix: '', thousands: ',', decimal: '.', precision: '2' }" id="annualGrossSalary" class="form-control form-control-round form-control-right"
+              placeholder="Annual Gross Salary ₦ 0.00" formControlName="annualGrossSalary">
+          </div>
+
+          <!-- Employment Sector [@fadeInOutTranslate] *ngIf="schoolFeesAdvanceForm.controls['tenor'].value"-->
+          <div class="form-group pl-0">
+            <label class="f-12 pl-2" for="empSectors">Employment Sector:</label>
+            <select #selectReason class="custom-select form-control-round text-dark" name="empSectors" id="empSectors" placeholder="Select sector" formControlName="empSectors">
+              <option *ngFor="let s of empSectors" value="{{s?.code}}">{{s?.name}}</option>
+            </select>
+          </div>
+
+          <!-- Net Annual Salarye [@fadeInOutTranslate] *ngIf="salaryAdvanceForm.controls['netAnnualSalary'].dirty"-->
+          <div class="form-group pl-0">
+            <label class="f-12 pl-2" for="netAnnualSalary">Net Annual Salary:</label>
+            <input currencyMask [options]="{ prefix: '', thousands: ',', decimal: '.', precision: '2' }" id="netAnnualSalary" class="form-control form-control-round"
+              placeholder="Net Annual Salary" formControlName="netAnnualSalary">
+          </div>
+
+          <!-- Yearly Upfront Payment: [@fadeInOutTranslate] *ngIf="salaryAdvanceForm.controls['yearlyUpfrontPayment'].dirty"-->
+          <div class="form-group pl-0">
+            <label class="f-12 pl-2" for="yearlyUpfrontPayment">Yearly Upfront Payment:</label>
+            <input currencyMask [options]="{ prefix: '', thousands: ',', decimal: '.', precision: '2' }" id="yearlyUpfrontPayment" class="form-control form-control-round"
+              placeholder="Yearly Upfront" formControlName="yearlyUpfrontPayment">
+          </div>
+
+          <!-- Quarterly Allowance: [@fadeInOutTranslate] *ngIf="salaryAdvanceForm.controls['quarterlyAllowance'].dirty" -->
+          <div class="form-group pl-0">
+            <label class="f-12 pl-2" for="quarterlyAllowance">Quarterly Allowance:</label>
+            <input currencyMask [options]="{ prefix: '', thousands: ',', decimal: '.', precision: '2' }" id="quarterlyAllowance" class="form-control form-control-round"
+              placeholder="Quarterly Allowance" formControlName="quarterlyAllowance">
+          </div>
+
+          <!-- Last Net Month Salary: [@fadeInOutTranslate] *ngIf="salaryAdvanceForm.controls['lastMonthSalary'].dirty"  -->
+          <div class="form-group pl-0">
+            <label class="f-12 pl-2" for="lastMonthSalary">Last Net Month Salary:</label>
+            <input currencyMask [options]="{ prefix: '', thousands: ',', decimal: '.', precision: '2' }" id="lastMonthSalary" class="form-control form-control-round"
+              placeholder="Last Net Month Salary" formControlName="lastMonthSalary">
+          </div>
+
+          <!-- Employee Status [@fadeInOutTranslate] *ngIf="schoolFeesAdvanceForm.controls['tenor'].value"-->
+          <div class="form-group pl-0">
+            <label class="f-12 pl-2" for="employeeStatus">Employee Status:</label>
+            <select #selectReason class="custom-select form-control-round text-dark" name="employeeStatus" id="employeeStatus" placeholder="Select sector"
+              formControlName="employeeStatus">
+              <option *ngFor="let s of employeeStatus" value="{{s?.code}}">{{s?.name}}</option>
+            </select>
+          </div>
+
+          <!-- Length of Service(Years): -->
+          <div class="form-group pl-0">
+            <label [@fadeInOutTranslate] *ngIf="salaryAdvanceForm.controls['yearServiceLength'].dirty" class="f-12 pl-2" for="yearServiceLength">Length of Service(Years):</label>
+            <input type="text" id="yearServiceLength" class="form-control form-control-round" placeholder="Length of Service(Years)" formControlName="yearServiceLength">
+          </div>
+
+          <!-- Length of Service(Months)  -->
+          <div class="form-group pl-0">
+            <label [@fadeInOutTranslate] *ngIf="salaryAdvanceForm.controls['monthServiceLength'].dirty" class="f-12 pl-2" for="monthServiceLength">Length of Service(Months):</label>
+            <input type="text" id="monthServiceLength" class="form-control form-control-round" placeholder="Length of Service(Months):" formControlName="monthServiceLength">
+          </div>
+
+          <!-- Frequency Of Salary per month: [@fadeInOutTranslate] *ngIf="schoolFeesAdvanceForm.controls['tenor'].value"-->
+          <div class="form-group pl-0">
+            <label class="f-12 pl-2" for="salFrequency">Frequency Of Salary per month:</label>
+            <select #selectReason class="custom-select form-control-round text-dark" name="salFrequency" id="salFrequency" placeholder="Select sector" formControlName="salFrequency">
+              <option *ngFor="let s of salFrequency" value="{{s?.code}}">{{s?.name}}</option>
+            </select>
+          </div>
+
+          <!-- Existing Loan Obligation -->
+          <div class="form-group pl-0">
+            <label [@fadeInOutTranslate] *ngIf="salaryAdvanceForm.controls['existOblig'].value" class="f-12 px-2" for="existOblig">Any existing loan?</label>
+            <div class="btn-group btn-group-toggle" ngbRadioGroup formControlName="existOblig">
+
+              <label ngbButtonLabel class="btn-outline-secondary btn-mini">
+                <input ngbButton type="radio" value="true">YES
+              </label>
+              <label ngbButtonLabel class="btn-outline-secondary btn-mini">
+                <input ngbButton type="radio" value="false">NO
+              </label>
+            </div>
+          </div>
+          <!-- Monthly Repayment on Loan: -->
+          <div *ngIf="salaryAdvanceForm.controls['existOblig'].value === 'true'" class="form-group pl-0">
+            <label [@fadeInOutTranslate] *ngIf="salaryAdvanceForm.controls['loanRepayment'].dirty" class="f-12 pl-2" for="loanRepayment">Monthly Repayment on Loan:</label>
+            <input currencyMask [options]="{ prefix: '', thousands: ',', decimal: '.', precision: '2' }" id="loanRepayment" class="form-control form-control-round"
+              placeholder="Monthly Repayment" formControlName="loanRepayment">
+          </div>
+
+          <!-- Bvn -->
+          <div class="form-group pl-0">
+            <label [@fadeInOutTranslate] *ngIf="salaryAdvanceForm.controls['bvn'].dirty" class="f-12 pl-2" for="bvn">BVN:</label>
+            <input type="text" id="bvn" class="form-control form-control-round" placeholder="BVN" formControlName="bvn">
+          </div>
+
+
+          <!-- Input for Secret Question -->
+          <div class="form-group pl-0">
+            <label [@fadeInOutTranslate] *ngIf="salaryAdvanceForm.controls['secretAnsw'].value" class="f-12 pl-2" for="secretAnsw">Answer to secret Question:</label>
+            <input type="password" class="form-control form-control-round" placeholder="Answer to secret Question" formControlName="secretAnsw">
+            <get-secret-question></get-secret-question>
+          </div>
+
+          <div class="form-group pt-3">
+            <div class="md-form text-right">
+              <button [disabled]='!salaryAdvanceForm.valid' [@fadeInOutTranslate] id="customer" type="submit" class="btn btn-success light-shadow btn-round px-4 waves-light md-trigger btn-sm"
+                mdbRippleRadius>
+                <span *ngIf="isLoading === true" class="">
+                  <i class="fa fa-spin fa-spinner"></i>
+                </span>
+                <span *ngIf="!isLoading" class="">
+                  Continue
+                </span>
+              </button>
+            </div>
+            <!-- <p class="mt-3 f-12">You will be charged
+              <span class="text-primary">₦0.00</span> for this transfer
+            </p> -->
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-12 d-none">
+      <div class="card">
+        <div class="card-block">
+          <div class="multiple-transfers">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="formSubmit" [@fadeInOutTranslate] class="row">
+    <div class="col-md-9 pt-4 mx-auto">
+      <app-token-confirmation-modal (resetFormEvent)="resetFormEventHandler($event)" (tokenVissibilityEvent)="tokenEventHandler($event)"
+        [body]="reqBody" [isToken]=true [category]="'transfers'" [transactionType]='"salaryAdvance"'>
+
+      </app-token-confirmation-modal>
+    </div>
+  </div>
+</div>

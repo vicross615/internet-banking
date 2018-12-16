@@ -1,0 +1,19 @@
+<div class="card-loader text-center mx-auto" *ngIf="notification.message">
+  <div class="card mx-auto" style="width: 75%">
+    <div class="card-block">
+      <div class="text-center">
+        <img *ngIf="notification.type === 'success'" [@slideUpDown] class="img-menu-user img-circle z-depth-bottom-1 img-60 my-2" [src]="'assets/icon/smashicons/alert/success.svg'"
+          alt="lock icon">
+        <img *ngIf="notification.type === 'error'" [@slideUpDown] class="img-menu-user img-circle z-depth-bottom-1 img-60 my-2" [src]="'assets/icon/smashicons/alert/error.svg'"
+          alt="lock icon">
+        <img *ngIf="notification.type === 'info'" [@slideUpDown] class="img-menu-user img-circle z-depth-bottom-1 img-60 my-2" [src]="'assets/icon/smashicons/alert/error.svg'"
+          alt="lock icon">
+        <h6 class="mt-2">{{notification.title}}</h6>
+        <div [innerHTML]="notification.message" class="text-primary"></div>
+      </div>
+    </div>
+    <div class="card-footer p-0">
+      <button (click)="clearNotification()" type="button" class="btn btn-mini btn-block btn-dark py-2 f-16" mdbRippleRadius>OK</button>
+    </div>
+  </div>
+</div>

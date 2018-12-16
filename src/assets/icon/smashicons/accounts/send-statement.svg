@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>008 - Email </title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="008---Email-" transform="translate(1.000000, 1.000000)" stroke="#dd4f05" stroke-width="1">
+            <path d="M58,22 L58,56 C58,57.1045695 57.1045695,58 56,58 L2,58 C0.8954305,58 2.22044605e-16,57.1045695 0,56 L0,22" id="Shape"></path>
+            <path d="M23.18,4 L27.79,0.42 C28.4994796,-0.139991302 29.5005204,-0.139991302 30.21,0.42 L34.82,4" id="Shape"></path>
+            <path d="M58,22 L48,14.23" id="Shape"></path>
+            <path d="M10,14.23 L0,22" id="Shape"></path>
+            <path d="M0,57.48 L27.791,35.9 C28.5014713,35.3450366 29.4985287,35.3450366 30.209,35.9 L58,57.48" id="Shape"></path>
+            <path d="M0.67,22 L18,35.458" id="Shape"></path>
+            <path d="M39.971,35.48 L57.33,22" id="Shape"></path>
+            <path d="M48,24 L48,6 C48,4.8954305 47.1045695,4 46,4 L12,4 C10.8954305,4 10,4.8954305 10,6 L10,24" id="Shape"></path>
+            <path d="M19,11 L39,11" id="Shape"></path>
+            <path d="M19,17 L39,17" id="Shape"></path>
+            <path d="M30,23 L39,23" id="Shape"></path>
+        </g>
+    </g>
+</svg>

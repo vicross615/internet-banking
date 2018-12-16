@@ -1,0 +1,63 @@
+<div [@fadeInOutTranslate] class="card" style="min-height: 100vh;">
+  <div class="mb-0 p-0 bg-primary card-block" style="height: 5px;"></div>
+  <!-- Nav Filter tab start -->
+  <div class="col-12 px-0 py-1 filter-bar">
+    <nav class="navbar navbar-light bg-faded p-3 justify-content-between">
+      <h5 class="text-primary f-w-100">
+        <img src="assets\icon\smashicons\cards\view-blocked-funds.svg" class="img-fluid img-40 mb-2" alt=""> 
+        Blocked Funds
+      </h5>
+      <div *ngIf="accounts" ngbDropdown>
+        <p class="f-w-400 mt-2 mr-2 float-md-left" for="">Select acount:</p>
+        <button class="btn btn-round btn-dark btn-sm py-2" id="dropdownBasic1" ngbDropdownToggle>
+          {{selectedAccount?.map_acc_no}} {{selectedAccount?.des_eng}}
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <perfect-scrollbar [style.max-width]="'auto'" [style.max-height]="'250px'" [config]="config">
+            <span *ngFor="let account of accounts; let i=index">
+              <!-- <hr class="my-1"> -->
+              <button (click)="showBlockedFunds(account.map_acc_no)" class="dropdown-item f-12 btn-light">
+                <span class="d-block f-w-100">{{account?.cusname}}</span>
+                <span class=" f-w-400">{{account?.map_acc_no}} {{account?.des_eng}}</span>
+              </button>
+            </span>
+          </perfect-scrollbar>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <!-- Nav Filter tab end -->
+  <div [@slideUpDown] class="mx-auto my-5 text-center" *ngIf="!blockedFunds && !errorMessage">
+    <div class="preloader4 mx-auto pb-0 mb-0">
+      <span>
+        <div class="double-bounce1 text-center"></div>
+        <div class="double-bounce2 text-center"></div>
+      </span>
+    </div>
+    <span class="f-10 text-muted mb-4"> Loading ..</span>
+  </div>
+  <div [@slideUpDown] class="mx-auto my-5 text-center f-12" *ngIf="errorMessage">
+    <p class="text-primary mb-0">
+      <i-alert-circle class="d-block mx-auto mb-3"></i-alert-circle>
+      {{errorMessage}}.
+    </p>
+    <p>Select a different account to view Blocked Funds</p>
+  </div>
+  <div class="card-block p-0">
+    <perfect-scrollbar [style.max-width]="'auto'" [style.max-height]="'500px'" [config]="">
+      <div *ngFor="let bf of blockedFunds" class="list-group-item list-group-item-action flex-column align-items-start px-3">
+        <div class="d-flex w-100 justify-content-between">
+          <h6 class="f-w-500 m-b-0 ">{{bf?.REMARKS}}</h6>
+          <span class="f-12 text-muted">Ref: {{bf?.TRANSID}}</span>
+        </div>
+        <p class="my-2 col-10 pl-0 f-w-400">
+        </p>
+        <div class="d-flex w-100 justify-content-between">
+          <span class="f-w-100 f-12">{{bf.TRANSACTION_DATE | date}}</span>
+          <h5 class="text-right text-success f-w-600 f-14">{{bf.TRANSACTION_AMOUNT_IN_NAIRA |
+            currency:bf.TRANSACTIONCURRENCY}}</h5>
+        </div>
+      </div>
+    </perfect-scrollbar>
+  </div>
+</div>

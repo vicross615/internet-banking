@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>025 - startup costs</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="025---startup-costs" transform="translate(1.000000, 1.000000)" stroke="#dd4f05" stroke-width="1">
+            <rect id="Rectangle-path" x="50" y="46" width="8" height="4" rx="1"></rect>
+            <rect id="Rectangle-path" x="50" y="50" width="8" height="4" rx="1"></rect>
+            <rect id="Rectangle-path" x="50" y="54" width="8" height="4" rx="1"></rect>
+            <rect id="Rectangle-path" x="50" y="34" width="8" height="4" rx="1"></rect>
+            <rect id="Rectangle-path" x="50" y="38" width="8" height="4" rx="1"></rect>
+            <rect id="Rectangle-path" x="50" y="42" width="8" height="4" rx="1"></rect>
+            <rect id="Rectangle-path" x="42" y="50" width="8" height="4" rx="1"></rect>
+            <rect id="Rectangle-path" x="42" y="54" width="8" height="4" rx="1"></rect>
+            <rect id="Rectangle-path" x="34" y="46" width="8" height="4" rx="1"></rect>
+            <rect id="Rectangle-path" x="34" y="50" width="8" height="4" rx="1"></rect>
+            <rect id="Rectangle-path" x="34" y="54" width="8" height="4" rx="1"></rect>
+            <rect id="Rectangle-path" x="34" y="42" width="8" height="4" rx="1"></rect>
+            <path d="M10,11 L10,2 C10,0.8954305 10.8954305,2.22044605e-16 12,0 L37,0 L50,13 L50,58 L12,58 C10.8954305,58 10,57.1045695 10,56 L10,50" id="Shape"></path>
+            <path d="M37,0 L37,11 C37,12.1045695 37.8954305,13 39,13 L50,13 L37,0 Z" id="Shape"></path>
+            <path d="M19,20 L44,20" id="Shape"></path>
+            <path d="M19,25 L44,25" id="Shape"></path>
+            <path d="M19,30 L44,30" id="Shape"></path>
+            <path d="M21,35 L44,35" id="Shape"></path>
+            <path d="M5,24 C5,19.481 10,15 10,15 C10,15 15,19.481 15,24" id="Shape"></path>
+            <rect id="Rectangle-path" x="5" y="24" width="10" height="22"></rect>
+            <polygon id="Shape" points="0 50.87 0 40 5 34 5 46"></polygon>
+            <polygon id="Shape" points="20 50.87 20 40 15 34 15 46"></polygon>
+            <path d="M5,41 L15,41" id="Shape"></path>
+            <path d="M9,28 L11,28" id="Shape"></path>
+            <path d="M9,32 L11,32" id="Shape"></path>
+        </g>
+    </g>
+</svg>

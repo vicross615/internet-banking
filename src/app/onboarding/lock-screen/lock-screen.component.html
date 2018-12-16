@@ -1,0 +1,60 @@
+<section class="login-block">
+  <!-- Container-fluid starts -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12">
+        <!-- Login card start -->
+        <form class="md-float-material form-material" action="javascript:">
+          <div class="text-center">
+            <img src="assets/images/logo.png" alt="logo.png">
+          </div>
+          <div class="auth-box card">
+            <div class="card-block">
+              <div class="row mb-5">
+                <div class="col-md-12">
+                  <h3 class="text-center"><i class="fa fa-lock text-custom f-60"></i></h3>
+                </div>
+              </div>
+              <div class="form-group form-primary">
+                <p class="text-custom">
+                  <i class="fa fa-fw fa-envelope prefix"></i>
+                  <i class="fa fa-fw fa-id-badge prefix"></i>
+                  <i class="fa fa-fw fa-user prefix"></i>
+                </p> 
+                <input type="text" name="email" class="form-control" required="">
+                <span class="form-bar"></span>
+                <p class="text-inverse text-right f-11 f-w-100"><a class="f-12" [routerLink]="['/onboarding']">Forgot User Id</a></p>
+                <label class="float-label f-14">Your Email Address/User Id/Username</label>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <button 
+                    [routerLink] = "['/dashboard']"
+                    type="button" 
+                    class="btn btn-primary btn-md btn-block waves-light text-center m-b-20" 
+                    mdbRippleRadius><i class="fa fa-lock"></i> Unlock </button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-10">
+                 
+                </div>
+                <div class="col-md-2">
+                  <img src="./assets/images/logo-blue.png" class="img-fluid white-text float-right img-60" alt="Responsive image">
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <!-- Login card end -->
+      </div>
+      <!-- end of col-sm-12 -->
+      <div class="col-sm-12">
+        <!-- Ratings card start -->
+        <app-rating></app-rating>
+      </div>
+    </div>
+    <!-- end of row -->
+  </div>
+  <!-- end of container-fluid -->
+</section>

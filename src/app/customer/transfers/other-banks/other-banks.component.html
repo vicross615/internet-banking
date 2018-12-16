@@ -1,0 +1,224 @@
+<div class="card-header py-2 bg-white">
+  <div class="d-flex flex-row justify-content-between">
+    <div class="bd-highlight text-left">
+      <h6 class="text-primary f-w-400">
+        <img src="assets\icon\smashicons\transfer\others.svg" class="img-fluid img-30 mb-2" alt="">
+        Transfer to Other Banks
+      </h6>
+    </div>
+    <div class="bd-highlight text-right">
+      <h6 class="f-w-100 f-12 text-right text-dark mb-0">Daily limit:
+        <span class="f-w-500 text-c-brand">{{transferLimit | currency:'₦'}}</span>
+      </h6>
+    </div>
+  </div>
+</div>
+<div class="card-block">
+  <div *ngIf="!formSubmit" class="row">
+    <div class="col-md-8 pt-3 mx-auto">
+      <p class="text-center"><span class="text-center text-success" *ngIf="beneficiaryMessage">{{beneficiaryMessage}}</span></p>
+      <div [@fadeInOutTranslate] class="m-t-5">
+         <!-- <pre>Model: {{ otherBanksTransferForm.value | json }}</pre> -->
+        <form [formGroup]="otherBanksTransferForm" (ngSubmit)="openTokenConfirmationModal()" action="javascript:">
+          <!-- Options for Instant or NEFT -->
+          <div class="form-group mb-2 mb-3" [@fadeInOutTranslate]>
+            <div class="btn-group btn-group-toggle btn-group-sm" ngbRadioGroup formControlName="type">
+              <label (click)="getCharges()" ngbButtonLabel class="btn-outline-primary btn-round py-1">
+                <input ngbButton type="radio" value='3'>Instant
+              </label>
+              <label (click)="getCharges()" ngbButtonLabel class="btn-outline-primary btn-round py-1">
+                <input ngbButton type="radio" value='4'>NEFT
+              </label>
+            </div>
+          </div>
+          <!-- Dropdown for Account to debit-->
+          <div [@fadeInOutTranslate] class="form-group mb-2">
+            <gtibank-accounts-typeahead [label]="'Account to Debit'" (acctToDebitEvent)="acctToDebitEventHander($event)">
+            </gtibank-accounts-typeahead>
+          </div>
+          <div [@fadeInOutTranslate] class="form-group mb-2 beneficiary-card">
+            <label [@fadeInOutTranslate] *ngIf="otherBanksTransferForm.controls['bank'].value || otherBanksTransferForm.controls['savedBeneficiary'].value"
+              class="f-12 pl-2" for="newBeneficiary">
+              {{beneficiaryLabel}}:
+            </label>
+            <!-- {{ values }} -->
+            <!-- Input for Saved Beneficiary -->
+            <div class="btn-group btn-group-sm btn-block btn-group-toggle mx-auto mb-2" ngbRadioGroup name="beneficiaryOption"
+              formControlName="beneficiaryOption">
+              <label ngbButtonLabel class="col-6 btn-outline-secondary btn-round py-2">
+                <input (click)="changeLabel('Enter Beneficiary`s name'); clearBeneficiary()" ngbButton type="radio"
+                  value="SAVED"><span class=""> Saved Beneficiary</span>
+              </label>
+              <label ngbButtonLabel class="col-6 btn-outline-secondary btn-round py-2">
+                <input (click)="changeLabel('Enter Beneficiary`s Bank'); clearBeneficiary()" ngbButton type="radio"
+                  value="NEW"><span class=""> New Beneficiary</span>
+              </label>
+            </div>
+            <div *ngIf="otherBanksTransferForm.controls['beneficiaryOption'].value === 'NEW'" class="form-group mb-2">
+              <ng-template #banks let-r="result" let-t="term">
+                <div class="card-block p-0 w-100">
+                  <div class="d-flex flex-row justify-content-between my-0 py-0">
+                    <div class="p-1 bd-highlight">
+                      <p class="mb-1">{{r.name}}</p>
+                    </div>
+                    <div class="p-1 bd-highlight">
+                      <i class="icofont icofont-bank-alt f-20"></i>
+                      <!-- <img class="img-menu-user img-radius img-30" src="assets/images/avatar-8.jpg" alt="User-Profile-Image"> -->
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+              <input (selectItem)="setBanksModel($event)"
+                [ngbTypeahead]="Banks" [resultTemplate]="banks" [inputFormatter]="banksFormatter" (focus)="otherBanksTransferForm.value.bank=''; $event.target.value='';"
+                (click)="click$.next($event.target.value);" #banksInstance="ngbTypeahead" id="bank" type="text" class="form-control-round form-control"
+                placeholder="Enter Beneficiary's Bank" formControlName="bank">
+            </div>
+            <!-- <pre>Model: {{ otherBanksTransferForm.get('bank').status}}</pre> -->
+            <!-- Template to display saved Beneficiary list -->
+            <div [@fadeInOutTranslate] *ngIf="otherBanksTransferForm.controls['beneficiaryOption'].value === 'SAVED'" class="form-group mb-2">
+              <ng-template class="border-primary" #rt let-r="result" let-t="term">
+                <div class="card-block p-0">
+                  <div class="d-flex flex-row justify-content-start my-0 py-0">
+                    <!-- <div class="p-2 bd-highlight">
+                      <img class="img-menu-user img-radius img-40" src="assets/images/avatar-10.jpg" alt="User-Profile-Image">
+                    </div> -->
+                    <div class="px-2 py-0 bd-highlight">
+                      <p class="mb-1 f-12">{{r.name | uppercase}}</p>
+                      <p class="mb-1 f-10"> {{r.bank | titlecase}} - {{r.accountNumber}}</p>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+              <!-- *ngIf="otherBanksTransferForm.controls['beneficiaryOption'].value === 'SAVED'" -->
+              <input #savedBeneficiary
+                (selectItem)="setSavedBeneficiariesModel($event)" [ngbTypeahead]="SavedBeneficiary" [resultTemplate]="rt"
+                [inputFormatter]="savedBeneficiariesFormatter" (focus)="otherBanksTransferForm.value.savedBeneficiaries=''; $event.target.value='';"
+                (click)="click$.next($event.target.value);" #savedBeneficiariesInstance="ngbTypeahead" id="savedBeneficiary"
+                type="text" class="form-control form-control-round" placeholder="Enter name of saved beneficiary"
+                formControlName="savedBeneficiary">
+            </div>
+            <!-- <pre>Model: {{ otherBanksTransferForm.get('savedBeneficiary').status}}</pre> -->
+            <!-- <hr class="my-0"> -->
+          </div>
+          <!-- Beneficiary Display Card -->
+          <div *ngIf="newBeneficiaryDetail" class="card my-2 border-primary">
+            <div class="card-block p-1">
+              <div class="d-flex flex-row justify-content-between my-0 py-0">
+                <div class="p-2 bd-highlight">
+                  <p class="mb-1">{{newBeneficiaryDetail.accountName | titlecase}} <span>-
+                      {{newBeneficiaryDetail.nuban}}</span></p>
+                  <p class="mb-2 text-secondary">{{otherBanksTransferForm.value.bank.name | titlecase}}</p>
+                  <a (click)="saveBeneficiary(newBeneficiaryDetail)" name="" id="" class="btn btn-primary btn-round btn-mini text-white mr-2"
+                    role="button" title="Save Beneficiary">
+                    <span *ngIf="!beneficiaryMessage"><i class="icofont icofont-save mr-2"></i>Save</span>
+                    <span *ngIf="beneficiaryMessage"><i class="fa fa-spin fa-spinner mr-2"></i>{{beneficiaryMessage}}</span>
+                  </a>
+                  <a (click)="clearBeneficiary()" name="" id="" class="btn btn-secondary btn-round btn-mini text-white"
+                    role="button" title="Clear Beneficiary">
+                    <i class="icofont icofont-trash mr-2"></i>Clear
+                  </a>
+                </div>
+                <div class="p-2 bd-highlight">
+                  <img class="img-menu-user img-radius img-60" src="assets/images/placeholder.png" alt="User-Profile-Image">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div [@fadeInOutTranslate] *ngIf="otherBanksTransferForm.value.savedBeneficiary" class="card my-2 border-primary">
+            <div class="card-block p-1">
+              <div class="d-flex flex-row justify-content-between my-0 py-0">
+                <div class="p-2 bd-highlight">
+                  <p class="mb-3">{{otherBanksTransferForm.value.savedBeneficiary.name | titlecase}} <span>-
+                      {{otherBanksTransferForm.value.savedBeneficiary.accountNumber}}</span></p>
+                  <a (click)="deleteBeneficiary(otherBanksTransferForm.value.savedBeneficiary)" class="btn btn-secondary btn-round btn-mini text-white mr-1"
+                    role="button" title="Clear Beneficiary">
+                    <span *ngIf="!beneficiaryMessage"><i class="icofont icofont-delete"></i>Delete</span>
+                    <span *ngIf="beneficiaryMessage"><i class="fa fa-spin fa-spinner mr-2"></i>{{beneficiaryMessage}}</span>
+                  </a>
+                  <a (click)="clearBeneficiary()" class="btn btn-primary btn-round btn-mini text-white" role="button"
+                    title="Clear Beneficiary">
+                    <span><i class="icofont icofont-recycle"></i>Change</span>
+                  </a>
+                </div>
+                <div class="p-2 bd-highlight">
+                  <img class="img-menu-user img-radius img-60" [src]="otherBanksTransferForm.value.savedBeneficiary?.image"
+                    alt="User-Profile-Image">
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Bank options -->
+          <div class="form-group mb-2">
+            <label [@fadeInOutTranslate] [ngClass]="{'d-none': newBeneficiaryDetail}" *ngIf="otherBanksTransferForm.controls['newBeneficiary'].value && otherBanksTransferForm.controls['beneficiaryOption'].value === 'NEW'"
+              class="f-12" for="transAmt">
+              Enter Beneficiary`s account number:
+            </label>
+            <!-- *ngIf="otherBanksTransferForm.controls['beneficiaryOption'].value === 'NEW'" -->
+            <input [@fadeInOutTranslate] *ngIf="otherBanksTransferForm.controls['beneficiaryOption'].value === 'NEW' && otherBanksTransferForm.controls['bank'].value"
+              #newBeneficiary (keyup)="onkey(otherBanksTransferForm.value.newBeneficiary, otherBanksTransferForm.value.bank)"
+              [ngClass]="{'d-none': newBeneficiaryDetail}" id="beneficiary" maxlength="10" type="text" class="form-control form-control-round"
+              placeholder="Enter Beneficiary`s account number" formControlName="newBeneficiary">
+            <!-- <pre>Model: {{ otherBanksTransferForm.get('newBeneficiary').status}}</pre> -->
+            <span [@fadeInOutTranslate] class="text-success f-12">{{successMessage}}</span>
+            <span [@fadeInOutTranslate] class="text-danger f-12">{{errorMessage}}</span>
+            <span *ngIf="loadingBeneficiary" [@fadeInOutTranslate] class="text-danger f-12">Loading Beneficiary</span>
+          </div>
+          <div class="form-group mb-2 pl-0">
+            <!-- Input: Amount to transfer -->
+            <label [@fadeInOutTranslate] class="f-12 pl-2" for="transAmt">Amount to transfer:</label>
+            <input (keyup)="util.formatCurrency(otherBanksTransferForm.controls['transferAmt'])" id="transAmt" class="form-control form-control-right form-control-round"
+              placeholder="Enter Amount ₦ 0.00" formControlName="transferAmt">
+            <!-- <pre>Model: {{ otherBanksTransferForm.get('transferAmt').status}}</pre> -->
+          </div>
+          <div class="form-group mb-2 pl-0">
+            <label [@fadeInOutTranslate] *ngIf="otherBanksTransferForm.controls['remark'].value" class="f-12" for="remark">Remark:</label>
+            <input type="textarea" class="form-control form-control-round" placeholder="Remark" formControlName="remark">
+            <!-- <div *ngIf="otherBanksTransferForm.controls['remark'].dirty" class="form-group mb-2">
+                <div class="md-form">
+                  <button
+                    id="customer"
+                    type="button"
+                    class="btn btn-block btn-sm btn-secondary waves-light md-trigger mt-1"
+                    mdbRippleRadius>Add new Transfer</button>
+                </div>
+              </div> -->
+          </div>
+          <!-- Input for Secret Question -->
+          <div class="form-group pl-0">
+            <label [@fadeInOutTranslate] *ngIf="otherBanksTransferForm.controls['secretAnsw'].value" class="f-12" for="secretAnsw">Answer
+              to secret Question:</label>
+            <input type="password" class="form-control form-control-round" placeholder="Answer to secret Question"
+              formControlName="secretAnsw">
+            <get-secret-question></get-secret-question>
+            <!-- <pre>Model: {{ otherBanksTransferForm.get('secretAnsw').status}}</pre> -->
+          </div>
+          <div class="form-group pt-3">
+            <div class="md-form d-block">
+              <button [disabled]='!(otherBanksTransferForm.valid && (otherBanksTransferForm.value.savedBeneficiary || newBeneficiaryDetail))'
+                [@fadeInOutTranslate] id="customer" type="submit" class="btn btn-success waves-light md-trigger btn-sm btn-round light-shadow float-right"
+                mdbRippleRadius>
+                <span *ngIf="isLoading === true" class="">
+                  <i class="fa fa-spin fa-spinner"></i>
+                </span>
+                <span *ngIf="!isLoading" class="">
+                  Continue
+                </span>
+              </button>
+            </div>
+            <p class="mt-3 f-12">You will be charged
+              <span class="text-primary">{{charges?.chargeValue | currency:'₦' || chargesError}}</span> for this transfer
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="formSubmit" [@fadeInOutTranslate] class="row">
+    <div class="col-md-9 pt-4 mx-auto">
+      <app-token-confirmation-modal (resetFormEvent)="resetFormEventHandler($event)" (tokenVissibilityEvent)="tokenEventHandler($event)"
+        [body]="reqBody" [transactionType]='"interTransfers"' [isToken]='true' [category]='"transfers"'>
+
+      </app-token-confirmation-modal>
+    </div>
+  </div>
+</div>

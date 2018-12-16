@@ -1,0 +1,125 @@
+<div class="row mt-3">
+  <div class="col-md-8 mt-3 mb-3">
+    <div class="card bg-transparent mb-3 mt-2" style="cursor:pointer">
+      <div class="card-body p-1 pb-0">
+        <div class="d-flex justify-content-between">
+          <div class="form-group w-100 d-inline mb-0">
+              <ng-template #rt let-r="result" let-t="term">
+                    <p (click)="onAcctChange();" class="f-12 p-1 text-left text-overflow">{{ r.formTitle | uppercase}}</p>
+                </ng-template>
+            <div class="input-group my-2">
+              <input title="Enter Billers name to search" [(ngModel)]="searchModel" type="text" class="form-control form-control-round" name="search" id="search"
+              [ngbTypeahead]="productSearchTypeahead" [resultTemplate]="rt" [inputFormatter]="formatter"
+              (focus)="searchFocus$.next($event.target.value); $event.target.value=''; clear();" (click)="searchClick$.next($event.target.value); $event.target.value='';" 
+              [formControl]="searchInput" #searchInstance="ngbTypeahead"
+                aria-describedby="infoText" placeholder="Enter product name to search...">
+              <div class="input-group-append" id="search" title="Search">
+                <button class="btn btn-round btn-secondary pt-2" type="button" mdbRippleRadius>
+                  <i class="icofont icofont-search" style="cursor: pointer;"></i>
+                </button>
+              </div>
+            </div>
+            <!-- <pre>Model: {{ searchModel | json }}</pre> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 mb-3">
+        <div class="d-flex justify-content-start px-1">
+          <a [@fadeInOutTranslate] [routerLink]="[ '/payments' ]" routerLinkActive="active" name="" id="" class="btn light-shadow bg-transparent btn-light btn-round btn-mini py-2 mx-1"
+            role="button" mdbRippleRadius>
+            <i class="icofont icofont-layout ml-2 f-16"></i><span class="f-12">Show all Category</span>
+          </a>
+          <!-- <a [@fadeInOutTranslate] [routerLink]="[ '/payments/categories' ]" routerLinkActive="active" name="" id="" class="btn light-shadow btn-light btn-round btn-mini py-2 mx-1" role="button" mdbRippleRadius>
+            <i class="icofont icofont-food-cart ml-2 f-16"></i><span class="f-12">Show all Billers</span>
+          </a> -->
+          <!-- <a [@fadeInOutTranslate] name="" id="" class="btn light-shadow btn-light btn-round btn-mini py-2 mx-1" role="button" mdbRippleRadius>
+            <i class="icofont icofont-box ml-2 f-18"></i><span class="f-12">Show all Products</span>
+          </a> -->
+        </div>
+      </div>
+    </div>
+    <router-outlet>
+      <app-spinner>
+        <app-title></app-title>
+      </app-spinner>
+    </router-outlet>
+  </div>
+  <div class="col-md-4">
+    <div class="row mt-3">
+      <div class="col-md-12 px-0 px-md-1">
+        <div [@fadeInOutTranslate] class="card mb-2">
+          <!-- <div class="mb-0 p-0 bg-light card-block" style="height: 5px;"></div> -->
+          <div class="col-12 p-0 filter-bar">
+            <nav class="navbar navbar-light bg-light justify-content-between">
+              <div class="bd-highlight text-left">
+                <h5 class="text-dark pt-2 f-w-500 f-12">
+                  <i class="fas fa-arrow-alt-circle-down text-success"></i> Frequent Bills
+                </h5>
+              </div>
+            </nav>
+          </div>
+          <div class="card-block p-0 o-hidden" style="height: 300px;">
+            <gtibank-payment-history-cards></gtibank-payment-history-cards>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 px-0 px-md-1">
+        <div class="card bg-light my-1">
+          <div class="card-block p-0 mt-1">
+            <img src="assets/images/onboarding-slider/hubcredit-1366px-x-1268px.png" class="img-fluid mb-1" alt="">
+          </div>
+        </div>
+        <div [@fadeInOutTranslate] class="card mb-2">
+          <!-- <div class="mb-0 p-0 bg-light card-block" style="height: 5px;"></div> -->
+          <div class="col-12 p-0 filter-bar">
+            <nav class="navbar navbar-light bg-light justify-content-between">
+              <div class="bd-highlight text-left">
+                <h5 class="text-dark pt-2 f-w-500 f-12">
+                  <i class="fas fa-arrow-alt-circle-down text-success"></i> What others like you are paying for
+                </h5>
+              </div>
+            </nav>
+          </div>
+          <perfect-scrollbar [style.max-width]="'auto'" [style.max-height]="'400px'" [config]="config">
+            <div class="card-block py-1">
+              <div class="px-1 col-md-4 col-sm-6 d-inline-block">
+                <div class="card mb-2 text-center order-visitor-card z-depth-bottom-1">
+                  <div class="card-block px-1">
+                    <img src="./assets/images/payments/lagos-logo.png" class="img-fluid img-60" alt="Responsive image">
+                    <p class="m-b-0 f-12 f-w-500">Lagos state bills</p>
+                  </div>
+                </div>
+              </div>
+              <div class="px-1 col-md-4 col-sm-6 d-inline-block">
+                <div class="card mb-2 text-center order-visitor-card z-depth-bottom-1" placement="top" ngbTooltip="Last Transfer: N80,000">
+                  <div class="card-block px-1">
+                    <img src="./assets/images/payments/GOtv.png" class="img-fluid img-60" alt="Responsive image">
+                    <p class="m-b-0 f-12 f-w-500">GOtv Subscription</p>
+                  </div>
+                </div>
+              </div>
+              <div class="px-1 col-md-4 col-sm-6 d-inline-block">
+                <div class="card mb-2 text-center order-visitor-card z-depth-bottom-1" placement="top" ngbTooltip="Last Transfer: N80,000">
+                  <div class="card-block px-1">
+                    <img src="./assets/images/payments/unilag.jpg" class="img-fluid img-60" alt="Responsive image">
+                    <p class="m-b-0 f-12 f-w-500">UNILAG Tuition</p>
+                  </div>
+                </div>
+              </div>
+              <div class="px-1 col-md-4 col-sm-6 d-inline-block">
+                <div class="card mb-2 text-center order-visitor-card z-depth-bottom-1" placement="top" ngbTooltip="Last Transfer: N80,000">
+                  <div class="card-block px-1">
+                    <img src="./assets/images/payments/unilag.jpg" class="img-fluid img-60" alt="Responsive image">
+                    <p class="m-b-0 f-12 f-w-500">UNILAG Tuition</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </perfect-scrollbar>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

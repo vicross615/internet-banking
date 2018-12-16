@@ -1,0 +1,136 @@
+<div class="card-header py-2 bg-white">
+  <div class="d-flex flex-row justify-content-between">
+    <div class="bd-highlight text-left">
+      <h6 class="text-primary f-w-400">
+        <img src="assets\icon\smashicons\transfer\cardless-withdrawal-2.svg" class="img-fluid img-30 mb-2" alt="">
+        {{Title}}
+      </h6>
+    </div>
+    <div class="bd-highlight text-right">
+    </div>
+  </div>
+</div>
+<div class="card-block">
+  <!-- <pre>{{ AirtimeForm.value | json }}</pre> -->
+  <div class="row">
+    <div class="col-md-8 pt-3 mx-auto">
+      <div *ngIf="!(isLoading  || formSubmit)" [@fadeInOutTranslate] class="m-t-5">
+        <form [formGroup]="AirtimeForm" (ngSubmit)="openTokenConfirmation(AirtimeForm)" class="" action="javascript:">
+          <div class="form-group col-12 pl-0 my-1">
+            <div class="form-group">
+              <div class="btn-group btn-group-sm btn-block btn-group-toggle mx-auto" ngbRadioGroup name="requestType"
+                formControlName="reqtype">
+                <label ngbButtonLabel class="btn-outline-secondary bg-c-blue">
+                  <input ngbButton type="radio" value="0" (click)="requestType = 0"> Airtime Purchase
+                </label>
+                <label ngbButtonLabel class="btn-outline-primary">
+                  <input ngbButton type="radio" value="1" (click)="requestType = 1"> Data Bundle
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <ng-container *ngIf="requestTypeIs == 0">
+              <div class="material-group material-group-primary">
+                <div (click)="amountSubmitted = false" class="form-group form-primary">
+                  <!-- Input: Amount to transfer -->
+                  <label [@fadeInOutTranslate] class="f-18 f-w-500 mb-0" for="airtimeamount">How much do you need?</label><br>
+                  <small *ngIf="!amountSubmitted" class="text-primary">Enter amount or use buttons bellow to add up
+                    amount (₦).</small>
+                  <input style="font-size: 28pt; color: #dd4f05" currencyMask [options]="{ prefix: '', thousands: ',', decimal: '.', precision: '2', allowNegative: false }"
+                    id="airtimeamount" class="form-control form-primary form-control-lg form-control-right border-left-0 border-right-0 border-top-0"
+                    placeholder="0.00" formControlName="airtimeamount">
+                  <span class="form-bar"></span>
+                </div>
+              </div>
+              <div class="form-row mx-auto" style="width: 100%">
+                <div class="col-8 col-md-7 px-0">
+                  <div class="row pl-2">
+                    <div (click)="addAmount(i)" *ngFor="let i of keypadNumbers" class="col-4 p-1 m-0 text-dark text-center gt-clickable">
+                      <div class="card m-0 text-center p-0 waves-dark" mdbRippleRadius>
+                        <div class="card-body p-0 overflow-hidden">
+                          <h6 class="card-title p-2 f-w-500">{{i}}</h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-4 col-md-5 pl-4 pr-0 mb-1 pt-1 gt-clickable">
+                  <div class="row text-center h-100">
+                    <div class="col-12 text-center my-auto h-100">
+                      <div class="card h-100 mb-2 text-center bg-success md-trigger">
+                        <button (click)="clearAmount()" id="customer" type="button" class="btn btn-success btn-block waves-light p-1"
+                          style="height: 100%;" mdbRippleRadius>
+                          <span class="">
+                            CLEAR
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+            <div class="form-group col-12 my-1 pt-5">
+              <gtibank-accounts-typeahead [label]="'Account to Debit'" (acctToDebitEvent)="acctToDebitEventHander($event)">
+              </gtibank-accounts-typeahead>
+            </div>
+            <div class="form-group col-12 my-1" *ngIf="requestTypeIs == 1" [@fadeInOutTranslate]>
+              <label [@fadeInOutTranslate] *ngIf="AirtimeForm.controls['selectedbundle'].value" for="">Select Data
+                Bundle:</label>
+              <select class="custom-select text-dark" name="selectedbundle" id="databundle" formControlName="selectedbundle">
+                <option *ngFor="let plan of data_Bundles" [ngValue]='plan'>
+                  <span>
+                    {{plan?.productname | titlecase}}
+                  </span>
+                  <span>
+                    {{plan?.productbundle}}
+                  </span>
+                  <span>
+                    {{plan?.price | currency:'NGN'}}
+                  </span>
+                </option>
+              </select>
+            </div>
+            <div class="form-group col-12 my-1">
+              <label [@fadeInOutTranslate] *ngIf="AirtimeForm.controls['number'].value" class="f-12" for="phoneNumber">
+                Enter mobile number:
+              </label>
+              <input #number id="number" maxlength="11" type="text" class="form-control mt-1" placeholder="Phone number"
+                formControlName="number">
+            </div>
+            <div class="form-group col-12 my-1">
+              <label [@fadeInOutTranslate] *ngIf="AirtimeForm.controls['secretAnsw'].value" class="f-12" for="secretAnsw">Answer
+                to secret Question:</label>
+              <input type="password" class="form-control" placeholder="Answer to secret Question" formControlName="secretAnsw">
+              <get-secret-question></get-secret-question>
+            </div>
+            <span class="f-10 px-2">Use your <span class="text-primary">hardware token</span> or dial <span class="text-primary">*737*7#
+              </span>to generate 6 digit code.</span>
+            <div class="form-group col-12 my-1">
+              <div class="md-form">
+                <button [disabled]='!AirtimeForm.valid' [@fadeInOutTranslate] id="submit" type="submit" class="btn btn-success waves-light md-trigger btn-sm"
+                  mdbRippleRadius>
+                  <span *ngIf="isLoading === true" class="">
+                    <i class="fa fa-spin fa-spinner"></i>
+                  </span>
+                  <span *ngIf="!isLoading" class="">
+                    Continue
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="(formSubmit)" [@fadeInOutTranslate] class="row">
+    <div class="col-md-9 pt-4 mx-auto">
+      <app-gtibank-minimalist-token-modal (emitTokenEvent)='inititateService($event)' (clearEvent)='clearError()'
+        [message]='message' [isLoading]='isLoading' [activeService]='activeService' [isToken]=true [submited]='submitStatus'
+        [isSuccess]='isSuccess'>
+      </app-gtibank-minimalist-token-modal>
+    </div>
+  </div>
+</div>

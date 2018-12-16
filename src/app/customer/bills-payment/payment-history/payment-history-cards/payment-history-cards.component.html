@@ -1,0 +1,44 @@
+<div class="card-header p-0 mb-1 bg-white border-0">
+  <div class="btn-group btn-group-sm btn-block btn-group-toggle" ngbRadioGroup name="beneficiaryOption">
+    <label ngbButtonLabel class="col-12 btn-light rounded-0">
+      <input ngbButton type="radio" value=false>&nbsp;
+    </label>
+  </div>
+</div>
+<div [@fadeInOutTranslate] *ngIf="loading && !paymentHistory" class="text-center col mb-1 pt-1">
+  <div *ngIf="!message" class="preloader4 mx-auto pb-0 mb-0">
+    <span>
+      <div class="double-bounce1 text-center"></div>
+      <div class="double-bounce2 text-center"></div>
+    </span>
+  </div>
+  <span class="f-10 text-muted mb-4">{{message}}</span>
+</div>
+<div [@fadeInOutTranslate] *ngIf="message && !paymentHistory" class="card-body pt-1 text-center mt-5">
+  <div class="mt-0">
+    <i class="fas fa-info-circle fa-2x"></i>
+    <p class="mt-2 f-w-400 text-muted text-center mx-auto">
+      {{message}}
+    </p>
+    <!-- <p>Use button below to go to Transfers</p> -->
+    <button *ngIf="!loading" (click)="goToPayments()" type="button" class="btn btn-primary btn-sm btn-round px-3 ml-1 waves-light"
+  mdbRippleRadius>Go to Bills Payment</button>
+  </div>
+</div>
+<ng-container *ngIf="paymentHistory">
+  <perfect-scrollbar [style.max-width]="'auto'" [style.max-height]="'250px'">
+    <div [@fadeInOutTranslate] class="card-columns mb-3 px-3 mt-1">
+      <div *ngFor="let bills of paymentHistory | slice:0:8" (click)="repeatPayment(bills)" class="card mb-1 text-center frequent-transfers-card"
+        style="height: 110px">
+        <div class="card-block p-2">
+            <!-- 'data:image/' + bills.imageType + ';base64,' + bills?.customerLogo -->
+          <img class="img-menu-user img-40 my-2 shadow" [src]="bills?.image" alt="bills image" style="height: 40px">
+          <!-- <h6 class="f-12 mb-0 f-w-400 text-dark text-overflow">{{ bills?.transDate | date:shortDate }}</h6> -->
+          <h6 class="m-b-0 f-12 f-w-600 text-overflow text-secondary">{{bills?.formTitle | titlecase}}</h6>
+          <h4 class="f-14 mb-0 f-w-500 text-c-brand text-overflow">{{bills?.totalAmount | currency:'₦'}}</h4>
+        </div>
+      </div>
+    </div>
+  </perfect-scrollbar>
+</ng-container>
+
