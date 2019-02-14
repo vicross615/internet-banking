@@ -12,6 +12,46 @@ Screen Shots
 
 ----------------------------------------------------------------------------------------------------------------------
 
+
+![Image](https://github.com/zimejin/Angular-6-Internet-Banking-App/blob/master/Screenshots/ICLYvRJ8.png?raw=true)
+
+----------------------------------------------------------------------------------------------------------------------
+
+
+![Image](https://github.com/zimejin/Angular-6-Internet-Banking-App/blob/master/Screenshots/au1NC4XU.png?raw=true)
+
+----------------------------------------------------------------------------------------------------------------------
+
+
+![Image](https://github.com/zimejin/Angular-6-Internet-Banking-App/blob/master/Screenshots/eGmXGQkc.png?raw=true)
+
+----------------------------------------------------------------------------------------------------------------------
+
+
+![Image](https://github.com/zimejin/Angular-6-Internet-Banking-App/blob/master/Screenshots/eHkGbY2I.png?raw=true)
+
+----------------------------------------------------------------------------------------------------------------------
+
+
+![Image](https://github.com/zimejin/Angular-6-Internet-Banking-App/blob/master/Screenshots/fT8NRnr4.png?raw=true)
+
+----------------------------------------------------------------------------------------------------------------------
+
+
+![Image](https://github.com/zimejin/Angular-6-Internet-Banking-App/blob/master/Screenshots/payments_more_categories.png?raw=true)
+
+----------------------------------------------------------------------------------------------------------------------
+
+
+![Image](https://github.com/zimejin/Angular-6-Internet-Banking-App/blob/master/Screenshots/uJo3z5kQ.png?raw=true)
+
+----------------------------------------------------------------------------------------------------------------------
+
+
+![Image](https://github.com/zimejin/Angular-6-Internet-Banking-App/blob/master/Screenshots/screencapture-localhost-4200-onboarding-logout-2018-09-28-17_17_39.png?raw=true)
+
+----------------------------------------------------------------------------------------------------------------------
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.1.
 Updated to 6.0.8 on July 24th 2018
 
